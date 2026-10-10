@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T19:10:57.557Z",
+  "generatedAt": "2026-10-10T23:51:47.263Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -9,7 +9,7 @@
     },
     {
       "name": "Js插件",
-      "count": 76
+      "count": 77
     },
     {
       "name": "MCP",
@@ -1297,6 +1297,22 @@
       "avatar": "资源/Js插件/自动总结插件/.avatar.png",
       "ownerHash": "502eea5fd500c34516131c8089734f4ac5b5deae42d6fe8bf6af15018a4daeee",
       "updatedAt": "2026-09-09T13:22:02+08:00"
+    },
+    {
+      "folder": "Js插件",
+      "name": "自用",
+      "dirName": "自用",
+      "type": "dir",
+      "path": "资源/Js插件/自用",
+      "files": [
+        "资源/Js插件/自用/iMessage-Message-Bridge-perf.5-appendfast.js"
+      ],
+      "images": [],
+      "description": "自用",
+      "author": "kk",
+      "avatar": "资源/Js插件/自用/.avatar.png",
+      "ownerHash": "c9ade4e6ced1ed366176dbec99dc7ed8f71da5f1f4f2a6a552cf248b097b5b1b",
+      "updatedAt": "2026-10-11T07:50:20+08:00"
     },
     {
       "folder": "Js插件",
