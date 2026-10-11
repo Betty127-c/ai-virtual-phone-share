@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T10:33:58.465Z",
+  "generatedAt": "2026-10-11T12:49:30.691Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -77,7 +77,7 @@
     },
     {
       "name": "线上美化",
-      "count": 50
+      "count": 51
     },
     {
       "name": "线上聊天状态栏",
@@ -6854,6 +6854,27 @@
       "avatar": "",
       "ownerHash": "9f37e23318f452c263fceb61aacf58008faf41fb28eb4c51f812856d23237529",
       "updatedAt": "2026-08-19T01:22:51+08:00"
+    },
+    {
+      "folder": "线上美化",
+      "name": "仿纸飞机",
+      "dirName": "仿纸飞机",
+      "type": "dir",
+      "path": "资源/线上美化/仿纸飞机",
+      "files": [
+        "资源/线上美化/仿纸飞机/仿纸飞机float.css",
+        "资源/线上美化/仿纸飞机/仿纸飞机float.js",
+        "资源/线上美化/仿纸飞机/仿纸飞机纯cssfloat.css"
+      ],
+      "images": [
+        "资源/线上美化/仿纸飞机/1000116367.jpg",
+        "资源/线上美化/仿纸飞机/1000116368.jpg"
+      ],
+      "description": "仿纸飞机美化，纯css版不依赖脚本，但是只有气泡和顶栏底栏的美化，消息不分组，没有时间戳没有单双勾切换，css版需要和脚本配合，第一张是纯css版，第二张是css和脚本共同作用的效果",
+      "author": "哦",
+      "avatar": "",
+      "ownerHash": "ae517825a728afaf2de6004bd4692b795df20e5d6c2e8c6552ad1bff06848b72",
+      "updatedAt": "2026-10-11T20:47:49+08:00"
     },
     {
       "folder": "线上美化",
