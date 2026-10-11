@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T07:10:18.095Z",
+  "generatedAt": "2026-10-11T07:42:27.749Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -29,7 +29,7 @@
     },
     {
       "name": "剧情预设及正则",
-      "count": 12
+      "count": 11
     },
     {
       "name": "小剧场",
@@ -2662,22 +2662,6 @@
       "avatar": "",
       "ownerHash": "ccaecc009bf4a4f670f01f93005ebb7e60c8d958fe2449025a41e1609ae3e4cd",
       "updatedAt": "2026-08-30T14:29:21+08:00"
-    },
-    {
-      "folder": "剧情预设及正则",
-      "name": "反八股预设 / 线下剧情",
-      "dirName": "反八股预设  线下剧情",
-      "type": "dir",
-      "path": "资源/剧情预设及正则/反八股预设  线下剧情",
-      "files": [
-        "资源/剧情预设及正则/反八股预设  线下剧情/默认预设·反八股 (2).json"
-      ],
-      "images": [],
-      "description": "和小助手沟通出来了一个反八股预设，针对线下剧情。 适合稍微粘人或者黏人的角色使用。可以在预设的第21条里面添加适合自己角色的词条使用。",
-      "author": "kks",
-      "avatar": "资源/剧情预设及正则/反八股预设  线下剧情/.avatar.png",
-      "ownerHash": "665326c02f148787908eaa0c808ee8a0cdac7f0d240b3d5e443bff7920683472",
-      "updatedAt": "2026-10-11T15:07:41+08:00"
     },
     {
       "folder": "剧情预设及正则",
