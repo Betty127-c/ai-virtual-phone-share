@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T01:28:09.656Z",
+  "generatedAt": "2026-10-12T03:47:09.028Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -45,7 +45,7 @@
     },
     {
       "name": "应用反馈（与应用作者沟通渠道）",
-      "count": 4
+      "count": 5
     },
     {
       "name": "快捷指令模版",
@@ -5616,6 +5616,20 @@
       "avatar": "",
       "ownerHash": "bdf6a37a27be8366340a00d59b1df351b214f575f4460a44460bb2633f17562e",
       "updatedAt": "2026-09-22T20:30:05+08:00"
+    },
+    {
+      "folder": "应用反馈（与应用作者沟通渠道）",
+      "name": "[花]备忘录",
+      "dirName": "[花]备忘录",
+      "type": "dir",
+      "path": "资源/应用反馈（与应用作者沟通渠道）/[花]备忘录",
+      "files": [],
+      "images": [],
+      "description": "许愿备忘录加一个上传图片一键生成成备忘的功能❤️❤️",
+      "author": "P",
+      "avatar": "",
+      "ownerHash": "967826da0a6d92bf811b4076cc20ed9a13e9801065336de1b42b97d8c33083fa",
+      "updatedAt": "2026-10-12T11:45:31+08:00"
     },
     {
       "folder": "应用反馈（与应用作者沟通渠道）",
