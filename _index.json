@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T07:03:41.067Z",
+  "generatedAt": "2026-10-12T07:19:12.401Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -29,7 +29,7 @@
     },
     {
       "name": "剧情预设及正则",
-      "count": 12
+      "count": 13
     },
     {
       "name": "小剧场",
@@ -2695,6 +2695,22 @@
       "avatar": "",
       "ownerHash": "669c2f4579605edead26c25df83e951ce159584320de5f4d54d4ef156aa46539",
       "updatedAt": "2026-10-05T10:41:55+08:00"
+    },
+    {
+      "folder": "剧情预设及正则",
+      "name": "测试",
+      "dirName": "测试",
+      "type": "dir",
+      "path": "资源/剧情预设及正则/测试",
+      "files": [
+        "资源/剧情预设及正则/测试/YU_V1.3.5.json"
+      ],
+      "images": [],
+      "description": "",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "6c0513cf0a880c43f8860adaaaf830e565a6f51e539bbaa46ddfde8bfc96ed2b",
+      "updatedAt": "2026-10-12T15:17:30+08:00"
     },
     {
       "folder": "剧情预设及正则",
