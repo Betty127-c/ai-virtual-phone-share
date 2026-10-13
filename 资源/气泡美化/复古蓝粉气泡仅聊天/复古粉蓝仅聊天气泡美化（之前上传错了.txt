@@ -1,0 +1,357 @@
+/* ══════════════════════════════════════════════════════════════
+   独立聊天主题 · 仅影响聊天界面
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─────────── ★ 快捷修改区（改颜色只动这里）─────────── */
+.chat-room-wrapper {
+
+  /* ① 气泡 */
+  --qs-bubble-self-bg:  #e8d0d8;   /* 自己（用户）气泡底色 */
+  --qs-bubble-other-bg: #bac3d4;   /* 对方（AI）气泡底色 */
+  --qs-bubble-text:     #2C3E50;   /* 气泡内文字颜色 */
+  --qs-bubble-shadow:              /* 气泡悬浮阴影 */
+      0 0 10px rgba(50, 60, 80, 0.10),
+      0 0 24px rgba(50, 60, 80, 0.07);
+
+  /* ② 顶部栏 */
+  --qs-topbar-bg:   rgba(237, 240, 244, 0.84);
+  --qs-topbar-line: rgba(120, 130, 150, 0.15);
+  --qs-topbar-text: #2C3E50;
+
+  /* ③ 底部栏 */
+  --qs-bottombar-bg:   #edf0f4;
+  --qs-bottombar-line: rgba(120, 130, 150, 0.15);
+  --qs-bottombar-icon: #6B7A8F;   /* 所有图标常态颜色 */
+
+  /* ④ 发送按钮 */
+  --qs-send-icon:        #6B7A8F;
+  --qs-send-icon-active: #4A627A;
+
+  /* ⑤ 聊天底图 */
+  --qs-chat-bg: #FFFFFF;
+
+  /* ⑥ 输入框 */
+  --qs-input-bg:          var(--qs-chat-bg);
+  --qs-input-text:        #2C3E50;
+  --qs-input-placeholder: #A0AAB5;
+
+  /* ⑦ 内心独白卡片（已同步气泡文字色，可单独调整） */
+  --qs-thought-bg:     #F4F6F9;                 /* 内心独白卡片背景 */
+  --qs-thought-text:   var(--qs-bubble-text);   /* 内心独白正文颜色 */
+  --qs-thought-title:  var(--qs-bubble-text);   /* 内心独白标题与签名颜色 */
+  --qs-thought-heart:  #f2eaec;                 /* 内心独白激活爱心颜色 */
+
+  /* ⑧ 红包与转账 */
+  --qs-red-packet-bg: #d9a693;  /* 红包黄色部分底色 */
+  --qs-transfer-bg:   #C3A98E;  /* 转账黄色部分底色 */
+
+  /* ⑨ 气泡长按菜单（浏览器风格） */
+  --qs-menu-bg:          #FFFFFF;  /* 菜单背景底色 */
+  --qs-menu-text:        #2A2A2A;  /* 普通功能字色（白底黑字） */
+  --qs-menu-danger-text: #E53935;  /* 删除等警示项（保留红色） */
+  --qs-menu-hover-bg:    #F2F4F7;  /* 鼠标悬停/按压底色 */
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   以下为结构 + 应用代码，一般不需要动
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─────────── ⑤ 聊天底图（纯色）─────────── */
+.chat-room-wrapper:not([data-has-bg-image]) {
+  background: var(--qs-chat-bg) !important;
+}
+.chat-room-wrapper[data-has-bg-image] { background-color: transparent !important; }
+.chat-room-wrapper .page-body { background: transparent !important; }
+
+/* ─────────── ② 顶部栏 ─────────── */
+.chat-room-wrapper .page-header {
+  background: var(--qs-topbar-bg) !important;
+  backdrop-filter: blur(18px) saturate(1.12) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.12) !important;
+  border-bottom: 0.5px solid var(--qs-topbar-line) !important;
+  box-shadow: none !important;
+}
+.chat-room-wrapper .page-header-content,
+.chat-room-wrapper .page-header-content span,
+.chat-room-wrapper .page-header-content button {
+  color: var(--qs-topbar-text) !important;
+}
+
+/* ─────────── ① 气泡：结构 + 颜色 + 阴影 ─────────── */
+.chat-room-wrapper .chat-bubble-role-user:not(.chat-bubble-media),
+.chat-room-wrapper .chat-bubble-role-assistant:not(.chat-bubble-media) {
+  border-radius: 14px !important;
+  border: none !important;
+  font-size: 15px !important;
+  padding: 10px 14px !important;
+  box-shadow: var(--qs-bubble-shadow) !important;
+}
+.chat-room-wrapper .chat-bubble-role-user:not(.chat-bubble-media) {
+  background: var(--qs-bubble-self-bg) !important;
+  color: var(--qs-bubble-text) !important;
+  border-top-right-radius: 2px !important;
+}
+.chat-room-wrapper .chat-bubble-role-assistant:not(.chat-bubble-media) {
+  background: var(--qs-bubble-other-bg) !important;
+  color: var(--qs-bubble-text) !important;
+  border-top-left-radius: 2px !important;
+}
+.chat-room-wrapper .chat-bubble-role-user .chat-markdown,
+.chat-room-wrapper .chat-bubble-role-assistant .chat-markdown {
+  color: inherit !important;
+}
+/* 语音气泡同步外观 */
+.chat-room-wrapper .chat-bubble-role-user:has(.voice-msg-bubble),
+.chat-room-wrapper .chat-bubble-role-assistant:has(.voice-msg-bubble) {
+  display: flex !important;
+  align-items: center !important;
+  border-radius: 14px !important;
+  padding: 10px 14px !important;
+  box-shadow: var(--qs-bubble-shadow) !important;
+}
+.chat-room-wrapper .chat-bubble-role-user:has(.voice-msg-bubble) {
+  background: var(--qs-bubble-self-bg) !important;
+  border-top-right-radius: 2px !important;
+}
+.chat-room-wrapper .chat-bubble-role-assistant:has(.voice-msg-bubble) {
+  background: var(--qs-bubble-other-bg) !important;
+  border-top-left-radius: 2px !important;
+}
+
+/* ─────────── ⑨ 气泡长按菜单：浏览器列表风格 ─────────── */
+.chat-room-wrapper .ctx-menu {
+  display: flex !important;
+  flex-direction: column !important; /* 强制纵向排列 */
+  background: var(--qs-menu-bg) !important;
+  border-radius: 8px !important;
+  padding: 6px !important;
+  min-width: 130px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  gap: 2px !important;
+}
+
+/* 隐藏原有横向分割竖线 */
+.chat-room-wrapper .ctx-menu::after,
+.chat-room-wrapper .ctx-menu::before {
+  display: none !important;
+}
+
+/* 菜单选项样式 */
+.chat-room-wrapper .ctx-menu-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  padding: 8px 12px !important;
+  font-size: 14px !important;
+  color: var(--qs-menu-text) !important; /* 白底黑字 */
+  background: transparent !important;
+  border: none !important;
+  border-radius: 5px !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  transition: background 0.15s ease !important;
+}
+
+/* 悬停/点击反馈 */
+.chat-room-wrapper .ctx-menu-btn:hover,
+.chat-room-wrapper .ctx-menu-btn:active {
+  background: var(--qs-menu-hover-bg) !important;
+}
+
+/* 删除、删除以下等危险选项：保留红色 */
+.chat-room-wrapper .ctx-menu-btn.ctx-menu-btn-danger,
+.chat-room-wrapper .ctx-menu-btn[data-danger="true"] {
+  color: var(--qs-menu-danger-text) !important;
+}
+
+/* ─────────── 头像圆角 ─────────── */
+.chat-room-wrapper .chat-msg-avatar,
+.chat-room-wrapper .chat-msg-avatar > div,
+.chat-room-wrapper .chat-msg-avatar img {
+  border-radius: 6px !important;
+}
+
+/* ─────────── 系统消息 ─────────── */
+.chat-room-wrapper .chat-sys-msg,
+.chat-room-wrapper .flex.justify-center.w-full > span.chat-sys-msg {
+  background: rgba(237, 240, 244, 0.9) !important;
+  color: #6B7A8F !important;
+  font-size: 12px !important;
+  padding: 3px 7px !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+.chat-room-wrapper .chat-sys-msg:has(svg) {
+  background: #FFFFFF !important;
+  color: var(--qs-topbar-text) !important;
+  border-radius: 6px !important;
+  padding: 7px 11px !important;
+  font-size: 14px !important;
+  box-shadow: 0 1px 2px rgba(50, 60, 80, 0.06) !important;
+}
+
+/* ─────────── ③ 底部栏：上下两行布局（响应式）─────────── */
+.chat-room-wrapper .chat-input-bar {
+  --wx-ib-btn: 36px;               /* 按钮最小点击热区 */
+  --wx-ib-field: 40px;             /* 输入框高度 */
+  --wx-ib-bg: var(--qs-bottombar-bg);
+  --wx-ib-padB: max(12px, calc(8px + env(safe-area-inset-bottom, 0px)));
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  padding: 10px 12px var(--wx-ib-padB) 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: var(--qs-bottombar-bg) !important;
+  backdrop-filter: blur(18px) saturate(1.12) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.12) !important;
+  border-top: 0.5px solid var(--qs-bottombar-line) !important;
+  box-shadow: none !important;
+}
+
+/* ─────────── 按钮组：独占第二行，均匀铺满整行 ─────────── */
+.chat-room-wrapper .chat-input-bar .chat-input-actions {
+  order: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 每个按钮平分整行宽度，图标居中 */
+.chat-room-wrapper .chat-input-actions > button,
+.chat-room-wrapper .chat-input-actions > .chat-offline-toggle {
+  position: static !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  width: auto !important;
+  height: var(--wx-ib-btn) !important;
+  min-height: var(--wx-ib-btn) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+.chat-room-wrapper .chat-input-actions button {
+  color: var(--qs-bottombar-icon) !important;
+}
+
+/* ─────────── ⑥ 输入框：独占第一行，占满宽度 ─────────── */
+.chat-room-wrapper .chat-input-bar .chat-input-textarea {
+  order: 1 !important;
+  width: 100% !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  min-height: var(--wx-ib-field) !important;
+  padding: 10px 13px !important;
+  border: none !important;
+  border-radius: 5px !important;
+  background: var(--qs-input-bg) !important;
+  color: var(--qs-input-text) !important;
+  font-size: 15px !important;
+  line-height: 20px !important;
+  box-shadow: inset 0 0 0 0.5px var(--qs-bottombar-line) !important;
+  box-sizing: border-box !important;
+}
+.chat-room-wrapper .chat-input-textarea::placeholder {
+  color: var(--qs-input-placeholder) !important;
+  opacity: 1 !important;
+}
+
+/* ─────────── ④ 发送按钮：无底色，图标随分组均匀分布 ─────────── */
+.chat-room-wrapper .chat-input-actions .chat-offline-toggle ~ button[aria-label="发送"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.chat-room-wrapper .chat-input-actions .chat-offline-toggle ~ button[aria-label="发送"] svg {
+  color: var(--qs-send-icon) !important;
+  stroke: currentColor !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+.chat-room-wrapper .chat-input-actions .chat-offline-toggle ~ button[aria-label="发送"]:active svg {
+  color: var(--qs-send-icon-active) !important;
+}
+
+/* ─────────── ⑦ 内心独白卡片（修复文字颜色及各部分单独控制） ─────────── */
+/* 卡片外框 */
+.chat-room-wrapper .chat-thought-card {
+  background: var(--qs-thought-bg) !important;
+  border: 0.5px solid rgba(120, 130, 150, 0.10) !important;
+  box-shadow: 0 1px 3px rgba(50, 60, 80, 0.06) !important;
+}
+
+/* 内心独白正文文字 */
+.chat-room-wrapper .chat-thought-body {
+  color: var(--qs-thought-text) !important;
+}
+
+/* 内心独白标题与签名 */
+.chat-room-wrapper .chat-thought-title,
+.chat-room-wrapper .chat-thought-sig {
+  color: var(--qs-thought-title) !important;
+}
+
+/* 内心独白激活爱心颜色 */
+.chat-room-wrapper .chat-monologue-heart[data-active] {
+  color: var(--qs-thought-heart) !important;
+}
+
+/* ─────────── ⑧ 红包与转账底色 ─────────── */
+/* 红包底色 */
+.chat-room-wrapper .chat-red-packet-body {
+  background: var(--qs-red-packet-bg) !important;
+  background-image: none !important;
+}
+
+/* 转账底色 */
+.chat-room-wrapper .chat-transfer-body {
+  background: var(--qs-transfer-bg) !important;
+  background-image: none !important;
+}
+
+/* ─────────── 引用条 ─────────── */
+.chat-room-wrapper .chat-quote-preview {
+  background: rgba(203, 212, 222, 0.58) !important;
+  color: #5A6B7F !important;
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.45) inset !important;
+}
+.chat-room-wrapper .chat-group-sender-name { color: #8C9AAB !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   响应式适配：极窄屏幕下图标缩小，保证不挤压
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 360px) {
+  .chat-room-wrapper .chat-input-actions button svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .chat-room-wrapper .chat-input-bar {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+}
+
+/* 横屏 / 大屏下按钮不至于拉太散，图标仍居中 */
+@media (min-width: 768px) {
+  .chat-room-wrapper .chat-input-bar {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
