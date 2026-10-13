@@ -1,0 +1,1 @@
+如题，希望语音可以连接fish audio，s2.1pro模型的api是免费的
