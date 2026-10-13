@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T13:46:49.697Z",
+  "generatedAt": "2026-10-13T14:15:24.447Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -198,7 +198,7 @@
     },
     {
       "folder": "Js插件",
-      "name": "[爱心]反差插件",
+      "name": "[爱心]查岗",
       "dirName": "[爱心]反差插件",
       "type": "dir",
       "path": "资源/Js插件/[爱心]反差插件",
@@ -210,7 +210,7 @@
       "author": "",
       "avatar": "",
       "ownerHash": "e7d1710fe2fa32cc3d0b39c9ca754809f7f227623f402768cd9477f640656744",
-      "updatedAt": "2026-10-13T21:45:23+08:00"
+      "updatedAt": "2026-10-13T22:14:02+08:00"
     },
     {
       "folder": "Js插件",
