@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T13:41:28.728Z",
+  "generatedAt": "2026-10-13T13:46:49.697Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -9,7 +9,7 @@
     },
     {
       "name": "Js插件",
-      "count": 76
+      "count": 77
     },
     {
       "name": "MCP",
@@ -195,6 +195,22 @@
       "avatar": "资源/Js插件/[星星]更换全局聊天背景的小插件[星星]/.avatar.png",
       "ownerHash": "64c4b53d46f5e3372d7b9038e518cf7a93df9d8da983094a12c2ab652f65ac8b",
       "updatedAt": "2026-08-24T21:59:53+08:00"
+    },
+    {
+      "folder": "Js插件",
+      "name": "[爱心]反差插件",
+      "dirName": "[爱心]反差插件",
+      "type": "dir",
+      "path": "资源/Js插件/[爱心]反差插件",
+      "files": [
+        "资源/Js插件/[爱心]反差插件/lens_fix.js .txt"
+      ],
+      "images": [],
+      "description": "",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "e7d1710fe2fa32cc3d0b39c9ca754809f7f227623f402768cd9477f640656744",
+      "updatedAt": "2026-10-13T21:45:23+08:00"
     },
     {
       "folder": "Js插件",
