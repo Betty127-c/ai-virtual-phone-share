@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T13:07:28.784Z",
+  "generatedAt": "2026-10-13T13:10:16.844Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -57,7 +57,7 @@
     },
     {
       "name": "气泡美化",
-      "count": 9
+      "count": 10
     },
     {
       "name": "消息列表美化",
@@ -5995,6 +5995,24 @@
       "avatar": "",
       "ownerHash": "7e23f17206cd464fcecdd0e4f95aaf3204080d2f5349ab00b54b3d9afc1df15a",
       "updatedAt": "2026-10-13T21:05:37+08:00"
+    },
+    {
+      "folder": "气泡美化",
+      "name": "复古蓝粉气泡仅聊天",
+      "dirName": "复古蓝粉气泡仅聊天",
+      "type": "dir",
+      "path": "资源/气泡美化/复古蓝粉气泡仅聊天",
+      "files": [
+        "资源/气泡美化/复古蓝粉气泡仅聊天/复古粉蓝仅聊天气泡美化（之前上传错了.txt"
+      ],
+      "images": [
+        "资源/气泡美化/复古蓝粉气泡仅聊天/Screenshot_20261013_205311.jpg"
+      ],
+      "description": "",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "7e23f17206cd464fcecdd0e4f95aaf3204080d2f5349ab00b54b3d9afc1df15a",
+      "updatedAt": "2026-10-13T21:08:33+08:00"
     },
     {
       "folder": "气泡美化",
