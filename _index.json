@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T16:54:00.508Z",
+  "generatedAt": "2026-10-13T02:01:50.848Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -37,7 +37,7 @@
     },
     {
       "name": "应用",
-      "count": 137
+      "count": 139
     },
     {
       "name": "应用bug改善",
@@ -3598,6 +3598,20 @@
     },
     {
       "folder": "应用",
+      "name": "[爱心]",
+      "dirName": "[爱心]",
+      "type": "dir",
+      "path": "资源/应用/[爱心]",
+      "files": [],
+      "images": [],
+      "description": "",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "507d2346bb5fa60054f10b640e709f2749356da7e3a39267e37c6f83b8055d8f",
+      "updatedAt": "2026-10-13T10:00:02+08:00"
+    },
+    {
+      "folder": "应用",
       "name": "[爱心]Velvet丝绒暗室",
       "dirName": "[爱心]Velvet丝绒暗室",
       "type": "dir",
@@ -3672,6 +3686,20 @@
       "avatar": "",
       "ownerHash": "e0072eb568bfbfcd8c14e306b8d125f8733ad9fe2d5f00a94139b052bee4c4f9",
       "updatedAt": "2026-09-06T12:23:30+08:00"
+    },
+    {
+      "folder": "应用",
+      "name": "[花]",
+      "dirName": "[花]",
+      "type": "dir",
+      "path": "资源/应用/[花]",
+      "files": [],
+      "images": [],
+      "description": "",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "507d2346bb5fa60054f10b640e709f2749356da7e3a39267e37c6f83b8055d8f",
+      "updatedAt": "2026-10-13T09:58:51+08:00"
     },
     {
       "folder": "应用",
