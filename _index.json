@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T02:29:38.127Z",
+  "generatedAt": "2026-10-13T09:04:44.193Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -45,7 +45,7 @@
     },
     {
       "name": "应用反馈（与应用作者沟通渠道）",
-      "count": 5
+      "count": 6
     },
     {
       "name": "快捷指令模版",
@@ -5755,6 +5755,20 @@
       "avatar": "资源/应用反馈（与应用作者沟通渠道）/许愿可以选择线下生成内容的历史版本/.avatar.png",
       "ownerHash": "665326c02f148787908eaa0c808ee8a0cdac7f0d240b3d5e443bff7920683472",
       "updatedAt": "2026-10-11T15:08:26+08:00"
+    },
+    {
+      "folder": "应用反馈（与应用作者沟通渠道）",
+      "name": "💐许愿语音可以加入fish audio",
+      "dirName": "💐许愿语音可以加入fish audio",
+      "type": "dir",
+      "path": "资源/应用反馈（与应用作者沟通渠道）/💐许愿语音可以加入fish audio",
+      "files": [],
+      "images": [],
+      "description": "如题，希望语音可以连接fish audio，s2.1pro模型的api是免费的",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "268e3566d97eb000aa76c1abc9d51e9a81c67e810c9348cf080d86711e587d82",
+      "updatedAt": "2026-10-13T17:03:13+08:00"
     },
     {
       "folder": "应用反馈（与应用作者沟通渠道）",
