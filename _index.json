@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T09:55:09.553Z",
+  "generatedAt": "2026-10-14T09:56:49.215Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -8137,11 +8137,11 @@
         "资源/表情包/jibi酱表情包/jibi酱表情包.docx"
       ],
       "images": [],
-      "description": "图源网络，侵权删。可以随意二改。\n[粗]使用方法：下载-复制url-表情包仓储-导入[/粗]",
+      "description": "图源网络，侵权删。可以随意二改。\n[粗]使用方法：下载-复制url-表情包仓储-导入[/粗]\n[大]不知道为什么预览图在文件里，而且是黑底的，请原谅……。[/大]",
       "author": "言嘉",
-      "avatar": "",
+      "avatar": "资源/表情包/jibi酱表情包/.avatar.png",
       "ownerHash": "cab08ff47709ab8ed6ccec9b5e31cfe380683e91334358926e59d42dcc0a47c9",
-      "updatedAt": "2026-10-13T21:39:59+08:00"
+      "updatedAt": "2026-10-14T17:54:51+08:00"
     },
     {
       "folder": "表情包",
