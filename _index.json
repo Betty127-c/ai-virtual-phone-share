@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T07:20:40.716Z",
+  "generatedAt": "2026-10-14T08:04:56.845Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -45,7 +45,7 @@
     },
     {
       "name": "应用反馈（与应用作者沟通渠道）",
-      "count": 6
+      "count": 7
     },
     {
       "name": "快捷指令模版",
@@ -5803,6 +5803,20 @@
       "avatar": "",
       "ownerHash": "967826da0a6d92bf811b4076cc20ed9a13e9801065336de1b42b97d8c33083fa",
       "updatedAt": "2026-10-12T11:45:31+08:00"
+    },
+    {
+      "folder": "应用反馈（与应用作者沟通渠道）",
+      "name": "许愿可以设置发送消息和接收消息的提示音🥺",
+      "dirName": "许愿可以设置发送消息和接收消息的提示音🥺",
+      "type": "dir",
+      "path": "资源/应用反馈（与应用作者沟通渠道）/许愿可以设置发送消息和接收消息的提示音🥺",
+      "files": [],
+      "images": [],
+      "description": "",
+      "author": "不躲雨",
+      "avatar": "",
+      "ownerHash": "5f562e77e754f494ee2fc66cbc56d0f79dc824e945a004066d59cf53591a2238",
+      "updatedAt": "2026-10-14T16:03:39+08:00"
     },
     {
       "folder": "应用反馈（与应用作者沟通渠道）",
