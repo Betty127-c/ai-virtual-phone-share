@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T11:11:09.617Z",
+  "generatedAt": "2026-10-14T11:28:30.752Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -37,7 +37,7 @@
     },
     {
       "name": "应用",
-      "count": 140
+      "count": 141
     },
     {
       "name": "应用bug改善",
@@ -4849,6 +4849,22 @@
       "avatar": "资源/应用/故梦辞[爱心]/.avatar.png",
       "ownerHash": "9840628ff5f4d01a8a3aad435eade27791b624164c9cb2815513a424987ac5f7",
       "updatedAt": "2026-09-12T14:21:18+08:00"
+    },
+    {
+      "folder": "应用",
+      "name": "文件系统",
+      "dirName": "文件系统",
+      "type": "dir",
+      "path": "资源/应用/文件系统",
+      "files": [
+        "资源/应用/文件系统/file-vault.zip"
+      ],
+      "images": [],
+      "description": "v1.0：支持导入docx、doc和txt格式文件，方便进行世界观、约束、文风等材料的导入。支持md、json和txt格式导出",
+      "author": "fallen",
+      "avatar": "",
+      "ownerHash": "2effeb33526e4ee92b105dc5922b6dcd0fa7cbeacc7f873bc4e7a6494ffb809c",
+      "updatedAt": "2026-10-14T19:26:51+08:00"
     },
     {
       "folder": "应用",
