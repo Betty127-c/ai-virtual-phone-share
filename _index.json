@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T11:36:54.695Z",
+  "generatedAt": "2026-10-14T12:19:07.494Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -37,7 +37,7 @@
     },
     {
       "name": "应用",
-      "count": 141
+      "count": 142
     },
     {
       "name": "应用bug改善",
@@ -5610,6 +5610,26 @@
       "avatar": "资源/应用/邮箱📮-给char一个交笔友+拥有自己邮箱的机会/.avatar.png",
       "ownerHash": "b1e1c3387460706865343cc3941321654acd3bfbe0ff343af04c9600a7f7b4e1",
       "updatedAt": "2026-10-06T21:47:58+08:00"
+    },
+    {
+      "folder": "应用",
+      "name": "附近外卖",
+      "dirName": "附近外卖",
+      "type": "dir",
+      "path": "资源/应用/附近外卖",
+      "files": [
+        "资源/应用/附近外卖/附近外卖_小手机应用包 (1).zip"
+      ],
+      "images": [
+        "资源/应用/附近外卖/Screenshot_20261014_201429_org.mozilla.firefox.jpg",
+        "资源/应用/附近外卖/Screenshot_20261014_201433_org.mozilla.firefox.jpg",
+        "资源/应用/附近外卖/Screenshot_20261014_201444_org.mozilla.firefox.jpg"
+      ],
+      "description": "我做了一个叫「附近外卖」的小手机应用，把外卖购物和大众点评式探店放在了一起。\n它支持现代都市、古代架空、仙侠修真和赛博未来。输入想找的东西，AI 会根据关键词和世界观生成对应的店铺、商品和评论，比如在古代找蜀锦服饰，在仙侠世界找灵茶或法器。\n顶部可以切换外卖和点评，两边共享同一批店铺。你可以挑商品、下单、自己付款或请聊天角色代付，也能收藏店铺、写点评、分享给角色。\n每次生成只请求一次 API，生成4家店，每家8～12件商品和6条模拟评论，想看更多评论再点击追加，生成内容会保存。",
+      "author": "宝宝",
+      "avatar": "",
+      "ownerHash": "122da77ce3e09cb45fb3833d01053fa7d73663b1ed5d35d61b66d65a8b7cf4ea",
+      "updatedAt": "2026-10-14T20:17:19+08:00"
     },
     {
       "folder": "应用",
