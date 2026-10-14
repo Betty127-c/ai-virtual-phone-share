@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T07:15:37.486Z",
+  "generatedAt": "2026-10-14T07:20:40.716Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -9,7 +9,7 @@
     },
     {
       "name": "Js插件",
-      "count": 79
+      "count": 78
     },
     {
       "name": "MCP",
@@ -1472,22 +1472,6 @@
       "avatar": "",
       "ownerHash": "744a240a9e75b6e391e9c765bf223c2b145a918023a693736b053f6ab2b9a321",
       "updatedAt": "2026-10-02T19:27:15+08:00"
-    },
-    {
-      "folder": "Js插件",
-      "name": "键盘防掉(网页版和apk都可以防止掉落)",
-      "dirName": "键盘防掉(网页版和apk都可以防止掉落)",
-      "type": "dir",
-      "path": "资源/Js插件/键盘防掉(网页版和apk都可以防止掉落)",
-      "files": [
-        "资源/Js插件/键盘防掉(网页版和apk都可以防止掉落)/键盘防掉__6.js"
-      ],
-      "images": [],
-      "description": "!!!使用工坊时一定要把此插件关掉，否则会停止生成\n\n插件说明:\n解决发消息后菜单栏按键和原生输入法自动掉落的问题。\n\n收起键盘的方法：\n点击原生输入法键盘的收起键，或者直接点击聊天界面的空白处。",
-      "author": "vel",
-      "avatar": "资源/Js插件/键盘防掉(网页版和apk都可以防止掉落)/.avatar.png",
-      "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
-      "updatedAt": "2026-10-14T15:13:35+08:00"
     },
     {
       "folder": "Js插件",
