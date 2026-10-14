@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T05:49:16.762Z",
+  "generatedAt": "2026-10-14T06:02:28.129Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -1483,11 +1483,11 @@
         "资源/Js插件/键盘防掉(网页版和apk都可以防止掉落)/键盘2.js"
       ],
       "images": [],
-      "description": "插件说明:\n解决发消息后菜单栏按键和原生输入法自动掉落的问题。\n\n收起键盘的方法：\n\n点击原生输入法键盘的收起键，或者直接点击聊天界面的空白处。",
-      "author": "",
-      "avatar": "",
+      "description": "插件说明:\n解决发消息后菜单栏按键和原生输入法自动掉落的问题。\n\n收起键盘的方法：\n点击原生输入法键盘的收起键，或者直接点击聊天界面的空白处。",
+      "author": "vel",
+      "avatar": "资源/Js插件/键盘防掉(网页版和apk都可以防止掉落)/.avatar.png",
       "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
-      "updatedAt": "2026-10-14T13:47:35+08:00"
+      "updatedAt": "2026-10-14T14:00:03+08:00"
     },
     {
       "folder": "Js插件",
