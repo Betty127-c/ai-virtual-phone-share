@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T17:30:18.351Z",
+  "generatedAt": "2026-10-14T00:13:25.539Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -29,7 +29,7 @@
     },
     {
       "name": "剧情预设及正则",
-      "count": 13
+      "count": 14
     },
     {
       "name": "小剧场",
@@ -2743,6 +2743,22 @@
       "avatar": "资源/剧情预设及正则/【0830】⚖️日月西 float专用 v0.1/.avatar.png",
       "ownerHash": "b951d10e37c43a8d184a8d711593f55f94bd7b009589a822fa621b0053fab23d",
       "updatedAt": "2026-08-31T00:45:49+08:00"
+    },
+    {
+      "folder": "剧情预设及正则",
+      "name": "【1014】⚖️日月西 float专用版 v0.2",
+      "dirName": "【1014】⚖️日月西 float专用版 v0.2",
+      "type": "dir",
+      "path": "资源/剧情预设及正则/【1014】⚖️日月西 float专用版 v0.2",
+      "files": [
+        "资源/剧情预设及正则/【1014】⚖️日月西 float专用版 v0.2/【日月西】float v0.2 @电波系.json"
+      ],
+      "images": [],
+      "description": "最近没咋玩float，过来补一下更新！\n\n- 新增【有事业心】，加强防止char围绕user转\n- 新增14个【角色特质】：有犬系猫系重力系高干各种各样的特化，针对不同类型的char，需要哪个开哪个就行\n- 新增【宠物优化】，防止char吃宠物的醋、不尊重小动物\n- 新增【防占有】",
+      "author": "电波系",
+      "avatar": "资源/剧情预设及正则/【1014】⚖️日月西 float专用版 v0.2/.avatar.png",
+      "ownerHash": "b951d10e37c43a8d184a8d711593f55f94bd7b009589a822fa621b0053fab23d",
+      "updatedAt": "2026-10-14T08:12:10+08:00"
     },
     {
       "folder": "剧情预设及正则",
