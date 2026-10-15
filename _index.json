@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T12:34:54.526Z",
+  "generatedAt": "2026-10-15T12:36:44.569Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -4862,11 +4862,11 @@
         "资源/应用/文件系统/file-vault.zip"
       ],
       "images": [],
-      "description": "v1.0：支持导入docx、doc和txt格式文件，方便进行世界观、约束、文风等材料的导入。支持md、json和txt格式导出",
-      "author": "fallen",
+      "description": "v1.1：更新支持联动聊天室、特调模式和世界观功能。（因涉及[粗]底层[/粗]修改需额外导入代码，可[粗]地瓜[/粗]看，已公开发布）\nv1.0：支持导入docx、doc和txt格式文件，方便进行世界观、约束、文风等材料的导入。支持md、json和txt格式导出",
+      "author": "淡淡的低精力栗子",
       "avatar": "",
       "ownerHash": "2effeb33526e4ee92b105dc5922b6dcd0fa7cbeacc7f873bc4e7a6494ffb809c",
-      "updatedAt": "2026-10-14T19:26:51+08:00"
+      "updatedAt": "2026-10-15T20:35:02+08:00"
     },
     {
       "folder": "应用",
