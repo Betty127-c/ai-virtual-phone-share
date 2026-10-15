@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T12:28:01.845Z",
+  "generatedAt": "2026-10-15T12:34:54.526Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -5679,11 +5679,11 @@
         "资源/应用/随想笔记/quick-notes.zip"
       ],
       "images": [],
-      "description": "一个支持AI通用分析和角色共创分析的笔记软件，欢迎大家多多反馈！后续会持续更新",
-      "author": "淡淡的低精力栗子（地瓜可找）",
+      "description": "一个支持AI通用分析、角色共同分析的笔记软件，后续还会持续更新，欢迎大家多多反馈！！（地瓜可找我）",
+      "author": "淡淡的低精力栗子",
       "avatar": "",
-      "ownerHash": "940bb02fa6c54dc1db6773d0507463e51a07f6d022d2ec1d26cb6c922889f77a",
-      "updatedAt": "2026-10-15T20:26:09+08:00"
+      "ownerHash": "2effeb33526e4ee92b105dc5922b6dcd0fa7cbeacc7f873bc4e7a6494ffb809c",
+      "updatedAt": "2026-10-15T20:32:58+08:00"
     },
     {
       "folder": "应用",
