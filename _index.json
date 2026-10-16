@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T13:50:54.559Z",
+  "generatedAt": "2026-10-16T14:03:05.069Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -7742,17 +7742,17 @@
       "type": "dir",
       "path": "资源/线上美化/邮票信笺",
       "files": [
-        "资源/线上美化/邮票信笺/2邮票信笺美化.css"
+        "资源/线上美化/邮票信笺/3邮票信笺美化.css"
       ],
       "images": [
         "资源/线上美化/邮票信笺/Screenshot_2026-10-16-18-20-15-109_com.microsoft.emmx_17.jpg",
         "资源/线上美化/邮票信笺/Screenshot_2026-10-16-20-46-36-060_com.microsoft.emmx_17.jpg"
       ],
-      "description": "不适配的话自己调整一下，调整的数值集中放在了代码最前面的“控制面板”里，或者给小卷修改。标题栏的大字、对方（AI）的悬浮网名(Ceshiyuan)、我方（User）的悬浮网名，这三处的文字都是我提前预设好的，并不是自动抓取你的聊天昵称。如果需要改成自己的，去代码最前面的“控制面板”。(改前面控制面板标题如果还没变的话找到:\ncontent:\"Ceshiyuan\"!important; /* 使用大字变量 */，将里面引号内容替换成你要改的就可以)\n配套插件在资源集市的插件那个文件夹里，可以根据自己的喜好开启(只是装饰性作用)。",
+      "description": "不适配的话自己调整一下，调整的数值集中放在了代码最前面的“控制面板”里，或者给小卷修改。标题栏的大字、对方（AI）的悬浮网名(Ceshiyuan)、我方（User）的悬浮网名，这三处的文字都是我提前预设好的，并不是自动抓取你的聊天昵称。如果需要改成自己的，去代码最前面的“控制面板”。\n\n\n(改前面控制面板标题如果还没变的话在代码里找到这一行：\n\n\ncontent: var(--title-main-text) !important;\n把它替换成：\ncontent: \"你想改的名字\" !important;\n\n\n如果副标题也没变，就找到：\n\n\ncontent: var(--title-sub-text) !important;\n把它替换成：\ncontent: \"你想改的副标题\" !important;\n\n\n配套插件在资源集市的插件那个文件夹里，可以根据自己的喜好开启(只是装饰性作用)。",
       "author": "vel",
       "avatar": "资源/线上美化/邮票信笺/.avatar.png",
       "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
-      "updatedAt": "2026-10-16T21:48:52+08:00"
+      "updatedAt": "2026-10-16T22:01:14+08:00"
     },
     {
       "folder": "线上美化",
