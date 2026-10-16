@@ -1,0 +1,537 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Italianno&family=Playfair+Display:ital,wght@1,500&display=swap');
+
+/* ==============================================
+   ⚙️ 万能控制面板（所有你想改的数字/文字都在这里）
+   ============================================== */
+:root {
+  /* --- 顶部标题栏 --- */
+  --title-main-text: "Ceshiyuan";          /* 顶部大花体字（主名字） */
+  --title-sub-text: "Let life be beautiful like summer flowers"; /* 顶部下方的小字副标题 */
+  --title-wing-left: "ʚ";                  /* 左侧小翅膀图案 */
+  --title-wing-right: "ɞ";                 /* 右侧小翅膀图案 */
+  --title-wing-gap: 36px;                  /* 翅膀和大字之间的左右间距 */
+  --title-wing-top: 6px;                   /* 翅膀的高度位置，数字越大越往下 */
+
+  /* --- 头像旁悬浮网名 --- */
+  --bot-floating-text: "Caelestis";       /* AI头像旁边的花体字网名 */
+  --user-floating-text: "Vel";            /* 我方头像旁边的花体字网名 */
+  --floating-text-size: 32px;              /* 悬浮网名字体大小 */
+  --avatar-scale: 1.08;                    /* 头像整体放大倍数，1为原始大小 */
+  --avatar-offset-y: 30px;                 /* 🎯 头像往下偏移量：想往下移就把30px改大，想往上移就改小 */
+  --floating-text-offset-y: 10px;           /* 🎯 悬浮网名整体往下偏移量：想往下移改成4px或8px，浮动动画完全不影响！ */
+
+  /* --- 邮票输入栏 --- */
+  --stamp-hole-size: 6px;                  /* 输入栏四周邮票齿孔的大小 */
+  --stamp-gap: 20px;                       /* 输入栏齿孔之间的间距，数字越大孔越稀疏 */
+  --stamp-bg: rgba(255, 255, 255, 0.3);    /* 输入栏外框底色（半透明白） */
+  --stamp-inner-bg: rgba(235, 245, 250, 0.25); /* 输入栏内部输入区和图标区的底色 */
+
+  /* --- 气泡设置 --- */
+  --bubble-bg-user: rgba(200, 230, 250, 0.7);   /* 我方气泡底色：浅冰蓝 */
+  --bubble-bg-ai: rgba(235, 245, 255, 0.7);     /* AI气泡底色：浅云灰蓝 */
+  --bubble-text-color: #4A5D73;                 /* 气泡内的文字颜色：雾霾蓝 */
+  --bubble-hole-size: 4px;                      /* 气泡四周邮票齿孔的大小 */
+  --bubble-gap: 16px;                           /* 气泡齿孔之间的间距，数字越大孔越稀疏 */
+
+  /* --- 气泡角标（花体字） --- */
+  --bubble-tag-text: "𝒲𝓇𝒾𝓉ℯ 𝒶 𝓁ℯ𝓉𝓉ℯ𝓇…";      /* 气泡左下/右下角的装饰文字 */
+  --bubble-tag-color: rgba(120, 150, 180, 0.6); /* 气泡角标文字颜色 */
+  --bubble-tag-size: 13px;                      /* 气泡角标文字大小 */
+
+  /* --- 邮戳装饰 --- */
+  --stamp-icon-size: 36px;                      /* 气泡里的邮戳图片大小 */
+}
+
+/* --- 1. 两侧胶片波点边饰 --- */
+.chat-room-wrapper::before,
+.chat-room-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 18px;                     /* 两侧边饰的宽度 */
+  z-index: 5;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.95) 2.2px, transparent 2.6px); /* 白色波点 */
+  background-size: 14px 18px;      /* 波点间距和大小 */
+  background-position: center;
+  opacity: 0.9;                    /* 边饰透明度 */
+}
+.chat-room-wrapper::before { left: 2px; border-right: 1px dashed rgba(255,255,255,0.65); } /* 左侧边饰 */
+.chat-room-wrapper::after  { right: 2px; border-left: 1px dashed rgba(255,255,255,0.65); } /* 右侧边饰 */
+
+/* --- 2. 顶栏标题栏（含上下浮游的翅膀动画） --- */
+.page-header {
+  background: linear-gradient(180deg, #f4faff 0%, #dceef4 100%) !important; /* 顶部颜色：上浅下深的冰霜渐变 */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  height: auto !important;           /* 高度自适应 */
+  min-height: unset !important;
+  margin-top: -20px !important;      /* 关键：向上拉，消除顶部空档 */
+  padding: 0 20px 18px 20px !important;
+  position: relative !important;
+  overflow: visible !important;
+
+  /* 底部齿孔魔法 */
+  -webkit-mask-image: radial-gradient(circle var(--stamp-hole-size) at 50% 100%, transparent 98%, #000 100%) !important;
+  -webkit-mask-size: var(--stamp-gap) 100% !important;
+  -webkit-mask-repeat: repeat-x !important;
+  mask-image: radial-gradient(circle var(--stamp-hole-size) at 50% 100%, transparent 98%, #000 100%) !important;
+  mask-size: var(--stamp-gap) 100% !important;
+  mask-repeat: repeat-x !important;
+}
+.page-header::before {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 6px !important;
+  left: 0 !important;
+  right: 0 !important;
+  border-top: 1.5px dashed rgba(120, 150, 180, 0.45) !important; /* 标题栏底部的淡蓝色虚线 */
+  pointer-events: none !important;
+  z-index: 10 !important;
+}
+.page-header-content {
+  position: relative !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  overflow: visible !important;
+  padding-top: 4px !important;
+  padding-bottom: 0 !important;
+}
+.page-title, .page-header .page-title, .chat-room-wrapper .page-title {
+  font-size: 0 !important; line-height: 0 !important; color: transparent !important;
+  opacity: 1 !important; display: flex !important; flex-direction: column !important;
+  align-items: center !important; justify-content: center !important;
+  overflow: visible !important; text-align: center !important;
+  margin: 0 auto !important; position: relative !important;
+}
+@keyframes original-wing-float {
+  0%,100% { transform: translateY(0) scale(1); opacity: 0.92; }
+  50%      { transform: translateY(-4px) scale(1.08); opacity: 1; }
+}
+.page-title::before, .page-header .page-title::before {
+  content: "Caelestis"!important; /* 使用大字变量 */
+  font-family: 'Great Vibes', cursive, serif !important; /* 大字花体字体 */
+  font-size: 35px !important; line-height: 1.15 !important;
+  font-weight: normal !important; display: inline-block !important;
+  white-space: nowrap !important; position: relative !important;
+  padding: 0 var(--title-wing-gap) !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.75) 0%, #d4e4f4 25%, #587593 58%, #8ea7c0 100%) !important; /* 大字银蓝浮雕渐变 */
+  -webkit-background-clip: text !important; background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 1px 1px rgba(255,255,255,0.95)) drop-shadow(0 2px 6px rgba(35,60,88,0.55)) !important; /* 大字发光阴影 */
+  animation: none !important;
+}
+.page-header-content::before {
+  content: var(--title-wing-left) !important; /* 使用左翅膀变量 */
+  font-family: 'Great Vibes', cursive, serif !important;
+  font-size: 30px !important; line-height: 1 !important;
+  position: absolute !important; top: var(--title-wing-top) !important;
+  left: calc(50% - (max(56px, calc(var(--title-wing-gap) + 48px)))) !important;
+  pointer-events: none !important; z-index: 30 !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.75) 0%, #cce0f2 25%, #52718f 60%, #85a2be 100%) !important; /* 左翅膀渐变 */
+  -webkit-background-clip: text !important; background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 1px 1px rgba(255,255,255,0.95)) drop-shadow(0 2px 5px rgba(35,60,88,0.5)) !important; /* 左翅膀阴影 */
+  animation: original-wing-float 3.2s ease-in-out infinite !important; /* 启动左翅膀动画 */
+}
+.page-header-content::after {
+  content: var(--title-wing-right) !important; /* 使用右翅膀变量 */
+  font-family: 'Great Vibes', cursive, serif !important;
+  font-size: 30px !important; line-height: 1 !important;
+  position: absolute !important; top: var(--title-wing-top) !important;
+  right: calc(50% - (max(56px, calc(var(--title-wing-gap) + 48px)))) !important;
+  pointer-events: none !important; z-index: 30 !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.75) 0%, #cce0f2 25%, #52718f 60%, #85a2be 100%) !important; /* 右翅膀渐变 */
+  -webkit-background-clip: text !important; background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 1px 1px rgba(255,255,255,0.95)) drop-shadow(0 2px 5px rgba(35,60,88,0.5)) !important; /* 右翅膀阴影 */
+  animation: original-wing-float 3.2s ease-in-out infinite !important; /* 启动右翅膀动画 */
+}
+.page-title::after, .page-header .page-title::after {
+  content: var(--title-sub-text) !important; /* 使用小字副标题变量 */
+  font-family: 'Italianno', 'Great Vibes', cursive, serif !important; /* 小字花体字体 */
+  font-size: 21px !important; line-height: 1 !important;
+  display: block !important; white-space: nowrap !important;
+  letter-spacing: 0.5px !important; margin-top: 1px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, #bed3e8 35%, #567595 100%) !important; /* 小字渐变 */
+  -webkit-background-clip: text !important; background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 1px 2px rgba(35,60,88,0.45)) !important;
+}
+.page-back-btn, .page-header-right button, .page-header button {
+  background: rgba(255,255,255,0.78) !important; backdrop-filter: blur(12px) !important; /* 按钮玻璃磨砂效果 */
+  -webkit-backdrop-filter: blur(12px) !important; border-radius: 50% !important;
+  box-shadow: 0 2px 10px rgba(160,185,210,0.3) !important; color: #55728f !important; /* 按钮颜色 */
+  border: 1px solid rgba(255,255,255,0.95) !important;
+  width: 38px !important; height: 38px !important; /* 按钮尺寸 */
+  display: flex !important; align-items: center !important;
+  justify-content: center !important; position: relative !important; z-index: 50 !important;
+}
+
+/* --- 3. 头像旁悬浮网名 --- */
+@keyframes archangel-float-breathe {
+  0%,100% { opacity: 0.95; transform: translateY(0) scale(1); }
+  50%      { opacity: 1; transform: translateY(-2px) scale(1.02); }
+}
+.chat-msg-wrapper[data-role="assistant"] .chat-msg-content-wrap,
+.chat-msg-wrapper[data-role="user"] .chat-msg-content-wrap {
+  overflow: visible !important;
+}
+.chat-msg-wrapper[data-role="assistant"] .chat-msg-content-wrap::before,
+.chat-msg-wrapper[data-role="user"] .chat-msg-content-wrap::before {
+  display: block !important;
+  font-family: 'Great Vibes', cursive, serif !important; /* 悬浮网名使用花体字 */
+  font-size: var(--floating-text-size) !important;
+  line-height: 1.25 !important;
+  padding-top: 6px !important;
+  padding-bottom: 0px !important;
+  margin-bottom: 2px !important;
+  pointer-events: none !important;
+  animation: archangel-float-breathe 3.5s ease-in-out infinite !important; /* 启动呼吸动画 */
+  will-change: transform !important;
+  color: transparent !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f7fc 22%, #dbe8f5 45%, #b9d3ec 70%, #9cbfe3 100%) !important; /* 悬浮网名渐变 */
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 -1px 0px rgba(80, 80, 80, 0.55)) drop-shadow(0 1.5px 0px rgba(255, 255, 255, 0.98)) drop-shadow(0 2px 3px rgba(120, 120, 120, 0.35)) !important;
+  
+  /* 🎯 这里就是只调整位置，不动动画的核心：用相对定位整体平移 */
+  position: relative !important;
+  top: var(--floating-text-offset-y, 0px) !important;
+}
+.chat-msg-wrapper[data-role="assistant"] .chat-msg-content-wrap::before {
+  content: var(--bot-floating-text) !important; /* AI名字 */
+  width: 100% !important; text-align: left !important;
+  transform-origin: left bottom !important;
+}
+.chat-msg-wrapper[data-role="user"] .chat-msg-content-wrap::before {
+  content: var(--user-floating-text) !important; /* 我方名字 */
+  width: 100% !important; text-align: right !important;
+  transform-origin: right bottom !important;
+  padding-top: 8px !important; padding-right: 6px !important;
+  box-sizing: border-box !important;
+}
+
+/* --- 4. 连续发多条消息优化 + 气泡间距 --- */
+/* 🎯 清除宿主默认间距，统一接管 */
+.chat-scroll-anchored {
+  gap: 6px !important; /* 👈 核心：气泡之间的间距！数字越小越挤，数字越大越开 */
+}
+.chat-msg-wrapper {
+  margin-top: 0 !important; 
+  margin-bottom: 0 !important;
+}
+
+/* 干掉连发消息时的 -6px 折叠，防止它们黏在一起 */
+.chat-msg-wrapper[data-role="assistant"][data-consecutive],
+.chat-msg-wrapper[data-role="user"][data-consecutive] {
+  margin-top: 0 !important; 
+  margin-bottom: 0 !important; 
+  padding-top: 0 !important;
+}
+.chat-msg-wrapper[data-role="assistant"][data-consecutive] .chat-msg-avatar,
+.chat-msg-wrapper[data-role="user"][data-consecutive] .chat-msg-avatar {
+  opacity: 0 !important; pointer-events: none !important; visibility: hidden !important;
+  height: 0 !important; min-height: 0 !important; margin-top: 0 !important; margin-bottom: 0 !important;
+  transform: none !important;
+}
+.chat-msg-wrapper[data-role="assistant"][data-consecutive] .chat-msg-content-wrap::before,
+.chat-msg-wrapper[data-role="user"][data-consecutive] .chat-msg-content-wrap::before {
+  display: none !important; content: none !important;
+}
+
+/* --- 5. 头像框 --- */
+.chat-msg-avatar {
+  border-radius: 50% !important; position: relative !important;
+  /* 🎯 关键：这里读取控制面板里的 --avatar-offset-y 变量，控制头像往下偏移多少 */
+  margin-top: var(--avatar-offset-y, 14px) !important; 
+  overflow: visible !important;
+  transform: scale(var(--avatar-scale, 1.08)) !important;
+  transform-origin: center center !important;
+}
+.chat-msg-avatar img {
+  border-radius: 50% !important; display: block !important;
+  position: relative !important; z-index: 1 !important;
+}
+.chat-msg-avatar::before, .chat-msg-avatar::after {
+  display: none !important; content: none !important;
+}
+.chat-msg-wrapper[data-role="user"] .chat-msg-avatar { overflow: visible !important; }
+.chat-msg-wrapper[data-role="user"] .chat-msg-avatar::after {
+  display: block !important; content: "" !important; position: absolute !important;
+  top: 50% !important; left: 50% !important;
+  transform: translate(calc(-50% - 3px), calc(-50% - 2.5px)) !important;
+  width: 150% !important; height: 150% !important;
+  background-image: url('https://i.postimg.cc/MX2qbCHh/retouch-2026101515103397.png') !important; /* 我方头像框图片（蝴蝶） */
+  background-size: contain !important; background-repeat: no-repeat !important;
+  background-position: center !important; z-index: 3 !important; pointer-events: none !important;
+}
+.chat-msg-wrapper[data-role="user"] .chat-msg-avatar img { position: relative !important; z-index: 1 !important; }
+.chat-msg-wrapper[data-role="assistant"] .chat-msg-avatar { overflow: visible !important; }
+.chat-msg-wrapper[data-role="assistant"] .chat-msg-avatar::after {
+  display: block !important; content: "" !important; position: absolute !important;
+  top: 50% !important; left: 50% !important;
+  /* 🎯 核心修改：完全复制上面用户头像的 transform 参数，实现绝对居中 */
+  transform: translate(calc(-50% - 3px), calc(-50% - 2.5px)) !important;
+  width: 150% !important; height: 150% !important;
+  background-image: url('https://i.postimg.cc/MX2qbCHh/retouch-2026101515103397.png') !important; /* AI头像框图片（蝴蝶） */
+  background-size: contain !important; background-repeat: no-repeat !important;
+  background-position: center !important; z-index: 3 !important; pointer-events: none !important;
+}
+.chat-msg-wrapper[data-role="assistant"] .chat-msg-avatar img { position: relative !important; z-index: 1 !important; }
+
+/* --- 6. 邮票信笺输入栏 --- */
+.chat-input-bar {
+  background-color: var(--stamp-bg) !important; /* 输入栏外框底色 */
+  padding: 12px 14px 10px !important;
+  box-shadow: 0 4px 12px rgba(45, 75, 105, 0.08) !important; /* 输入栏轻微阴影 */
+  backdrop-filter: blur(12px) !important; /* 输入栏玻璃磨砂效果 */
+  -webkit-backdrop-filter: blur(12px) !important;
+
+  /* 四边锯齿邮票效果 */
+  -webkit-mask-image: 
+    radial-gradient(circle var(--stamp-hole-size) at 50% 0, transparent 98%, #000 100%),
+    radial-gradient(circle var(--stamp-hole-size) at 50% 100%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--stamp-hole-size) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--stamp-hole-size) at 100% 50%, transparent 98%, #000 100%) !important;
+  -webkit-mask-size: var(--stamp-gap) 100%, var(--stamp-gap) 100%, 100% var(--stamp-gap), 100% var(--stamp-gap) !important;
+  -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important;
+  -webkit-mask-composite: source-in !important;
+
+  mask-image: 
+    radial-gradient(circle var(--stamp-hole-size) at 50% 0, transparent 98%, #000 100%),
+    radial-gradient(circle var(--stamp-hole-size) at 50% 100%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--stamp-hole-size) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--stamp-hole-size) at 100% 50%, transparent 98%, #000 100%) !important;
+  mask-size: var(--stamp-gap) 100%, var(--stamp-gap) 100%, 100% var(--stamp-gap), 100% var(--stamp-gap) !important;
+  mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important;
+  mask-composite: intersect !important;
+}
+.chat-input-textarea {
+  background-color: var(--stamp-inner-bg) !important; /* 输入区内部底色 */
+  border: none !important;
+  border-radius: 4px 4px 4px 4px !important;
+  box-shadow: none !important;
+  color: #38434d !important; /* 打字后的文字颜色 */
+  min-height: 46px !important;
+  padding: 10px 14px !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.chat-input-actions {
+  background: var(--stamp-inner-bg) !important; /* 下方图标区底色 */
+  border-radius: 4px 4px 4px 4px !important;
+  border-top: none !important;
+  margin: 0 !important;
+  padding: 8px 12px 10px !important;
+  gap: 30px !important; /* 图标之间的间距 */
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+.chat-input-actions::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 24px !important; /* 虚线左端留空 */
+  right: 24px !important; /* 虚线右端留空 */
+  border-top: 2px dashed rgba(255, 255, 255, 0.8) !important; /* 输入区和图标区中间的分割虚线 */
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+.chat-input-actions button {
+  color: #8fa3b0 !important; /* 底部图标颜色（调浅的灰蓝色） */
+  opacity: 0.9 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* --- 7. 邮票气泡 + 邮戳水印 + 花体角标 --- */
+.chat-bubble-role-user:not(.chat-bubble-media):not(.voice-msg-bubble),
+.chat-bubble-role-assistant:not(.chat-bubble-media):not(.voice-msg-bubble) {
+  display: inline-block !important;
+  width: fit-content !important;
+  max-width: 240px !important;
+  border: none !important;
+  box-shadow: none !important;
+  filter: drop-shadow(0 4px 8px rgba(45, 75, 105, 0.15)) !important; /* 气泡整体悬浮阴影 */
+  color: var(--bubble-text-color) !important; /* 气泡文字颜色 */
+  border-radius: 2px !important;
+  /* 气泡内边距：上6下12（高度控制） */
+  padding: 6px 14px 12px 14px !important;
+  word-break: break-word !important; /* 长文字自动换行 */
+  position: relative !important;
+  line-height: 1.4 !important;
+
+  /* 气泡四边锯齿邮票效果 */
+  -webkit-mask-image: 
+    radial-gradient(circle var(--bubble-hole-size) at 50% 0, transparent 98%, #000 100%),
+    radial-gradient(circle var(--bubble-hole-size) at 50% 100%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--bubble-hole-size) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--bubble-hole-size) at 100% 50%, transparent 98%, #000 100%) !important;
+  -webkit-mask-size: var(--bubble-gap) 100%, var(--bubble-gap) 100%, 100% var(--bubble-gap), 100% var(--bubble-gap) !important;
+  -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important;
+  -webkit-mask-composite: source-in !important;
+
+  mask-image: 
+    radial-gradient(circle var(--bubble-hole-size) at 50% 0, transparent 98%, #000 100%),
+    radial-gradient(circle var(--bubble-hole-size) at 50% 100%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--bubble-hole-size) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--bubble-hole-size) at 100% 50%, transparent 98%, #000 100%) !important;
+  mask-size: var(--bubble-gap) 100%, var(--bubble-gap) 100%, 100% var(--bubble-gap), 100% var(--bubble-gap) !important;
+  mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important;
+  mask-composite: intersect !important;
+}
+
+/* 我方（右侧）气泡：浅冰蓝 + 左下角邮戳 */
+.chat-bubble-role-user:not(.chat-bubble-media):not(.voice-msg-bubble) {
+  background-color: var(--bubble-bg-user) !important;
+  background-image: url('https://i.postimg.cc/SKQr8thT/retouch-2026101522354532.png') !important; /* 我方邮戳图片 */
+  background-repeat: no-repeat !important;
+  background-size: var(--stamp-icon-size) var(--stamp-icon-size) !important; /* 邮戳大小 */
+  background-position: left 6px bottom 4px !important; /* 邮戳贴在左下角 */
+  background-blend-mode: multiply !important; /* 邮戳与底色正片叠底融合 */
+}
+
+/* AI（左侧）气泡：浅云灰蓝 + 右下角邮戳 */
+.chat-bubble-role-assistant:not(.chat-bubble-media):not(.voice-msg-bubble) {
+  background-color: var(--bubble-bg-ai) !important;
+  background-image: url('https://i.postimg.cc/SKQr8thT/retouch-2026101522354532.png') !important; /* AI邮戳图片 */
+  background-repeat: no-repeat !important;
+  background-size: var(--stamp-icon-size) var(--stamp-icon-size) !important; /* 邮戳大小 */
+  background-position: right 6px bottom 4px !important; /* 邮戳贴在右下角 */
+  background-blend-mode: multiply !important; /* 邮戳与底色正片叠底融合 */
+}
+
+/* 花体角标（通用，位于气泡左下角/右下角，与邮戳不冲突） */
+.chat-bubble-role-user:not(.chat-bubble-media):not(.voice-msg-bubble)::after,
+.chat-bubble-role-assistant:not(.chat-bubble-media):not(.voice-msg-bubble)::after {
+  position: absolute !important;
+  bottom: 2px !important; /* 角标距离底部的位置 */
+  font-family: 'Great Vibes', 'Italianno', cursive, serif !important; /* 角标使用花体字 */
+  font-size: var(--bubble-tag-size) !important; /* 角标字号 */
+  color: var(--bubble-tag-color) !important; /* 角标颜色 */
+  pointer-events: none !important;
+  content: var(--bubble-tag-text) !important; /* 角标显示的文字 */
+}
+.chat-bubble-role-assistant:not(.chat-bubble-media):not(.voice-msg-bubble)::after { right: 8px !important; } /* AI角标靠右 */
+.chat-bubble-role-user:not(.chat-bubble-media):not(.voice-msg-bubble)::after { left: 8px !important; } /* 我方角标靠左 */
+/* ==================== 转账/红包卡片改造 · 倒数第二版（回退版） ==================== */
+
+/* -----------------------------------------------------------
+   一、聊天记录里的卡片（挂小贴图 + 消除原底色）
+   ----------------------------------------------------------- */
+
+/* 1. 清除原有刺眼的底色，换上磨砂白底，让它跟气泡一致 */
+.chat-transfer-card,
+.chat-red-packet-card {
+  background-color: rgba(235, 245, 250, 0.8) !important; /* 半透明磨砂底色 */
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(45, 75, 105, 0.08) !important;
+  
+  /* 🎯 大印章贴图挂在右下角 */
+  background-image: url('https://i.postimg.cc/SKQr8thT/retouch-2026101522354532.png') !important; 
+  background-repeat: no-repeat !important;
+  background-size: 62px 62px !important; /* 大印章尺寸 */
+  background-position: right 10px bottom 8px !important;
+}
+
+/* 2. 隐藏原有的红色或黄色小图标（那个最抢眼的大图标） */
+.chat-transfer-body > .shrink-0,
+.chat-red-packet-body > .shrink-0 {
+  display: none !important;
+}
+
+/* 3. 卡片内边距（保留倒数第二版的高矮不一，不做强制居中） */
+.chat-transfer-body,
+.chat-red-packet-body {
+  background: transparent !important;
+  padding: 10px 14px 26px 14px !important; 
+}
+
+/* 4. 让卡片内部文字清晰可见，改成跟气泡字体一样的雾霾蓝 */
+.chat-transfer-body .ui-media-title,
+.chat-red-packet-body .ui-media-title,
+.chat-transfer-body .ui-media-amount,
+.chat-red-packet-body .ui-media-amount,
+.chat-transfer-body *,
+.chat-red-packet-body * {
+  color: #4A5D73 !important; 
+  text-shadow: 0 1px 2px rgba(255,255,255,0.9) !important;
+}
+
+/* 5. 转账金额稍微往下移一点 */
+.chat-transfer-card .ui-media-amount {
+  margin-top: 6px !important;
+}
+
+/* 6. 替换底部白边里的文字（改成花体英文） */
+.ui-media-footer {
+  background: transparent !important;
+  border-top: 1px dashed rgba(120, 150, 180, 0.5) !important;
+  padding-top: 4px !important;
+  margin-top: 2px !important;
+}
+.ui-media-footer span:first-child {
+  font-size: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+.ui-media-footer span:first-child::after {
+  content: "𝓡𝓮𝓭 𝓟𝓪𝓬𝓴𝓮𝓽" !important;
+  font-family: 'Great Vibes', 'Italianno', cursive, serif !important;
+  font-size: 16px !important;
+  color: #8fa3b0 !important;
+  letter-spacing: 0.5px !important;
+}
+.chat-transfer-card .ui-media-footer span:first-child::after {
+  content: "𝓜𝓸𝓷𝓮𝔂 𝓣𝓻𝓪𝓷𝓼𝓯𝓮𝓻" !important;
+}
+
+/* -----------------------------------------------------------
+   二、点击后弹出的详情页面（【核心修改：文字改成浅雾霾蓝】）
+   ----------------------------------------------------------- */
+
+/* 1. 把弹窗背景和标题栏改成你的冰霜主题色 */
+.media-modal-header.bg-transfer-gradient,
+.media-modal-header.bg-redpacket-gradient,
+[class*="modal"] [class*="bg-transfer"],
+[class*="modal"] [class*="bg-redpacket"] {
+  background: rgba(235, 245, 250, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px dashed rgba(120, 150, 180, 0.5) !important;
+}
+
+/* 2. 弹窗里的按钮改成雾霾蓝 */
+.ui-btn.ui-btn-redpacket,
+.ui-btn.ui-btn-transfer,
+[class*="modal"] button[class*="btn"] {
+  background-color: #4A5D73 !important;
+  border-color: #4A5D73 !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+}
+
+/* 🎯 3. 核心修复：把所有原本白色的文字（来自谁、备注、状态）强制改成浅雾霾蓝 */
+.media-modal-header .ui-media-amount,
+.media-modal-header .ui-media-title,
+.media-modal-header span,
+.media-modal-header p,
+.media-modal-header div,
+[class*="modal"] [class*="amount"],
+[class*="modal"] [class*="title"],
+[class*="modal"] span,
+[class*="modal"] p {
+  color: #6A8FAE !important; /* 浅雾霾蓝，比深蓝浅一点点，在白底上清晰可见 */
+}
