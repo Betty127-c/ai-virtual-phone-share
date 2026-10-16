@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T08:56:23.914Z",
+  "generatedAt": "2026-10-16T09:09:28.415Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -9,7 +9,7 @@
     },
     {
       "name": "Js插件",
-      "count": 79
+      "count": 80
     },
     {
       "name": "MCP",
@@ -143,6 +143,22 @@
       "avatar": "",
       "ownerHash": "83954432093f464d18e734fb94adb5cb6ba6eac3c0ae0b6c309ca5ff747f54ed",
       "updatedAt": "2026-09-14T18:25:41+08:00"
+    },
+    {
+      "folder": "Js插件",
+      "name": "[小猫]PNG和JS格式转换文本（可直接复制）",
+      "dirName": "[小猫]PNG和JS格式转换文本（可直接复制）",
+      "type": "dir",
+      "path": "资源/Js插件/[小猫]PNG和JS格式转换文本（可直接复制）",
+      "files": [
+        "资源/Js插件/[小猫]PNG和JS格式转换文本（可直接复制）/工具.js"
+      ],
+      "images": [],
+      "description": "角色卡png格式和世界书js格式可以放进工具直接换成文本复制并使用👨",
+      "author": "Shiuoi",
+      "avatar": "资源/Js插件/[小猫]PNG和JS格式转换文本（可直接复制）/.avatar.png",
+      "ownerHash": "148919e01298680d19836d0f72942b6862faae0e6e8f695321d66c383d1bb04d",
+      "updatedAt": "2026-10-16T17:08:04+08:00"
     },
     {
       "folder": "Js插件",
