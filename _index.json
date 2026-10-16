@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T10:05:57.436Z",
+  "generatedAt": "2026-10-16T13:06:17.099Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -77,7 +77,7 @@
     },
     {
       "name": "线上美化",
-      "count": 51
+      "count": 52
     },
     {
       "name": "线上聊天状态栏",
@@ -7717,6 +7717,25 @@
       "avatar": "资源/线上美化/薄荷生巧/.avatar.png",
       "ownerHash": "c6eb64f5a21fe7976bb628a5a0d28675fe8cfc7bc2290fd401fcde6ba18999e7",
       "updatedAt": "2026-08-28T02:00:46+08:00"
+    },
+    {
+      "folder": "线上美化",
+      "name": "邮票信笺",
+      "dirName": "邮票信笺",
+      "type": "dir",
+      "path": "资源/线上美化/邮票信笺",
+      "files": [
+        "资源/线上美化/邮票信笺/邮票信笺美化.css"
+      ],
+      "images": [
+        "资源/线上美化/邮票信笺/Screenshot_2026-10-16-18-20-15-109_com.microsoft.emmx_17.jpg",
+        "资源/线上美化/邮票信笺/Screenshot_2026-10-16-20-46-36-060_com.microsoft.emmx_17.jpg"
+      ],
+      "description": "不适配的话自己调整一下，调整的数值集中放在了代码最前面的“控制面板”里，或者给小卷修改。标题栏的大字、对方（AI）的悬浮网名(Ceshiyuan)、我方（User）的悬浮网名，这三处的文字都是我提前预设好的，并不是自动抓取你的聊天昵称。如果需要改成自己的，去代码最前面的“控制面板”。\n配套插件在资源集市的插件那个文件夹里，可以根据自己的喜好开启(只是装饰性作用)。",
+      "author": "vel",
+      "avatar": "资源/线上美化/邮票信笺/.avatar.png",
+      "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
+      "updatedAt": "2026-10-16T21:04:32+08:00"
     },
     {
       "folder": "线上美化",
