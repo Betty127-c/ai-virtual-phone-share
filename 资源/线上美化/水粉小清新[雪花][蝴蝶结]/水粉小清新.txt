@@ -1,0 +1,279 @@
+水粉小清新
+/* ══════════════════════════════════════════
+   全局主题方案 A：INS 黑白灰 · 毛玻璃清透
+   ══════════════════════════════════════════ */
+.chat-app {
+  --c-header-bg: #ffffff;
+  --c-page-body-bg: #f1f1f3;
+  --c-bubble-self: #1c1c1e;
+  --c-bubble-other: rgba(255, 255, 255, 0.66);
+  --c-card: rgba(255, 255, 255, 0.62);
+  --c-card-border: rgba(0, 0, 0, 0.07);
+  --c-input: rgba(236, 236, 239, 0.62);
+  --c-input-border: rgba(0, 0, 0, 0.05);
+  --c-text-title: #1c1c1e;
+  --c-text: #83838b;
+  --c-icon: #adadb4;
+  --c-icon-active: #1c1c1e;
+}
+.chat-app .page-body,
+.chat-app .chat-room-wrapper,
+.chat-app .moments-feed-page > .page-body {
+  background:
+    radial-gradient(120% 80% at 12% 0%, rgba(255, 255, 255, 0.9), transparent 58%),
+    radial-gradient(120% 90% at 88% 100%, rgba(205, 205, 212, 0.55), transparent 66%),
+    linear-gradient(160deg, #fafafb 0%, #ececee 55%, #e1e1e5 100%);
+}
+.chat-app .page-header {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(26px) saturate(170%);
+  -webkit-backdrop-filter: blur(26px) saturate(170%);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+}
+.chat-app .page-title,
+.chat-app .page-back-btn { color: #1c1c1e; font-weight: 600; }
+.chat-app .chat-tab-bar {
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(26px) saturate(170%);
+  -webkit-backdrop-filter: blur(26px) saturate(170%);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+}
+.chat-app .chat-tab { color: #a2a2a9; }
+.chat-app .chat-tab-active { color: #1c1c1e; }
+.chat-app .chat-search-bar {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.chat-app .chat-search-input { color: #1c1c1e; }
+.chat-app .contact-item { border-bottom: 0.5px solid rgba(0, 0, 0, 0.055); }
+.chat-app .chat-contact-name,
+.chat-app .contact-name { color: #1c1c1e; }
+.chat-app .contact-letter-header { color: #9b9ba2; }
+.chat-app .chat-bubble-role-user {
+  background: #1c1c1e;
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+.chat-app .chat-bubble-role-assistant {
+  background: rgba(255, 255, 255, 0.7);
+  color: #1c1c1e;
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+.chat-app .chat-input-bar {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(26px) saturate(170%);
+  -webkit-backdrop-filter: blur(26px) saturate(170%);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.05);
+}
+.chat-app .chat-input-textarea {
+  background: rgba(255, 255, 255, 0.6);
+  border: 0.5px solid rgba(0, 0, 0, 0.06);
+  color: #1c1c1e;
+}
+.chat-app .chat-html-inline,
+.chat-app .chat-music-share-card,
+.chat-app .scan-pay-card {
+  background: rgba(255, 255, 255, 0.6);
+  border: 0.5px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+.chat-app .chat-system-instruction-card {
+  background: rgba(255, 255, 255, 0.6);
+  border: 0.5px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.chat-app .feed-cover-bg,
+.chat-app .feed-profile-avatar { background: rgba(255, 255, 255, 0.5); }
+.chat-app .feed-profile-avatar { border-color: rgba(255, 255, 255, 0.9); }
+.chat-app .feed-post {
+  background: rgba(255, 255, 255, 0.52);
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+}
+/* ══════════════════════════════════════════
+   全局主题方案 B：纯白底 + 淡粉气泡  ★当前生效
+   ・背景 = 纯白
+   ・玻璃面板 = 水色磨砂
+   ・对方气泡 = 极淡偏蓝水色
+   ・我的气泡 = 粉（不变）
+   ・all/private/group 选中框 = 粉色反色
+   ・动态页背景 = 纯白；动态卡片 = 纯白无框；我的头像底 = 透明无描边
+   ・卡片框 = 深水色边框 + 纯白填充
+   ・动态点赞爱心 = 点赞后（svg fill="currentColor"）变粉
+   ・联系人「新的朋友」= 粉底 + 白小人
+   想切回方案 A：把下面这段整体注释掉即可
+   ══════════════════════════════════════════ */
+.chat-app {
+  --c-header-bg: #ffffff;
+  --c-page-body-bg: #ffffff;
+  /* 我的气泡 = 粉（保持不变） /
+  --c-bubble-self: #ffb0c8;
+  / 对方气泡 = 极淡、偏蓝的水色 */
+  --c-bubble-other: rgba(118, 190, 228, 0.14);
+  /* 卡片框 = 纯白填充 + 深水色边框 */
+  --c-card: #ffffff;
+  --c-card-border: #1f6b7c;
+  --c-input: rgba(255, 255, 255, 0.45);
+  --c-input-border: rgba(79, 163, 180, 0.28);
+  --c-text-title: #143b44;
+  --c-text: #4d7c86;
+  --c-icon: #6fa8b5;
+  /* 强调 = 深水色 */
+  --c-icon-active: #1f6b7c;
+}
+/* ── 背景：纯白 ── */
+.chat-app .page-body,
+.chat-app .chat-room-wrapper {
+  background: #ffffff;
+}
+/* ── 动态页背景：纯白 ── */
+.chat-app .moments-feed-page > .page-body {
+  background: #ffffff;
+}
+/* ── 标题栏：水色磨砂玻璃 ── */
+.chat-app .page-header {
+  background: rgba(126, 200, 211, 0.4);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-bottom: 0.5px solid rgba(79, 163, 180, 0.28);
+}
+.chat-app .page-title,
+.chat-app .page-back-btn { color: #143b44; font-weight: 600; }
+/* ── 底部标签栏 ── */
+.chat-app .chat-tab-bar {
+  background: rgba(126, 200, 211, 0.38);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-top: 0.5px solid rgba(79, 163, 180, 0.28);
+}
+.chat-app .chat-tab { color: #5f97a3; }
+.chat-app .chat-tab-active { color: #143b44; }
+/* ── all / private / group：粉色反色 ──
+   未选中：文字+边框=粉色，填充=纯白
+   选中后：文字=纯白，边框+填充=粉色  */
+.chat-app .chat-list-tab {
+  color: #ff85ab;
+  border: 1px solid #ff85ab;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 4px 14px;
+}
+.chat-app .chat-list-tab.active {
+  color: #ffffff;
+  background: #ff85ab;
+  border-color: #ff85ab;
+  font-weight: 600;
+}
+/* ── 搜索栏：深水色边框 + 纯白填充 ── */
+.chat-app .chat-search-bar {
+  background: #ffffff;
+  border: 1px solid #1f6b7c;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.chat-app .chat-search-input { color: #143b44; }
+/* ── 联系人 ── */
+.chat-app .contact-item { border-bottom: 0.5px solid rgba(79, 163, 180, 0.2); }
+.chat-app .chat-contact-name,
+.chat-app .contact-name { color: #143b44; }
+.chat-app .contact-letter-header { color: #5f97a3; }
+/* ── 联系人「新的朋友」图标：外圈粉底 + 内部人形纯白 ──
+   真实结构：无 class 的内联 SVG，靠 :has() 定位它的蓝色圆底容器 /
+.chat-app .minimal-list-item > div:has(> svg[stroke="#fff"]),
+.chat-app .minimal-list-item > div:has(> svg[stroke="#ffffff"]) {
+  background: #ff85ab !important;
+  background-color: #ff85ab !important;
+}
+/ 小人本身：强制纯白（描边+填充+currentColor） */
+.chat-app .minimal-list-item > div > svg[stroke="#fff"],
+.chat-app .minimal-list-item > div > svg[stroke="#ffffff"] {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+/* ── 气泡：我=粉（不变），对方=极淡偏蓝水色 ── */
+.chat-app .chat-bubble-role-user {
+  background: linear-gradient(135deg, #ffc2d5, #ffa6c1);
+  color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(255, 166, 193, 0.34);
+}
+.chat-app .chat-bubble-role-assistant {
+  background: rgba(118, 190, 228, 0.14);
+  color: #143b44;
+  border: 0.5px solid rgba(88, 160, 205, 0.22);
+  border-radius: 18px;
+  backdrop-filter: blur(20px) saturate(175%);
+  -webkit-backdrop-filter: blur(20px) saturate(175%);
+  box-shadow: 0 4px 16px rgba(88, 160, 205, 0.1);
+}
+/* ── 我的气泡内文字强制纯白 ──
+   气泡里 markdown 文本块会被默认样式用 --c-text-title 重新染色，
+   这里连子元素一起覆盖，保证气泡内所有文字都是纯白 */
+.chat-app .chat-bubble-role-user,
+.chat-app .chat-bubble-role-user .chat-markdown,
+.chat-app .chat-bubble-role-user .chat-markdown * {
+  color: #ffffff !important;
+}
+/* ── 输入栏 ── */
+.chat-app .chat-input-bar {
+  background: rgba(126, 200, 211, 0.38);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-top: 0.5px solid rgba(79, 163, 180, 0.26);
+}
+.chat-app .chat-input-textarea {
+  background: #ffffff;
+  border: 1px solid #1f6b7c;
+  color: #143b44;
+}
+/* ── 卡片：深水色边框 + 纯白填充 ── */
+.chat-app .chat-html-inline,
+.chat-app .chat-music-share-card,
+.chat-app .scan-pay-card {
+  background: #ffffff;
+  border: 1px solid #1f6b7c;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 6px 22px rgba(79, 163, 180, 0.14);
+}
+.chat-app .chat-system-instruction-card {
+  background: #ffffff;
+  border: 1px solid #1f6b7c;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+/* ── 动态页：我的头像底 = 透明、无描边；封面保持淡蓝，卡片纯白无框 ── */
+.chat-app .feed-profile-avatar {
+  background: transparent;
+  border: none;
+}
+.chat-app .feed-cover-bg { background: rgba(118, 190, 228, 0.2); }
+.chat-app .feed-post {
+  background: #ffffff;
+  border: none;
+  border-radius: 20px;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+/* ── 动态点赞爱心：点赞后（svg fill="currentColor"）填充变粉 ──
+   状态挂在 SVG 的 fill 属性上，不在 class 上。
+   CSS 规则优先级高于 presentation attribute，所以能覆盖。 */
+.chat-app .feed-post-like-btn svg[fill="currentColor"],
+.chat-app .feed-post-like-btn svg[fill="currentcolor"] {
+  color: #ff85ab !important;
+  fill: #ff85ab !important;
+  stroke: #ff85ab !important;
+}
