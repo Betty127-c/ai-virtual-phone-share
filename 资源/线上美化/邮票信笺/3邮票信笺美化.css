@@ -13,7 +13,7 @@
   --title-wing-top: 6px;                   /* 翅膀的高度位置，数字越大越往下 */
 
   /* --- 头像旁悬浮网名 --- */
-  --bot-floating-text: "Ceshiyuan";       /* AI头像旁边的花体字网名 */
+  --bot-floating-text: "Ceishiyuan";       /* AI头像旁边的花体字网名 */
   --user-floating-text: "User";            /* 我方头像旁边的花体字网名 */
   --floating-text-size: 32px;              /* 悬浮网名字体大小 */
   --avatar-scale: 1.08;                    /* 头像整体放大倍数，1为原始大小 */
@@ -113,7 +113,7 @@
   50%      { transform: translateY(-4px) scale(1.08); opacity: 1; }
 }
 .page-title::before, .page-header .page-title::before {
-  content: "Ceshiyuan"!important; /* 使用大字变量 */
+  content: var(--title-main-text) !important; /* 使用大字变量 */
   font-family: 'Great Vibes', cursive, serif !important; /* 大字花体字体 */
   font-size: 35px !important; line-height: 1.15 !important;
   font-weight: normal !important; display: inline-block !important;
