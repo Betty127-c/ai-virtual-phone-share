@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T16:21:22.857Z",
+  "generatedAt": "2026-10-16T16:50:26.679Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -7748,11 +7748,11 @@
         "资源/线上美化/邮票信笺/Screenshot_2026-10-16-18-20-15-109_com.microsoft.emmx_17.jpg",
         "资源/线上美化/邮票信笺/Screenshot_2026-10-16-20-46-36-060_com.microsoft.emmx_17.jpg"
       ],
-      "description": "[粉]更新第4版[/粉]：更改之前代码改动说明里面的一个小错误。\n配套插件在资源集市的插件那个文件夹里，可以根据自己的喜好开启(只是装饰性作用)。\n美化不适配的话自己调整一下，调整的数值集中放在了[蓝]代码前面的“控制面板”[/蓝]里，或者给小卷修改。标题栏的大字(Ceshiyuan)、对方的悬浮网名(Ceshiyuan)、我方的悬浮网名（User），这三处的文字都是我提前预设好的，并不是自动抓取你的聊天昵称。如果需要改成自己的，去代码前面的“控制面板”。\n\n如果改前面控制面板标题还没变的话在代码里找到这一行：\ncontent: var(--title-main-text) !important;\n把它替换成：\ncontent: \"你想改的名字\" !important;\n\n\n如果副标题也没变，就找到：\ncontent: var(--title-sub-text) !important;\n把它替换成：\ncontent: \"你想改的副标题\" !important;",
+      "description": "[粉]更新第4版[/粉]：更改之前代码改动说明里面的一个小错误。\n[蓝]配套插件[/蓝]在资源集市的插件那个文件夹里，可以根据自己的喜好开启(只是装饰性作用)。\n美化不适配的话自己调整一下，调整的数值集中放在了[蓝]代码前面的“控制面板”[/蓝]里，或者给小卷修改。标题栏的大字(Ceshiyuan)、对方的悬浮网名(Ceshiyuan)、我方的悬浮网名（User），这三处的文字都是我提前预设好的，并不是自动抓取你的聊天昵称。如果需要改成自己的，去代码前面的“控制面板”。\n\n如果改前面控制面板标题还没变的话在代码里找到这一行：\ncontent: var(--title-main-text) !important;\n把它替换成：\ncontent: \"你想改的名字\" !important;\n\n\n如果副标题也没变，就找到：\ncontent: var(--title-sub-text) !important;\n把它替换成：\ncontent: \"你想改的副标题\" !important;",
       "author": "vel",
       "avatar": "资源/线上美化/邮票信笺/.avatar.png",
       "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
-      "updatedAt": "2026-10-17T00:19:42+08:00"
+      "updatedAt": "2026-10-17T00:48:56+08:00"
     },
     {
       "folder": "线上美化",
