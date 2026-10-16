@@ -18,7 +18,7 @@
   --floating-text-size: 32px;              /* 悬浮网名字体大小 */
   --avatar-scale: 1.08;                    /* 头像整体放大倍数，1为原始大小 */
   --avatar-offset-y: 30px;                 /* 🎯 头像往下偏移量：想往下移就把30px改大，想往上移就改小 */
-  --floating-text-offset-y: 10px;           /* 🎯 悬浮网名整体往下偏移量：想往下移改成4px或8px，浮动动画完全不影响！ */
+  --floating-text-offset-y: 10px;           /* 🎯 悬浮网名整体往下偏移量：想往下移改大，浮动动画完全不影响！ */
 
   /* --- 邮票输入栏 --- */
   --stamp-hole-size: 6px;                  /* 输入栏四周邮票齿孔的大小 */
