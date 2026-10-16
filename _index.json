@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T13:09:07.689Z",
+  "generatedAt": "2026-10-16T13:35:41.025Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -7742,7 +7742,7 @@
       "type": "dir",
       "path": "资源/线上美化/邮票信笺",
       "files": [
-        "资源/线上美化/邮票信笺/邮票信笺美化.css"
+        "资源/线上美化/邮票信笺/2邮票信笺美化.css"
       ],
       "images": [
         "资源/线上美化/邮票信笺/Screenshot_2026-10-16-18-20-15-109_com.microsoft.emmx_17.jpg",
@@ -7752,7 +7752,7 @@
       "author": "vel",
       "avatar": "资源/线上美化/邮票信笺/.avatar.png",
       "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
-      "updatedAt": "2026-10-16T21:04:32+08:00"
+      "updatedAt": "2026-10-16T21:33:48+08:00"
     },
     {
       "folder": "线上美化",
