@@ -2,16 +2,12 @@
 
 
 (改前面控制面板标题如果还没变的话在代码里找到这一行：
-
-
 content: var(--title-main-text) !important;
 把它替换成：
 content: "你想改的名字" !important;
 
 
 如果副标题也没变，就找到：
-
-
 content: var(--title-sub-text) !important;
 把它替换成：
 content: "你想改的副标题" !important;
