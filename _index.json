@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T13:31:02.219Z",
+  "generatedAt": "2026-10-17T13:33:24.621Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -21,7 +21,7 @@
     },
     {
       "name": "世界书",
-      "count": 4
+      "count": 5
     },
     {
       "name": "全局主题",
@@ -2370,6 +2370,22 @@
       "avatar": "资源/世界书/你的心也会为我触动吗？[爱心]/.avatar.png",
       "ownerHash": "b1fb6e5837d789bce23afa8d55d136b02a8653a05245d2980a3c323e300b1042",
       "updatedAt": "2026-10-17T22:29:22+09:00"
+    },
+    {
+      "folder": "世界书",
+      "name": "感情需慢来，心急则味散",
+      "dirName": "感情需慢来，心急则味散",
+      "type": "dir",
+      "path": "资源/世界书/感情需慢来，心急则味散",
+      "files": [
+        "资源/世界书/感情需慢来，心急则味散/感情需慢来，心急则味散 by sonemo.docx"
+      ],
+      "images": [],
+      "description": "慢热世界书🩷\n🉑二改🈲二传\n\n增加了暧昧拉扯，削弱一见面就发情以及一些发情的八股内容",
+      "author": "sonemo",
+      "avatar": "资源/世界书/感情需慢来，心急则味散/.avatar.png",
+      "ownerHash": "b1fb6e5837d789bce23afa8d55d136b02a8653a05245d2980a3c323e300b1042",
+      "updatedAt": "2026-10-17T22:31:45+09:00"
     },
     {
       "folder": "世界书",
