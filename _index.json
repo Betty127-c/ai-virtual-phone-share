@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T13:35:10.126Z",
+  "generatedAt": "2026-10-17T15:45:04.802Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -41,7 +41,7 @@
     },
     {
       "name": "应用bug改善",
-      "count": 3
+      "count": 4
     },
     {
       "name": "应用反馈（与应用作者沟通渠道）",
@@ -5894,6 +5894,22 @@
       "avatar": "资源/应用/𝓐𝓶𝓸𝓻𝓮/.avatar.png",
       "ownerHash": "bfb3e3d17651836721132248bd5c9b911d883b93bb4269afe371127e1e530ed6",
       "updatedAt": "2026-09-05T16:19:43+08:00"
+    },
+    {
+      "folder": "应用bug改善",
+      "name": "临境test",
+      "dirName": "临境test",
+      "type": "dir",
+      "path": "资源/应用bug改善/临境test",
+      "files": [
+        "资源/应用bug改善/临境test/Limen-v1.1.42.zip"
+      ],
+      "images": [],
+      "description": "",
+      "author": "G",
+      "avatar": "",
+      "ownerHash": "85b94dde3046f0bb789afce70959e309b5e83cbf12c2417685b16c4d9c3387c5",
+      "updatedAt": "2026-10-18T00:43:20+09:00"
     },
     {
       "folder": "应用bug改善",
