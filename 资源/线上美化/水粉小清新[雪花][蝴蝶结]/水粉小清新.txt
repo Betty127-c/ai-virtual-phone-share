@@ -1,7 +1,8 @@
-水粉小清新
 /* ══════════════════════════════════════════
    全局主题方案 A：INS 黑白灰 · 毛玻璃清透
+   （备用方案，默认不生效）
    ══════════════════════════════════════════ */
+
 .chat-app {
   --c-header-bg: #ffffff;
   --c-page-body-bg: #f1f1f3;
@@ -16,6 +17,7 @@
   --c-icon: #adadb4;
   --c-icon-active: #1c1c1e;
 }
+
 .chat-app .page-body,
 .chat-app .chat-room-wrapper,
 .chat-app .moments-feed-page > .page-body {
@@ -24,6 +26,7 @@
     radial-gradient(120% 90% at 88% 100%, rgba(205, 205, 212, 0.55), transparent 66%),
     linear-gradient(160deg, #fafafb 0%, #ececee 55%, #e1e1e5 100%);
 }
+
 .chat-app .page-header {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(26px) saturate(170%);
@@ -32,6 +35,7 @@
 }
 .chat-app .page-title,
 .chat-app .page-back-btn { color: #1c1c1e; font-weight: 600; }
+
 .chat-app .chat-tab-bar {
   background: rgba(255, 255, 255, 0.58);
   backdrop-filter: blur(26px) saturate(170%);
@@ -40,6 +44,7 @@
 }
 .chat-app .chat-tab { color: #a2a2a9; }
 .chat-app .chat-tab-active { color: #1c1c1e; }
+
 .chat-app .chat-search-bar {
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -47,10 +52,12 @@
   -webkit-backdrop-filter: blur(14px);
 }
 .chat-app .chat-search-input { color: #1c1c1e; }
+
 .chat-app .contact-item { border-bottom: 0.5px solid rgba(0, 0, 0, 0.055); }
 .chat-app .chat-contact-name,
 .chat-app .contact-name { color: #1c1c1e; }
 .chat-app .contact-letter-header { color: #9b9ba2; }
+
 .chat-app .chat-bubble-role-user {
   background: #1c1c1e;
   color: #ffffff;
@@ -66,6 +73,7 @@
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
+
 .chat-app .chat-input-bar {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(26px) saturate(170%);
@@ -77,6 +85,7 @@
   border: 0.5px solid rgba(0, 0, 0, 0.06);
   color: #1c1c1e;
 }
+
 .chat-app .chat-html-inline,
 .chat-app .chat-music-share-card,
 .chat-app .scan-pay-card {
@@ -92,6 +101,7 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
+
 .chat-app .feed-cover-bg,
 .chat-app .feed-profile-avatar { background: rgba(255, 255, 255, 0.5); }
 .chat-app .feed-profile-avatar { border-color: rgba(255, 255, 255, 0.9); }
@@ -102,46 +112,58 @@
   backdrop-filter: blur(16px) saturate(150%);
   -webkit-backdrop-filter: blur(16px) saturate(150%);
 }
+
+
 /* ══════════════════════════════════════════
-   全局主题方案 B：纯白底 + 淡粉气泡  ★当前生效
+   全局主题方案 B：纯白底 + 粉/水蓝气泡  ★当前生效
+   ── 已同步 mascot_chat（AI助手）里实施的全部细节 ──
    ・背景 = 纯白
    ・玻璃面板 = 水色磨砂
-   ・对方气泡 = 极淡偏蓝水色
-   ・我的气泡 = 粉（不变）
+   ・我的气泡 = 粉渐变（白字）
+   ・对方气泡 = 水蓝线性渐变（深水色字）
+   ・消息页 Chats / 联系人页 Contacts 标题 = 水蓝色
    ・all/private/group 选中框 = 粉色反色
    ・动态页背景 = 纯白；动态卡片 = 纯白无框；我的头像底 = 透明无描边
-   ・卡片框 = 深水色边框 + 纯白填充
+   ・卡片框 = 深水色边框 + 纯白填充（含红包 / 转账 / 音乐 / 扫码付）
    ・动态点赞爱心 = 点赞后（svg fill="currentColor"）变粉
    ・联系人「新的朋友」= 粉底 + 白小人
-   想切回方案 A：把下面这段整体注释掉即可
+   想切回方案 A：把上面那段整体注释掉即可
    ══════════════════════════════════════════ */
+
 .chat-app {
   --c-header-bg: #ffffff;
   --c-page-body-bg: #ffffff;
-  /* 我的气泡 = 粉（保持不变） /
+
+  /* 我的气泡 = 粉 */
   --c-bubble-self: #ffb0c8;
-  / 对方气泡 = 极淡、偏蓝的水色 */
-  --c-bubble-other: rgba(118, 190, 228, 0.14);
+  /* 对方气泡 = 水蓝 */
+  --c-bubble-other: rgba(118, 190, 228, 0.24);
+
   /* 卡片框 = 纯白填充 + 深水色边框 */
   --c-card: #ffffff;
   --c-card-border: #1f6b7c;
+
   --c-input: rgba(255, 255, 255, 0.45);
   --c-input-border: rgba(79, 163, 180, 0.28);
+
   --c-text-title: #143b44;
   --c-text: #4d7c86;
   --c-icon: #6fa8b5;
   /* 强调 = 深水色 */
   --c-icon-active: #1f6b7c;
 }
+
 /* ── 背景：纯白 ── */
 .chat-app .page-body,
 .chat-app .chat-room-wrapper {
   background: #ffffff;
 }
+
 /* ── 动态页背景：纯白 ── */
 .chat-app .moments-feed-page > .page-body {
   background: #ffffff;
 }
+
 /* ── 标题栏：水色磨砂玻璃 ── */
 .chat-app .page-header {
   background: rgba(126, 200, 211, 0.4);
@@ -151,6 +173,7 @@
 }
 .chat-app .page-title,
 .chat-app .page-back-btn { color: #143b44; font-weight: 600; }
+
 /* ── 底部标签栏 ── */
 .chat-app .chat-tab-bar {
   background: rgba(126, 200, 211, 0.38);
@@ -160,6 +183,21 @@
 }
 .chat-app .chat-tab { color: #5f97a3; }
 .chat-app .chat-tab-active { color: #143b44; }
+
+/* ══════════════════════════════════════════
+   消息页「Chats」/ 联系人页「Contacts」标题 → 水蓝色
+   这两个标题没有专属 class，只有 Tailwind 工具类，
+   所以靠「同一容器里那个搜索框的 placeholder」反推定位。
+   注意：标题用了 text-[var(--c-text-title)]，优先级高，必须 !important。
+   若源码里 placeholder 文案改过，这条会失效。
+   ══════════════════════════════════════════ */
+.chat-app div:has(> .chat-search-bar input:is(
+    [placeholder="Search chats..."],
+    [placeholder="Search contacts..."]
+  )) > .flex > span {
+  color: #7ec8d3 !important;
+}
+
 /* ── all / private / group：粉色反色 ──
    未选中：文字+边框=粉色，填充=纯白
    选中后：文字=纯白，边框+填充=粉色  */
@@ -176,6 +214,7 @@
   border-color: #ff85ab;
   font-weight: 600;
 }
+
 /* ── 搜索栏：深水色边框 + 纯白填充 ── */
 .chat-app .chat-search-bar {
   background: #ffffff;
@@ -184,25 +223,28 @@
   -webkit-backdrop-filter: none;
 }
 .chat-app .chat-search-input { color: #143b44; }
+
 /* ── 联系人 ── */
 .chat-app .contact-item { border-bottom: 0.5px solid rgba(79, 163, 180, 0.2); }
 .chat-app .chat-contact-name,
 .chat-app .contact-name { color: #143b44; }
 .chat-app .contact-letter-header { color: #5f97a3; }
+
 /* ── 联系人「新的朋友」图标：外圈粉底 + 内部人形纯白 ──
-   真实结构：无 class 的内联 SVG，靠 :has() 定位它的蓝色圆底容器 /
+   真实结构：无 class 的内联 SVG，靠 :has() 定位它的蓝色圆底容器 */
 .chat-app .minimal-list-item > div:has(> svg[stroke="#fff"]),
 .chat-app .minimal-list-item > div:has(> svg[stroke="#ffffff"]) {
   background: #ff85ab !important;
   background-color: #ff85ab !important;
 }
-/ 小人本身：强制纯白（描边+填充+currentColor） */
+/* 小人本身：强制纯白（描边+填充+currentColor） */
 .chat-app .minimal-list-item > div > svg[stroke="#fff"],
 .chat-app .minimal-list-item > div > svg[stroke="#ffffff"] {
   stroke: #ffffff !important;
   color: #ffffff !important;
 }
-/* ── 气泡：我=粉（不变），对方=极淡偏蓝水色 ── */
+
+/* ── 气泡：我=粉渐变（白字），对方=水蓝线性渐变（深水色字） ── */
 .chat-app .chat-bubble-role-user {
   background: linear-gradient(135deg, #ffc2d5, #ffa6c1);
   color: #ffffff;
@@ -210,14 +252,19 @@
   box-shadow: 0 6px 18px rgba(255, 166, 193, 0.34);
 }
 .chat-app .chat-bubble-role-assistant {
-  background: rgba(118, 190, 228, 0.14);
+  background: linear-gradient(135deg, rgba(118, 190, 228, 0.3), rgba(118, 190, 228, 0.12));
   color: #143b44;
   border: 0.5px solid rgba(88, 160, 205, 0.22);
   border-radius: 18px;
   backdrop-filter: blur(20px) saturate(175%);
   -webkit-backdrop-filter: blur(20px) saturate(175%);
-  box-shadow: 0 4px 16px rgba(88, 160, 205, 0.1);
+  box-shadow: 0 4px 16px rgba(88, 160, 205, 0.12);
 }
+
+/* ── 正文与系统消息文字 ── */
+.chat-app .chat-markdown { color: #143b44; }
+.chat-app .chat-sys-msg { color: #4d7c86; }
+
 /* ── 我的气泡内文字强制纯白 ──
    气泡里 markdown 文本块会被默认样式用 --c-text-title 重新染色，
    这里连子元素一起覆盖，保证气泡内所有文字都是纯白 */
@@ -226,6 +273,7 @@
 .chat-app .chat-bubble-role-user .chat-markdown * {
   color: #ffffff !important;
 }
+
 /* ── 输入栏 ── */
 .chat-app .chat-input-bar {
   background: rgba(126, 200, 211, 0.38);
@@ -238,22 +286,23 @@
   border: 1px solid #1f6b7c;
   color: #143b44;
 }
-/* ── 卡片：深水色边框 + 纯白填充 ── */
+
+/* ── 卡片：深水色边框 + 纯白填充 ──
+   与 AI助手聊天室保持一致：含 HTML / 音乐 / 红包 / 转账 / 扫码付 / 系统指令 */
 .chat-app .chat-html-inline,
 .chat-app .chat-music-share-card,
-.chat-app .scan-pay-card {
+.chat-app .chat-red-packet-card,
+.chat-app .chat-transfer-card,
+.chat-app .scan-pay-card,
+.chat-app .chat-system-instruction-card {
   background: #ffffff;
   border: 1px solid #1f6b7c;
+  border-radius: 14px;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: 0 6px 22px rgba(79, 163, 180, 0.14);
 }
-.chat-app .chat-system-instruction-card {
-  background: #ffffff;
-  border: 1px solid #1f6b7c;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
+
 /* ── 动态页：我的头像底 = 透明、无描边；封面保持淡蓝，卡片纯白无框 ── */
 .chat-app .feed-profile-avatar {
   background: transparent;
@@ -268,6 +317,7 @@
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
+
 /* ── 动态点赞爱心：点赞后（svg fill="currentColor"）填充变粉 ──
    状态挂在 SVG 的 fill 属性上，不在 class 上。
    CSS 规则优先级高于 presentation attribute，所以能覆盖。 */
@@ -276,4 +326,56 @@
   color: #ff85ab !important;
   fill: #ff85ab !important;
   stroke: #ff85ab !important;
+}
+
+
+/* ══════════════════════════════════════════
+   细节微调（与 AI助手聊天室同步）
+   ══════════════════════════════════════════ */
+
+/* ① 引用对方的文字：→ 纯白
+   来源：QuoteBubble 的 text-[var(--c-icon)]，Tailwind 工具类优先级高，必须 !important */
+.chat-quote-preview {
+  color: #ffffff !important;
+}
+
+/* ② 内心独白状态栏爱心：点击后（data-active）→ 纯粉
+   data-active 挂在内层 span 上，SVG 用 fill="currentColor"，改 color 即可 */
+.chat-monologue-heart[data-active] {
+  color: #ff85ab !important;
+}
+
+/* ③ 内心独白便利贴：框填充 → 极淡奶黄（几乎接近白，只留一丝暖） */
+.chat-thought-card {
+  background: linear-gradient(135deg, #fffefc 0%, #fffdf2 50%, #fffefa 100%) !important;
+  border-color: rgba(242, 230, 202, 0.42) !important;
+  box-shadow: 0 2px 8px rgba(200, 170, 110, 0.06) !important;
+}
+
+/* ④ 便利贴内部的状态值框（好感度/占有欲/焦虑值）
+   填充 = 非常非常淡的粉 #fffafc
+   边框 = 比填充明显更粉、但比上一版更淡的粉
+   限定在 .chat-thought-card 内，不影响「裸状态栏」那处的同名元素 */
+.chat-thought-card .state-panel {
+  background: #fffafc !important;
+  border: 1px solid rgba(255, 228, 238, 0.9) !important;
+  box-shadow: 0 1px 4px rgba(255, 182, 205, 0.12) !important;
+}
+
+/* ⑤ 「我的气泡」里的引用框：浅半透明粉填充 + 同色左边框 */
+.chat-bubble-role-user .chat-quote-preview {
+  background: rgba(255, 200, 218, 0.5) !important;
+  border-color: rgba(255, 200, 218, 0.5) !important;
+}
+
+/* ⑥ 「对方气泡」里的引用框：水蓝底上换成更深一档的水蓝，
+   原来的 6% 黑会显脏 */
+.chat-bubble-role-assistant .chat-quote-preview {
+  background: rgba(88, 160, 205, 0.18) !important;
+  border-color: rgba(88, 160, 205, 0.18) !important;
+}
+/* 对方气泡引用框里的文字：跟着气泡走深水色，别被上面的纯白规则带跑 */
+.chat-bubble-role-assistant .chat-quote-preview,
+.chat-bubble-role-assistant .chat-quote-preview * {
+  color: #143b44 !important;
 }
