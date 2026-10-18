@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T05:29:06.006Z",
+  "generatedAt": "2026-10-18T05:35:49.039Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -748,7 +748,9 @@
       "dirName": "思维链美化[花]",
       "type": "dir",
       "path": "资源/Js插件/思维链美化[花]",
-      "files": [],
+      "files": [
+        "资源/Js插件/思维链美化[花]/💭思维链美化.js"
+      ],
       "images": [
         "资源/Js插件/思维链美化[花]/MEITU_20261018_132300838.jpg"
       ],
@@ -756,7 +758,7 @@
       "author": "vel",
       "avatar": "资源/Js插件/思维链美化[花]/.avatar.png",
       "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
-      "updatedAt": "2026-10-18T14:27:21+09:00"
+      "updatedAt": "2026-10-18T14:34:13+09:00"
     },
     {
       "folder": "Js插件",
