@@ -1,11 +1,11 @@
 export default {
   manifest: {
-    id: "inline-reasoning-v21",
-    name: "内联美化思维链(显示在气泡上方)",
+    id: "inline-reasoning-v25",
+    name: "内联美化思维链B2版",
     apiVersion: 1,
-    version: "2.1.0",
+    version: "2.5.0",
     author: "deepseek",
-    description: "完美与头像齐平，展开往下推气泡，且英文为默认字体",
+    description: "完美与头像齐平，展开往下推，气泡不撑大",
     permissions: ["chat.read"],
     settings: [
       { key: "defaultExpanded", label: "默认展开思维链", type: "boolean", default: false },
@@ -37,32 +37,33 @@ export default {
     try { ctx.system.settings.onChange(applySettings); } catch(e) {}
 
     ctx.ui.injectCSS(`
-      /* 隐藏原生按钮 */
+      /* 彻底隐藏原生按钮（防止它出来作妖） */
       .chat-reasoning-trigger {
         display: none !important;
       }
 
-      /* 
-       * ⭐ 核心魔法：强行把气泡的宽度改为 fit-content（只包裹文字本身）
-       * 这样即使上方的思维链再宽，气泡也不会跟着横向拉伸了！
-       */
+      /* 锁死气泡容器的最大宽度，给思维链一个宽敞的空间，但绝不撑爆屏幕 */
+      .chat-msg-content-wrap {
+        max-width: 280px !important;
+      }
+
+      /* 强制气泡只包裹自己的文字，不许跟着变长 */
       .chat-bubble-role-user:not(.chat-bubble-media):not(.voice-msg-bubble),
       .chat-bubble-role-assistant:not(.chat-bubble-media):not(.voice-msg-bubble) {
-        width: fit-content !important;
+        width: max-content !important; 
         max-width: 100% !important;
         display: inline-block !important;
       }
 
-      /* 我们的思维链面板 */
+      /* 思维链面板样式 */
       .my-inline-thought {
+        width: 100% !important; 
         margin: 0 0 8px 0 !important;
         background: transparent !important;
         border: none !important;
-        width: 100% !important; 
         box-sizing: border-box !important;
       }
 
-      /* 折叠栏 */
       .my-inline-thought-head {
         padding: 4px 0;
         cursor: pointer;
@@ -75,7 +76,6 @@ export default {
         font-weight: normal;
       }
 
-      /* 箭头 */
       .my-thought-arrow {
         transition: transform 0.3s ease;
         transform: rotate(-90deg); 
@@ -84,7 +84,6 @@ export default {
         transform: rotate(0deg);
       }
 
-      /* 内容区：去掉了打字机字体，采用默认紧凑字体 */
       .my-inline-thought-content {
         padding: 4px 0 4px 12px;
         margin-top: 4px;
@@ -111,16 +110,17 @@ export default {
       const wrapper = el.closest('.chat-msg-wrapper');
       if (!wrapper) return;
 
+      // 找到原生的独立行把它藏起来
       const reasoningRow = wrapper.previousElementSibling;
-      if (!reasoningRow || !reasoningRow.hasAttribute('data-reasoning-row')) return;
+      if (reasoningRow && reasoningRow.hasAttribute('data-reasoning-row')) {
+        reasoningRow.style.display = 'none';
+      }
 
-      if (wrapper.querySelector('.my-inline-thought')) return;
-
+      // 找到气泡的专属容器（绿框）
       const contentWrap = wrapper.querySelector('.chat-msg-content-wrap');
       if (!contentWrap) return;
 
-      // 隐藏原生那个没用的触发条
-      reasoningRow.style.display = 'none';
+      if (wrapper.querySelector('.my-inline-thought')) return;
 
       const isExpanded = ctx.system.settings.get("defaultExpanded") || false;
       const headerText = String(ctx.system.settings.get("headerText") || "思考过程");
@@ -145,7 +145,7 @@ export default {
         arrow.classList.toggle('open');
       };
 
-      // 塞进气泡容器的最顶部（完美实现向下推气泡）
+      // 塞进气泡容器的最上方
       contentWrap.insertBefore(box, contentWrap.firstChild);
     });
   }
