@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T06:08:52.927Z",
+  "generatedAt": "2026-10-18T09:51:50.733Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -77,7 +77,7 @@
     },
     {
       "name": "线上美化",
-      "count": 53
+      "count": 54
     },
     {
       "name": "线上聊天状态栏",
@@ -7352,6 +7352,27 @@
       "avatar": "资源/线上美化/几个简单的可爱色系美化/.avatar.png",
       "ownerHash": "cfd675f4e26db2ac2b01670f28453eb921057607ab8a303dc97fd7dd401bc94b",
       "updatedAt": "2026-09-08T14:41:50+08:00"
+    },
+    {
+      "folder": "线上美化",
+      "name": "古典哥特",
+      "dirName": "古典哥特",
+      "type": "dir",
+      "path": "资源/线上美化/古典哥特",
+      "files": [
+        "资源/线上美化/古典哥特/a1🤍 白色版本.css",
+        "资源/线上美化/古典哥特/b1🖤 黑色版本.css",
+        "资源/线上美化/古典哥特/时间戳_哥特风美化.js"
+      ],
+      "images": [
+        "资源/线上美化/古典哥特/Screenshot_2026-10-18-17-02-52-673_app.floatphone.app_05.jpg",
+        "资源/线上美化/古典哥特/Screenshot_2026-10-18-17-08-31-242_app.floatphone.app_05.jpg"
+      ],
+      "description": "1. 两套美化（白& 黑）(没有红包和转账美化)\n2. 一个配套的时间戳插件\n代码最上面留了控制面板，想换网名、标题、颜色、调大小在里面改。",
+      "author": "vel",
+      "avatar": "资源/线上美化/古典哥特/.avatar.png",
+      "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
+      "updatedAt": "2026-10-18T18:50:00+09:00"
     },
     {
       "folder": "线上美化",
