@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T10:19:44.586Z",
+  "generatedAt": "2026-10-18T10:32:17.794Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -7355,7 +7355,7 @@
     },
     {
       "folder": "线上美化",
-      "name": "古典哥特",
+      "name": "⋆♱古典哥特♱⋆",
       "dirName": "古典哥特",
       "type": "dir",
       "path": "资源/线上美化/古典哥特",
@@ -7372,7 +7372,7 @@
       "author": "vel",
       "avatar": "资源/线上美化/古典哥特/.avatar.png",
       "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
-      "updatedAt": "2026-10-18T19:18:10+09:00"
+      "updatedAt": "2026-10-18T19:30:34+09:00"
     },
     {
       "folder": "线上美化",
