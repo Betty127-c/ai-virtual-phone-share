@@ -1,0 +1,495 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Pinyon+Script&family=Courier+Prime&family=Libre+Barcode+39+Extended+Text&family=UnifrakturCook:wght@700&family=Grenze+Gotisch:wght@400;500;600&display=swap');
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  ⚙️ 万能控制面板 —— 改数值不会改结构，放心调，随时能调回来        ║
+   ║  ★ 本版＝「黑底夜景版」：深色元素翻亮，输入框文字保持深色          ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+:root {
+
+/* ══════════════════════════════════════════════
+   ▼ ① 顶部大标题（拱形大写）
+   ══════════════════════════════════════════════ */
+--title-main-text: "𝕽𝖚𝖘𝖙𝖞";           /* 大字内容 */
+--title-main-size: 38px;                  /* 大字字号。调大→更气派；调小→更秀气 */
+--title-main-offset-y: 6px;               /* 主标题垂直偏移。正数→往下；负数→往上 */
+--title-fill-color: #000000;              /* ⭐【字内填充】纯黑。白描边包黑字＝反差最强，磨砂底上也清晰。想透出底就填 transparent */
+--title-stroke-color: #f2f2f6;            /* ⭐【描边】亮银白。黑底上的骨架色 */
+--title-stroke-weight: 0.8px;             /* ⭐【描边粗细】细而利落。0.5px 极细 / 1.2px 有分量 */
+--title-glow-strength: 0.6;               /* ⭐⭐【标题光晕强度】0=不发光；0.4=含蓄；0.6=当前；1=很亮；1.5=爆亮。想调就改这一个数 */
+--title-shadow: 0 0 4px rgb(255 255 255 / calc(var(--title-glow-strength) * 1)), 0 0 12px rgb(255 255 255 / calc(var(--title-glow-strength) * 0.65)), 0 0 24px rgb(255 255 255 / calc(var(--title-glow-strength) * 0.4)), 0 0 42px rgb(255 255 255 / calc(var(--title-glow-strength) * 0.2)); /* ⭐四层递进光晕，强度由 --title-glow-strength 统一控制。整条填 none 即彻底关掉 */
+--header-offset-top: -40px;               /* 顶栏整体上下偏移 */
+
+/* ══════════════════════════════════════════════
+   ▼ ② 顶部副标题（手写体）
+   ══════════════════════════════════════════════ */
+--title-sub-text: "The past is never dead."; /* 副标题内容 */
+--title-sub-size: 22px;                     /* 副标题字号 */
+--title-sub-offset-y: 6px;                  /* 副标题垂直偏移 */
+--title-sub-color: #a6a6b0;                 /* ⭐副标题颜色。黑底上要亮灰才看得见 */
+
+/* ══════════════════════════════════════════════
+   ▼ ③ 顶栏容器（那条薄雾横栏）
+   ══════════════════════════════════════════════ */
+--header-bg: rgba(255, 255, 255, 0.07); /* ⭐顶栏底色+透明度。黑底上 0.07≈幽微白雾；想更实调大（0.12、0.2） */
+--header-line-color: rgba(255, 255, 255, 0.18); /* ⭐顶栏下沿那条虚线颜色 */
+--header-icon-color: #d8d8e0;           /* ⭐顶栏返回/更多按钮的图标颜色 */
+--header-hole-size: 5px;                /* 顶栏下沿一排小圆孔的大小 */
+--header-gap: 22px;                     /* 相邻小圆孔的间距 */
+--header-z: 40;                         /* ⚠️ 顶栏图层高低，必须大于头像的 10 */
+--header-content-pad-bottom: 16px;      /* ⭐【标题栏底部拉长】如果"对方正在输入中"被切掉，把这里调大，比如 24px 或 30px */
+
+/* ══════════════════════════════════════════════
+   ▼ ④ 头像 / 网名 / 虚线 / 消息间距
+   ══════════════════════════════════════════════ */
+--msg-list-gap: 7px;      /* 【不同人之间】消息容器间隔。只能 0 或正数 */
+--msg-consec-gap: 0px;    /* 【同一方连发之间】的间距。可填负数压紧 */
+--list-top-pad: 75px;     /* ⭐【列表顶部留白】如果第一条消息头像被挡，把这里调大，比如 80px 或 90px */
+--side-pad: 8px;          /* 内容离屏幕左右边缘的距离 */
+--msg-top-pad: 60px;      /* 每条消息顶部预留高度（给头像+网名腾地方） */
+--avatar-size: 38px;      /* 头像尺寸 */
+--avatar-top: 10px;       /* 头像顶部离本条消息顶端的距离 */
+--avatar-frame: #ffffff;  /* ⭐【头像框】白框 */
+--avatar-shadow: #6f6f7a; /* ⭐【头像框投影】灰影 → 与白框组成「白灰搭配」 */
+--name-text-ai: "𝕮𝖍𝖆𝖗˚˖✙*"; /* AI 侧显示的名字 */
+--name-text-user: "⁺✙˖˚𝖀𝖘𝖊𝖗";    /* 你这边显示的名字 */
+--name-font: serif; /* ⭐网名字体（已改为默认，以显示特殊字符） */
+--name-size: 26px;            /* ⭐【网名字号】调大→更有冲击力；调小→更收敛 */
+--name-gap: 12px;         /* 网名与头像之间的间距（时间戳也与网名同起点） */
+--name-color: #ffffff;        /* ⭐【网名字色】亮白*/
+--name-stroke-color: #15151a; /* ⭐【网名描边】近黑，让白字自带硬边不糊 */
+--name-stroke-weight: 0.8px;  /* ⭐网名描边粗细 */
+--name-glow-strength: 0.7;    /* ⭐⭐【网名光晕强度】0=不发光；0.3=隐隐；0.7=当前；1=很亮；1.5=爆亮。想调就改这一个数 */
+--name-glow: 0 0 3px rgb(255 255 255 / calc(var(--name-glow-strength) * 0.9)), 0 0 8px rgb(255 255 255 / calc(var(--name-glow-strength) * 0.55)), 0 0 16px rgb(255 255 255 / calc(var(--name-glow-strength) * 0.28)); /* ⭐三层柔光，强度由 --name-glow-strength 统一控制。整条填 none 即彻底关掉 */
+--name-float-speed: 5s;       /* ⭐【网名漂浮时间】数字越大飘得越慢，像呼吸一样。5s=当前；8s=更慢；4s=稍快 */
+--name-float-height: -4px;    /* ⭐【网名漂浮幅度】负数往上飘。想飘高一点填 -5px；想轻微一点填 -2px */
+--name-line-top: 52px;    /* 那条虚线的上下位置（在头像下方） */
+--line-width: 140px;      /* 虚线长度 */
+--line-color: rgba(240, 240, 246, 0.85); /* ⭐【虚线颜色】亮白 */
+
+/* 【心声】小爱心颜色 */
+--heart-color: #f4f4f7;        /* ⭐【心声爱心·普通态】现在是白色，黑底上看得见（原来灰的会融掉） */
+--heart-active-color: #f4f4f7; /* ⭐【心声爱心·点开态】想要醒目可换成暖红 #e74c5e */
+
+/* ══════════════════════════════════════════════
+   ▼ ⑤ 顶栏两侧的悬浮小装饰（✞ ༝ ˚⁺）
+   ══════════════════════════════════════════════ */
+--deco-inward: 12px;     /* ⭐️【装饰横向内收】正数→整体往中间(标题)靠拢；0=原始位置；负数→往外。只管左右，上下不变 */
+--deco-offset-y: -3px;   /* 6 个装饰整体上下位移。正数→往下；负数→往上。动画不受影响 */
+--deco-color: #cfcfd8;   /* ⭐装饰颜色。黑底上要亮灰才看得见 */
+--deco-glow-strength: 0.55; /* ⭐⭐【装饰光晕强度】0=不发光；0.55=当前；1=很亮；1.5=爆亮。调这一个数就够 */
+--deco-glow: 0 0 3px rgb(255 255 255 / calc(var(--deco-glow-strength) * 0.75)), 0 0 8px rgb(255 255 255 / calc(var(--deco-glow-strength) * 0.45)), 0 0 16px rgb(255 255 255 / calc(var(--deco-glow-strength) * 0.22)); /* ⭐三层柔光，强度由 --deco-glow-strength 统一控制。整条填 none 即关掉 */
+--left-outer-x: 138px;
+--left-cross-x: 110px;
+--left-inner-x: 92px;
+--right-inner-x: 92px;
+--right-cross-x: 110px;
+--right-outer-x: 138px;
+
+/* ══════════════════════════════════════════════
+   ▼ ⑥ 聊天气泡本体（未改动）
+   ══════════════════════════════════════════════ */
+--bubble-bg-user: rgba(255, 255, 255, 0.85);
+--bubble-bg-ai: rgba(255, 255, 255, 0.85);
+--bubble-text-color: #333333;
+--bubble-hole-size: 4px;
+--bubble-gap: 16px;
+--bubble-dash-hole-size: 8px;
+--dash-offset: 45px;
+--bubble-dash-color: #999999;  /* ⭐【气泡竖虚线】两个小圆孔中间那条竖虚线。原来 #cccccc 偏浅，现在加深一档，两边通用。想更黑填 #777777；想更浅填 #aaaaaa */
+--bubble-tag-text: "CASE FILE #1926";
+--bubble-tag-color: #999999;
+--bubble-tag-size: 10px;
+--barcode-text: "Rusty";
+--barcode-color: rgba(0, 0, 0, 0.1);
+--barcode-size: 36px;
+--barcode-offset-y: 55%;
+
+/* ⭐【引用条】消息里引用的那条小字。原来是浅灰，跟气泡糊一起，现在翻深 */
+--quote-text-color: #4a4a4a;   /* ⭐引用消息文字色：深灰，两边（你+对方）通用。想更黑填 #333333；想浅一点填 #666666 */
+
+/* ══════════════════════════════════════════════
+   ▼ ⑦ 底部输入栏
+   ══════════════════════════════════════════════ */
+--stamp-bg: rgba(255, 255, 255, 0.06);
+--stamp-inner-bg: rgba(255, 255, 255, 0.07);
+--stamp-text-color: #2b2b2b;   /* ⭐⭐【输入文字颜色】深色（输入区底下是浅色面） */
+--stamp-hole-size: 5px;
+--stamp-gap: 22px;
+--stamp-icon-color: #b9b9c2;
+--stamp-barcode-text: "Rusty Rusty Rusty Rusty Rusty Rusty Rusty";
+--stamp-barcode-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ==============================================
+   （下面的代码是直接生效的排版）
+   ============================================== */
+
+/* --- 1. 两侧边饰 --- */
+.chat-room-wrapper::before,
+.chat-room-wrapper::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 6px; z-index: 5; pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.05), transparent); opacity: 0.5;                    
+}
+.chat-room-wrapper::before { left: 0; } 
+.chat-room-wrapper::after  { right: 0; } 
+
+/* --- 2. 顶栏标题栏 --- */
+.page-header {
+  background-color: var(--header-bg) !important; 
+  border-bottom: none !important; 
+  height: auto !important;           
+  min-height: unset !important; 
+  margin-top: var(--header-offset-top) !important; 
+  padding: 0 20px !important; 
+  position: relative !important; 
+  overflow: visible !important; 
+  z-index: var(--header-z) !important;
+  
+  -webkit-mask-image: radial-gradient(circle var(--header-hole-size) at 50% 100%, transparent 98%, #000 100%) !important;
+  -webkit-mask-size: var(--header-gap) 100% !important;
+  -webkit-mask-repeat: repeat-x !important;
+  mask-image: radial-gradient(circle var(--header-hole-size) at 50% 100%, transparent 98%, #000 100%) !important;
+  mask-size: var(--header-gap) 100% !important;
+  mask-repeat: repeat-x !important;
+}
+
+.page-header::after {
+  content: "" !important; position: absolute !important; bottom: 4px !important; left: 0 !important; right: 0 !important;
+  border-top: 1px dashed var(--header-line-color) !important; pointer-events: none !important; z-index: 10 !important;
+}
+
+@keyframes float-inner { 0%,100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 50% { transform: translate(-50%, calc(-50% - 2px)) scale(1.05); opacity: 1; } }
+@keyframes float-cross { 0%,100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; } 50% { transform: translate(-50%, calc(-50% - 4px)) scale(1.08); opacity: 1; } }
+@keyframes float-outer { 0%,100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; } 50% { transform: translate(-50%, calc(-50% - 6px)) scale(1.1); opacity: 1; } }
+
+/* ⭐ 网名专属漂浮动画，直接调用控制面板的变量 */
+@keyframes name-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(var(--name-float-height)); }
+}
+
+.page-back-btn, .page-header-right button, .page-header button {
+  background: transparent !important; color: var(--header-icon-color) !important; border: none !important; 
+  box-shadow: none !important; border-radius: 0px !important;
+  width: 34px !important; height: 34px !important; display: flex !important; align-items: center !important;
+  justify-content: center !important; position: static !important; 
+  z-index: 50 !important; flex-shrink: 0 !important;
+}
+
+.page-header-content {
+  position: relative !important; height: 100% !important; display: flex !important; 
+  align-items: center !important; justify-content: space-between !important; overflow: visible !important; 
+  padding: 10px 0 var(--header-content-pad-bottom) 0 !important; /* ⭐ 这里调用了标题栏底部拉长变量 */
+}
+
+/* ⭐ 装饰锚点：垂直由 --deco-offset-y 管，横向由 --deco-inward 往中间收；发光由 --deco-glow 管 */
+.page-back-btn::after { content: "˚⁺" !important; position: absolute !important; top: calc(50% + var(--deco-offset-y)) !important; left: calc(50% - var(--left-outer-x) + var(--deco-inward)) !important; font-family: sans-serif !important; font-size: 16px !important; color: var(--deco-color) !important; text-shadow: var(--deco-glow) !important; pointer-events: none !important; animation: float-outer 2.8s ease-in-out infinite !important; z-index: 10 !important; }
+.page-back-btn::before { content: "༝" !important; position: absolute !important; top: calc(50% + var(--deco-offset-y)) !important; left: calc(50% - var(--left-inner-x) + var(--deco-inward)) !important; font-family: sans-serif !important; font-size: 16px !important; color: var(--deco-color) !important; text-shadow: var(--deco-glow) !important; pointer-events: none !important; animation: float-inner 3.6s ease-in-out infinite !important; z-index: 10 !important; }
+.page-header-content::before { content: "✞" !important; position: absolute !important; top: calc(50% + var(--deco-offset-y)) !important; left: calc(50% - var(--left-cross-x) + var(--deco-inward)) !important; font-family: sans-serif !important; font-size: 28px !important; color: var(--deco-color) !important; text-shadow: var(--deco-glow) !important; pointer-events: none !important; animation: float-cross 3.2s ease-in-out infinite !important; z-index: 10 !important; }
+
+.page-header-right button::before { content: "༝" !important; position: absolute !important; top: calc(50% + var(--deco-offset-y)) !important; left: calc(50% + var(--right-inner-x) - var(--deco-inward)) !important; font-family: sans-serif !important; font-size: 16px !important; color: var(--deco-color) !important; text-shadow: var(--deco-glow) !important; pointer-events: none !important; animation: float-inner 3.6s ease-in-out infinite !important; z-index: 10 !important; }
+.page-header-right button::after { content: "⁺˚" !important; position: absolute !important; top: calc(50% + var(--deco-offset-y)) !important; left: calc(50% + var(--right-outer-x) - var(--deco-inward)) !important; font-family: sans-serif !important; font-size: 16px !important; color: var(--deco-color) !important; text-shadow: var(--deco-glow) !important; pointer-events: none !important; animation: float-outer 2.8s ease-in-out infinite !important; z-index: 10 !important; }
+.page-header-content::after { content: "✞" !important; position: absolute !important; top: calc(50% + var(--deco-offset-y)) !important; left: calc(50% + var(--right-cross-x) - var(--deco-inward)) !important; font-family: sans-serif !important; font-size: 28px !important; color: var(--deco-color) !important; text-shadow: var(--deco-glow) !important; pointer-events: none !important; animation: float-cross 3.2s ease-in-out infinite !important; z-index: 10 !important; }
+
+.page-title, .page-header .page-title, .chat-room-wrapper .page-title {
+  font-size: 0 !important; line-height: 0 !important; color: transparent !important; opacity: 1 !important;
+  display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;
+  text-align: center !important; margin: 0 auto !important; position: relative !important;
+  width: 100% !important; 
+}
+.page-title::before {
+  content: var(--title-main-text) !important; font-family: sans-serif !important; font-size: var(--title-main-size) !important; 
+  line-height: 1.1 !important; font-weight: 900 !important; display: inline-block !important; white-space: nowrap !important; 
+  color: var(--title-fill-color) !important; -webkit-text-stroke: var(--title-stroke-weight) var(--title-stroke-color) !important; 
+  text-shadow: var(--title-shadow) !important;                   /* ⭐四层冷白光晕（强度可调） */
+  transform: translateY(var(--title-main-offset-y)) !important;   /* ⭐主标题垂直偏移 */
+}
+.page-title::after {
+  content: var(--title-sub-text) !important; font-family: 'Pinyon Script', cursive !important; font-size: var(--title-sub-size) !important; 
+  line-height: 1.2 !important; display: block !important; white-space: nowrap !important; margin-top: 2px !important; color: var(--title-sub-color) !important; 
+  transform: translateY(var(--title-sub-offset-y)) !important;    /* ⭐副标题垂直偏移 */
+}
+
+/* ==============================================
+   3. 🎯 消息列表：气泡间距控制（核心修复，别删）
+   ============================================== */
+*:has(> .chat-msg-wrapper),
+*:has(> * > .chat-msg-wrapper),
+*:has(> * > * > .chat-msg-wrapper) {
+  gap: var(--msg-list-gap) !important;
+  row-gap: var(--msg-list-gap) !important;
+  column-gap: var(--msg-list-gap) !important;
+}
+*:has(> .chat-msg-wrapper) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+*:has(> * > .chat-msg-wrapper) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+[class*="space-y"] > * + * { margin-top: 0 !important; }
+
+/* ⭐ 列表顶部留白：防止第 1 条消息被标题栏盖住 */
+.chat-scroll-anchored.chat-scroll-anchored {
+  padding-top: var(--list-top-pad) !important;
+}
+
+/* ==============================================
+   4. 🎯 完美横向排队：气泡 + 小爱心 紧贴
+   ============================================== */
+.chat-scroll-anchored > .flex.flex-col.gap-4 { gap: var(--msg-list-gap) !important; }
+.chat-msg-wrapper { padding: 0 var(--side-pad) !important; }
+
+.chat-msg-wrapper[data-role="assistant"] {
+  display: flex !important;
+  flex-direction: row !important; 
+  align-items: flex-end !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  position: relative !important;
+  padding-top: var(--msg-top-pad) !important;
+}
+
+.chat-msg-wrapper[data-role="user"] {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+  position: relative !important;
+  padding-top: var(--msg-top-pad) !important; 
+}
+
+.chat-msg-wrapper[data-consecutive] {
+  margin-top: var(--msg-consec-gap) !important; 
+  padding-top: 0 !important; 
+}
+.chat-msg-wrapper[data-consecutive] .chat-msg-avatar {
+  display: none !important;
+}
+
+/* 头像：绝对定位，不占流 —— 结构不变，仅颜色翻亮 */
+.chat-msg-avatar {
+  position: absolute !important;
+  top: var(--avatar-top) !important;
+  width: var(--avatar-size) !important;
+  height: var(--avatar-size) !important;
+  border-radius: 0px !important; border: 2px solid var(--avatar-frame) !important; filter: grayscale(1) contrast(1.2) !important; 
+  overflow: hidden !important; box-shadow: 2px 2px 0px var(--avatar-shadow) !important; 
+  flex-shrink: 0 !important; box-sizing: border-box !important;
+  z-index: 10 !important;
+}
+.chat-msg-wrapper[data-role="assistant"] .chat-msg-avatar { left: var(--side-pad) !important; }
+.chat-msg-wrapper[data-role="user"] .chat-msg-avatar { right: var(--side-pad) !important; }
+
+.chat-msg-avatar img { display: block !important; width: 100% !important; height: 100% !important; object-fit: cover !important; }
+.chat-msg-avatar, .chat-msg-avatar *, .chat-msg-avatar img { border-radius: 0px !important; clip-path: none !important; -webkit-clip-path: none !important; -webkit-mask-image: none !important; mask-image: none !important; }
+.chat-msg-avatar::before, .chat-msg-avatar::after { display: none !important; content: none !important; }
+
+/* 🎯 内容容器 */
+.chat-msg-content-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  width: fit-content !important; 
+  max-width: 220px !important;
+  position: relative !important;
+}
+.chat-msg-wrapper[data-role="assistant"] .chat-msg-content-wrap { align-items: flex-start !important; }
+.chat-msg-wrapper[data-role="user"] .chat-msg-content-wrap { align-items: flex-end !important; }
+
+/* 🎯 小爱心（心声）：正常排队，紧跟气泡后 —— 颜色翻白，黑底可见 */
+.chat-msg-wrapper[data-role="assistant"] .chat-monologue-heart {
+  position: static !important; 
+  margin: 0 0 4px 0 !important; 
+  flex-shrink: 0 !important;
+  transform: none !important;
+  display: flex !important;
+  color: var(--heart-color) !important;
+}
+.chat-monologue-heart { color: var(--heart-color) !important; }
+.chat-monologue-heart svg,
+.chat-monologue-heart svg path,
+.chat-monologue-heart svg * { fill: currentColor !important; stroke: currentColor !important; }
+.chat-monologue-heart[data-active] { color: var(--heart-active-color) !important; }
+
+/* 🎯 网名 ::before —— 亮白 + 硬描边 + 冷白微光 + ⭐漂浮动画 */
+.chat-msg-wrapper:has(.chat-msg-avatar):not([data-consecutive])::before {
+  display: block !important;
+  position: absolute !important;
+  top: calc(var(--avatar-top) + 2px) !important; 
+  font-family: var(--name-font) !important;
+  font-size: var(--name-size) !important;      /* ⭐网名字号 */
+  font-weight: normal !important;
+  color: var(--name-color) !important;
+  -webkit-text-stroke: var(--name-stroke-weight) var(--name-stroke-color) !important;
+  text-shadow: var(--name-glow) !important;    /* ⭐三层冷白光晕（强度可调） */
+  width: var(--line-width) !important;
+  padding-bottom: 2px !important;
+  line-height: 1.1 !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
+  animation: name-float var(--name-float-speed) ease-in-out infinite !important; /* ⭐让它像呼吸一样飘起来 */
+}
+.chat-msg-wrapper[data-role="assistant"]:has(.chat-msg-avatar):not([data-consecutive])::before { 
+  content: var(--name-text-ai) !important; 
+  left: calc(var(--side-pad) + var(--avatar-size) + var(--name-gap)) !important; 
+  text-align: left !important; 
+}
+.chat-msg-wrapper[data-role="user"]:has(.chat-msg-avatar):not([data-consecutive])::before { 
+  content: var(--name-text-user) !important; 
+  right: calc(var(--side-pad) + var(--avatar-size) + var(--name-gap)) !important; 
+  text-align: right !important; 
+}
+
+/* 🎯 虚线 ::after —— 画在头像下方，亮白 */
+.chat-msg-wrapper:has(.chat-msg-avatar):not([data-consecutive])::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: var(--name-line-top) !important; 
+  width: var(--line-width) !important;
+  border-top: 1px dashed var(--line-color) !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
+}
+.chat-msg-wrapper[data-role="assistant"]:has(.chat-msg-avatar):not([data-consecutive])::after { left: var(--side-pad) !important; }
+.chat-msg-wrapper[data-role="user"]:has(.chat-msg-avatar):not([data-consecutive])::after { right: var(--side-pad) !important; }
+
+/* 无头像兜底 */
+.chat-msg-wrapper:not(:has(.chat-msg-avatar)) { padding-top: 5px !important; justify-content: center !important; }
+.chat-msg-wrapper:not(:has(.chat-msg-avatar))::before { display: none !important; content: none !important; }
+.chat-msg-wrapper:not(:has(.chat-msg-avatar))::after { display: none !important; content: none !important; }
+.chat-msg-wrapper:not(:has(.chat-msg-avatar)):has(.chat-thought-card) { justify-content: flex-start !important; }
+
+/* ==============================================
+   5. 气泡主体（未改动）
+   ============================================== */
+.chat-bubble-role-user:not(.chat-bubble-media):not(.voice-msg-bubble),
+.chat-bubble-role-assistant:not(.chat-bubble-media):not(.voice-msg-bubble) {
+  display: inline-block !important; width: 100% !important; 
+  border: none !important; border-radius: 0px !important; 
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0, 0, 0, 0.3) !important; 
+  filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.4)) !important;
+  
+  padding: 8px 14px !important; 
+  line-height: 1.4 !important; 
+  
+  color: var(--bubble-text-color) !important; 
+  
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  
+  word-break: break-word !important; overflow-wrap: break-word !important; white-space: normal !important; 
+  box-sizing: border-box !important; position: relative !important; z-index: 1 !important; 
+  margin: 0 !important;
+}
+
+.chat-bubble-role-user:not(.chat-bubble-media):not(.voice-msg-bubble) *,
+.chat-bubble-role-assistant:not(.chat-bubble-media):not(.voice-msg-bubble) * {
+  text-align: left !important;
+}
+
+.chat-bubble-role-assistant:not(.chat-bubble-media):not(.voice-msg-bubble) {
+  text-align: left !important; 
+  background-color: var(--bubble-bg-ai) !important;
+  background-image: linear-gradient(to bottom, var(--bubble-dash-color) 50%, transparent 50%) !important;
+  background-size: 1px 6px !important; background-position: calc(100% - var(--dash-offset)) 0 !important; background-repeat: repeat-y !important;
+  -webkit-mask-image: radial-gradient(circle var(--bubble-hole-size) at 0 50%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-hole-size) at 100% 50%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-dash-hole-size) at calc(100% - var(--dash-offset)) 0%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-dash-hole-size) at calc(100% - var(--dash-offset)) 100%, transparent 98%, #000 100%), linear-gradient(#000, #000) !important;
+  -webkit-mask-size: 100% var(--bubble-gap), 100% var(--bubble-gap), 100% 100%, 100% 100%, 100% 100% !important;
+  -webkit-mask-repeat: repeat-y, repeat-y, no-repeat, no-repeat, no-repeat !important; -webkit-mask-composite: source-in !important;
+  mask-image: radial-gradient(circle var(--bubble-hole-size) at 0 50%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-hole-size) at 100% 50%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-dash-hole-size) at calc(100% - var(--dash-offset)) 0%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-dash-hole-size) at calc(100% - var(--dash-offset)) 100%, transparent 98%, #000 100%), linear-gradient(#000, #000) !important;
+  mask-size: 100% var(--bubble-gap), 100% var(--bubble-gap), 100% 100%, 100% 100%, 100% 100% !important;
+  mask-repeat: repeat-y, repeat-y, no-repeat, no-repeat, no-repeat !important; mask-composite: intersect !important;
+}
+
+.chat-bubble-role-user:not(.chat-bubble-media):not(.voice-msg-bubble) {
+  text-align: left !important; 
+  background-color: var(--bubble-bg-user) !important;
+  background-image: linear-gradient(to bottom, var(--bubble-dash-color) 50%, transparent 50%) !important;
+  background-size: 1px 6px !important; background-position: var(--dash-offset) 0 !important; background-repeat: repeat-y !important;
+  -webkit-mask-image: radial-gradient(circle var(--bubble-hole-size) at 0 50%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-hole-size) at 100% 50%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-dash-hole-size) at var(--dash-offset) 0%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-dash-hole-size) at var(--dash-offset) 100%, transparent 98%, #000 100%), linear-gradient(#000, #000) !important;
+  -webkit-mask-size: 100% var(--bubble-gap), 100% var(--bubble-gap), 100% 100%, 100% 100%, 100% 100% !important;
+  -webkit-mask-repeat: repeat-y, repeat-y, no-repeat, no-repeat, no-repeat !important; -webkit-mask-composite: source-in !important;
+  mask-image: radial-gradient(circle var(--bubble-hole-size) at 0 50%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-hole-size) at 100% 50%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-dash-hole-size) at var(--dash-offset) 0%, transparent 98%, #000 100%), radial-gradient(circle var(--bubble-dash-hole-size) at var(--dash-offset) 100%, transparent 98%, #000 100%), linear-gradient(#000, #000) !important;
+  mask-size: 100% var(--bubble-gap), 100% var(--bubble-gap), 100% 100%, 100% 100%, 100% 100% !important;
+  mask-repeat: repeat-y, repeat-y, no-repeat, no-repeat, no-repeat !important; mask-composite: intersect !important;
+}
+
+.chat-bubble-role-user::before, .chat-bubble-role-assistant::before {
+  content: var(--barcode-text) !important; font-family: 'Libre Barcode 39 Extended Text', cursive !important; 
+  position: absolute !important; top: var(--barcode-offset-y) !important; left: 50% !important; transform: translate(-50%, -50%) !important; 
+  font-size: var(--barcode-size) !important; letter-spacing: 2px !important; line-height: 1 !important; width: max-content !important; height: max-content !important;
+  text-align: center !important; opacity: 1 !important; color: var(--barcode-color) !important; pointer-events: none !important; z-index: -1 !important; 
+}
+
+.chat-bubble-role-user::after, .chat-bubble-role-assistant::after {
+  position: absolute !important; bottom: 2px !important; font-family: 'Courier Prime', monospace !important; font-size: var(--bubble-tag-size) !important; color: var(--bubble-tag-color) !important; pointer-events: none !important;
+  content: var(--bubble-tag-text) !important; text-transform: uppercase !important; letter-spacing: 1px !important; white-space: nowrap !important; z-index: 0 !important; 
+}
+.chat-bubble-role-assistant::after { right: 14px !important; left: auto !important; } 
+.chat-bubble-role-user::after { left: 14px !important; right: auto !important; }
+
+/* ==============================================
+   5.5 ⭐ 引用消息条（新增）
+   ============================================== */
+/* 引用时列出来那一条小字：默认是浅灰，跟气泡糊在一起看不清。
+   这里统一改成深灰，两边（你 / 对方）都生效。 */
+.chat-quote-preview,
+.chat-quote-preview * {
+  color: var(--quote-text-color) !important;
+}
+
+/* ==============================================
+   6. 输入栏
+   ============================================== */
+.chat-input-bar {
+  background-color: var(--stamp-bg) !important; padding: 14px 16px 12px !important; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important; 
+  -webkit-mask-image: radial-gradient(circle var(--stamp-hole-size) at 50% 0, transparent 98%, #000 100%), radial-gradient(circle var(--stamp-hole-size) at 50% 100%, transparent 98%, #000 100%), radial-gradient(circle var(--stamp-hole-size) at 0 50%, transparent 98%, #000 100%), radial-gradient(circle var(--stamp-hole-size) at 100% 50%, transparent 98%, #000 100%) !important;
+  -webkit-mask-size: var(--stamp-gap) 100%, var(--stamp-gap) 100%, 100% var(--stamp-gap), 100% var(--stamp-gap) !important;
+  -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important; -webkit-mask-composite: source-in !important;
+  mask-image: radial-gradient(circle var(--stamp-hole-size) at 50% 0, transparent 98%, #000 100%), radial-gradient(circle var(--stamp-hole-size) at 50% 100%, transparent 98%, #000 100%), radial-gradient(circle var(--stamp-hole-size) at 0 50%, transparent 98%, #000 100%), radial-gradient(circle var(--stamp-hole-size) at 100% 50%, transparent 98%, #000 100%) !important;
+  mask-size: var(--stamp-gap) 100%, var(--stamp-gap) 100%, 100% var(--stamp-gap), 100% var(--stamp-gap) !important;
+  mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important; mask-composite: intersect !important;
+}
+
+.chat-input-bar::before {
+  content: var(--stamp-barcode-text) !important; font-family: 'Libre Barcode 39 Extended Text', cursive !important;
+  position: absolute !important; top: 5px !important; left: 0 !important; font-size: 48px !important; line-height: 1 !important; white-space: nowrap !important;
+  color: var(--stamp-barcode-color) !important; z-index: 0 !important; pointer-events: none !important;
+}
+.chat-input-bar::after {
+  content: var(--stamp-barcode-text) !important; font-family: 'Libre Barcode 39 Extended Text', cursive !important;
+  position: absolute !important; bottom: 0px !important; left: -30px !important; font-size: 32px !important; line-height: 1 !important; white-space: nowrap !important;
+  color: var(--stamp-barcode-color) !important; z-index: 0 !important; pointer-events: none !important;
+}
+
+.chat-input-textarea {
+  position: relative !important; z-index: 1 !important; 
+  background-color: var(--stamp-inner-bg) !important; 
+  border: none !important; border-radius: 4px !important; box-shadow: none !important; 
+  color: var(--stamp-text-color) !important; font-family: 'Courier Prime', monospace !important;
+  min-height: 46px !important; padding: 10px 14px !important; margin: 0 !important; width: 100% !important; box-sizing: border-box !important;
+  caret-color: var(--stamp-text-color) !important;   /* ⭐光标也跟着深色 */
+}
+
+.chat-input-actions {
+  position: relative !important; z-index: 1 !important; 
+  background: var(--stamp-inner-bg) !important; 
+  border-radius: 0 0 4px 4px !important; margin: 0 !important; padding: 10px 12px 10px !important;
+  gap: 30px !important; justify-content: center !important; align-items: center !important; width: 100% !important;
+  box-sizing: border-box !important; 
+}
+
+.chat-input-actions::before {
+  content: "" !important; position: absolute !important; top: 0 !important; left: 24px !important; right: 24px !important;
+  border-top: 2px dashed rgba(255, 255, 255, 0.45) !important; pointer-events: none !important; z-index: 1 !important;
+}
+
+.chat-input-actions button {
+  color: var(--stamp-icon-color) !important; opacity: 0.9 !important; background: transparent !important; border: none !important; 
+  transition: color 0.2s ease;
+}
+.chat-input-actions button:hover { color: #ffffff !important; }
