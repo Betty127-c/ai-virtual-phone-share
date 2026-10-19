@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T04:34:37.574Z",
+  "generatedAt": "2026-10-19T05:05:47.771Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -37,7 +37,7 @@
     },
     {
       "name": "应用",
-      "count": 143
+      "count": 144
     },
     {
       "name": "应用bug改善",
@@ -4761,6 +4761,23 @@
       "avatar": "",
       "ownerHash": "3b2ec651ad1405938e448749951310a2a116dd422b84a87c2e25c611edd1200c",
       "updatedAt": "2026-08-28T19:44:29+08:00"
+    },
+    {
+      "folder": "应用",
+      "name": "小饿万物",
+      "dirName": "小饿万物",
+      "type": "dir",
+      "path": "资源/应用/小饿万物",
+      "files": [
+        "资源/应用/小饿万物/manifest.json",
+        "资源/应用/小饿万物/xiaoe.html"
+      ],
+      "images": [],
+      "description": "",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "79730ca31b3e49997313f29a8481994c26ca6369315249538869725f43b2fc7f",
+      "updatedAt": "2026-10-19T14:03:59+09:00"
     },
     {
       "folder": "应用",
