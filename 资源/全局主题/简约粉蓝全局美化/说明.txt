@@ -1,1 +1,14 @@
 自用随意改
+
+
+初始动态爱心忘记加这段了，加了是粉色，没加是浅蓝
+/* 触发点赞状态时的按钮与爱心 */
+.feed-post-like-btn:has(svg[fill="currentColor"]) svg,
+.feed-post-like-btn[class*="text-rose"] svg,
+.feed-post-like-btn[class*="text-red"] svg,
+.feed-post-like-btn[data-liked="true"] svg,
+.feed-post-like-btn.active svg {
+  color: #ffb3b3 !important;
+  fill: #ffb3b3 !important;
+  stroke: #ffb3b3 !important;
+}
