@@ -1,11 +1,11 @@
 export default {
   manifest: {
     id: "inline-reasoning-v15",
-    name: "内联自定义美化思维链",
+    name: "A2版思维链（英文等宽字体）",
     apiVersion: 1,
     version: "1.0.1",
     author: "deepseek",
-    description: "将原生思维链转换为内联思维链,且可以自定义思维链样式：标题内容、标题字号、标题颜色、竖线颜色、内容颜色、内容字号",
+    description: "将原生思维链转换为内联思维链,且可以自定义思维链样式",
     permissions: ["chat.read"],
     settings: [
       { key: "defaultExpanded", label: "默认展开思维链", type: "boolean", default: false },
