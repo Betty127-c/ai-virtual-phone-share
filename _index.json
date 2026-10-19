@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T05:19:15.098Z",
+  "generatedAt": "2026-10-19T08:01:27.432Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -37,7 +37,7 @@
     },
     {
       "name": "应用",
-      "count": 144
+      "count": 145
     },
     {
       "name": "应用bug改善",
@@ -4997,6 +4997,22 @@
       "avatar": "",
       "ownerHash": "10fcb4810a7e1f79fb4f735a8aab71691dd662edd6c01043ea5cef63af474106",
       "updatedAt": "2026-08-27T23:32:11+08:00"
+    },
+    {
+      "folder": "应用",
+      "name": "攻略系统",
+      "dirName": "攻略系统",
+      "type": "dir",
+      "path": "资源/应用/攻略系统",
+      "files": [
+        "资源/应用/攻略系统/guide.relationship-1.1.0.zip"
+      ],
+      "images": [],
+      "description": "【攻略辅助系统】\n辅助user攻略char的得力助手一枚呀\n\n\n我玩这类的时候总卡在第一句——喜欢从刚认识开始，但不知道该怎么把关系往前推一步，所以写了这个。\n\n\n装好之后多两样东西：\n\n\n▸ 任务栏\n系统丢任务给你，你去照做。做完不用想「然后呢」，做好感任务就行\n\n\n▸ 建议栏\n不知道该说什么的时候，它把下一句递到你手上。\n\n\n线上线下各给一套。线上那句能直接复制，点一下就跳进对应的聊天框接着聊。\n\n\n也可以同时开好几个人的线，并行跑（这块我还没测透，凑合玩，出问题扔给我改）。",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "0b03c18f5351b397f1736d16d1779c27cd36f752bc77019f5e38e97d2dcec9ea",
+      "updatedAt": "2026-10-19T16:59:39+09:00"
     },
     {
       "folder": "应用",
