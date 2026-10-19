@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T17:49:25.082Z",
+  "generatedAt": "2026-10-19T22:44:04.978Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -6065,14 +6065,14 @@
       "type": "dir",
       "path": "资源/应用bug改善/临境test",
       "files": [
-        "资源/应用bug改善/临境test/Limen-v1.1.42.zip"
+        "资源/应用bug改善/临境test/Limen-v1.1.43.zip"
       ],
       "images": [],
       "description": "修改了yzy老师的临境 发送消息不使用更改后的历史文字而是首次回复储存到本地版本 的问题\n\n因消息已经超过500条了没办法备份，要备份就要改小手机本体，上传zip自用",
       "author": "G",
       "avatar": "",
       "ownerHash": "85b94dde3046f0bb789afce70959e309b5e83cbf12c2417685b16c4d9c3387c5",
-      "updatedAt": "2026-10-18T01:03:22+09:00"
+      "updatedAt": "2026-10-20T07:42:15+09:00"
     },
     {
       "folder": "应用bug改善",
