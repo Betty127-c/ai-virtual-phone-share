@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T03:44:51.483Z",
+  "generatedAt": "2026-10-19T03:54:12.113Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -37,7 +37,7 @@
     },
     {
       "name": "应用",
-      "count": 142
+      "count": 143
     },
     {
       "name": "应用bug改善",
@@ -3828,6 +3828,22 @@
       "avatar": "资源/应用/[月亮]梦境/.avatar.png",
       "ownerHash": "9840628ff5f4d01a8a3aad435eade27791b624164c9cb2815513a424987ac5f7",
       "updatedAt": "2026-08-16T22:18:31+08:00"
+    },
+    {
+      "folder": "应用",
+      "name": "[樱桃]",
+      "dirName": "[樱桃]",
+      "type": "dir",
+      "path": "资源/应用/[樱桃]",
+      "files": [
+        "资源/应用/[樱桃]/xiaoe.html.txt"
+      ],
+      "images": [],
+      "description": "",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "79730ca31b3e49997313f29a8481994c26ca6369315249538869725f43b2fc7f",
+      "updatedAt": "2026-10-19T12:52:25+09:00"
     },
     {
       "folder": "应用",
