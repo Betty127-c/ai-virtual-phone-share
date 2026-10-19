@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T04:11:32.506Z",
+  "generatedAt": "2026-10-19T04:17:27.504Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -2733,11 +2733,11 @@
         "资源/全局主题/简约粉蓝全局美化/Screenshot_20261019_003829.jpg",
         "资源/全局主题/简约粉蓝全局美化/Screenshot_20261019_003844.jpg"
       ],
-      "description": "自用随意改",
+      "description": "自用随意改\n\n\n初始动态爱心忘记加这段了，加了是粉色，没加是浅蓝\n/* 触发点赞状态时的按钮与爱心 */\n.feed-post-like-btn:has(svg[fill=\"currentColor\"]) svg,\n.feed-post-like-btn[class*=\"text-rose\"] svg,\n.feed-post-like-btn[class*=\"text-red\"] svg,\n.feed-post-like-btn[data-liked=\"true\"] svg,\n.feed-post-like-btn.active svg {\n  color: #ffb3b3 !important;\n  fill: #ffb3b3 !important;\n  stroke: #ffb3b3 !important;\n}",
       "author": "Mir",
       "avatar": "",
       "ownerHash": "7e23f17206cd464fcecdd0e4f95aaf3204080d2f5349ab00b54b3d9afc1df15a",
-      "updatedAt": "2026-10-19T13:09:55+09:00"
+      "updatedAt": "2026-10-19T13:15:42+09:00"
     },
     {
       "folder": "全局主题",
