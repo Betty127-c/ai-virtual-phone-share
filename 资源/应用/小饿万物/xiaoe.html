@@ -1,0 +1,921 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#ff4d4f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="小饿万物">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff4d4f'/%3E%3Ctext x='50' y='72' font-size='52' text-anchor='middle'%3E%F0%9F%9B%8D%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<title>小饿万物</title>
+<style>
+:root{--brand:#ff4d4f;--brand2:#ff8a3d;--bg:#f4f4f6;--line:#f0f0f2;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Roboto,sans-serif;
+  color:#222;background:var(--bg);
+  height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+
+/* 顶部 */
+header{
+  flex-shrink:0;display:flex;align-items:center;gap:10px;
+  padding:10px 12px;padding-top:calc(10px + env(safe-area-inset-top));
+  background:linear-gradient(135deg,#ff7a45,#ff3d3d);color:#fff;
+}
+.logo{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:18px;flex-shrink:0;}
+.shop h1{font-size:15px;font-weight:700;letter-spacing:.5px;}
+.shop p{font-size:10px;opacity:.85;margin-top:2px;}
+.hbtns{margin-left:auto;display:flex;gap:8px;}
+.hbtns button{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.2);color:#fff;font-size:16px;display:grid;place-items:center;}
+
+/* 搜索 */
+.searchwrap{flex-shrink:0;padding:8px 12px;background:#fff;}
+.search{display:flex;align-items:center;gap:8px;background:#f4f4f6;border-radius:10px;padding:8px 11px;}
+.search input{border:none;background:none;outline:none;flex:1;font-size:13px;color:#333;min-width:0;}
+.search .clr{font-size:12px;color:#bbb;display:none;padding:2px;}
+
+/* 分类横滑 */
+.cats{flex-shrink:0;display:flex;gap:8px;overflow-x:auto;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line);scrollbar-width:none;}
+.cats::-webkit-scrollbar{display:none;}
+.cat{flex-shrink:0;padding:6px 12px;border-radius:20px;background:#f4f4f6;font-size:12.5px;color:#666;white-space:nowrap;transition:.2s;}
+.cat.on{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;font-weight:600;}
+
+/* 商品网格（小图标） */
+main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 12px 20px;}
+.card{
+  position:relative;background:#fff;border-radius:14px;
+  padding:9px 6px 8px;display:flex;flex-direction:column;align-items:center;
+  transition:transform .15s;box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+.card:active{transform:scale(.95);}
+.card .ico{font-size:26px;line-height:1.3;}
+.card .nm{
+  font-size:11px;font-weight:600;text-align:center;line-height:1.25;
+  margin-top:2px;height:2.5em;overflow:hidden;width:100%;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+}
+.card .pr{font-size:11.5px;color:var(--brand);font-weight:700;margin-top:3px;}
+.card .plus{
+  position:absolute;right:5px;bottom:5px;width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;
+  font-size:14px;line-height:1;display:grid;place-items:center;
+}
+.card .cbadge{
+  position:absolute;left:5px;top:5px;min-width:16px;height:16px;padding:0 4px;
+  border-radius:8px;background:var(--brand);color:#fff;font-size:10px;font-weight:700;
+  display:grid;place-items:center;
+}
+.card .cbadge:empty{display:none;}
+.card.has{box-shadow:0 0 0 1.5px rgba(255,77,79,.35);}
+.empty{padding:60px 20px;text-align:center;color:#b5b5b5;font-size:13px;line-height:1.8;grid-column:1/-1;}
+
+/* 底部购物车栏 */
+.cartbar{
+  flex-shrink:0;display:flex;align-items:center;gap:10px;
+  padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom));
+  background:#26262a;
+}
+.cartleft{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
+.cicon{position:relative;font-size:22px;line-height:1;}
+.badge{
+  position:absolute;top:-6px;right:-9px;min-width:16px;height:16px;padding:0 4px;
+  border-radius:8px;background:var(--brand);color:#fff;font-size:10px;font-weight:700;
+  display:none;place-items:center;
+}
+.ctotal{color:#fff;font-size:17px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.checkout{
+  flex-shrink:0;height:38px;padding:0 20px;border-radius:20px;
+  font-size:14px;font-weight:600;background:#48484d;color:#8d8d92;transition:.25s;
+}
+.checkout.on{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;box-shadow:0 4px 12px rgba(255,61,61,.35);}
+
+/* 遮罩 & 弹层 */
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:20;}
+.mask.on{opacity:1;pointer-events:auto;}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:25;background:#fff;
+  border-radius:18px 18px 0 0;transform:translateY(105%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  max-height:82vh;display:flex;flex-direction:column;
+  padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -6px 24px rgba(0,0,0,.14);
+}
+.sheet.on{transform:translateY(0);}
+.sheet-h{
+  flex-shrink:0;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;font-size:14.5px;font-weight:600;border-bottom:1px solid var(--line);
+}
+.sheet-h .x{font-size:15px;color:#bbb;padding:4px 8px;}
+.sheet-b{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 16px 16px;}
+
+/* 购物车条目 */
+.citem{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #fafafa;}
+.citem:last-child{border-bottom:none;}
+.cico{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#fff4ec,#ffe3d3);display:grid;place-items:center;font-size:22px;flex-shrink:0;}
+.cinfo{flex:1;min-width:0;}
+.cnm{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cpr{font-size:12px;color:var(--brand);font-weight:600;margin-top:3px;}
+.stepper{display:flex;align-items:center;gap:9px;flex-shrink:0;}
+.stepper button{width:24px;height:24px;border-radius:50%;font-size:15px;line-height:1;display:grid;place-items:center;transition:transform .15s;}
+.stepper button:active{transform:scale(.85);}
+.stepper .minus{background:#fff;color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand);}
+.stepper .plus{background:var(--brand);color:#fff;}
+.stepper .q{font-size:13.5px;min-width:16px;text-align:center;font-variant-numeric:tabular-nums;}
+
+/* 按钮 */
+.btn-main{
+  width:100%;height:46px;border-radius:14px;font-size:15px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--brand2),var(--brand));
+  box-shadow:0 6px 16px rgba(255,61,61,.28);margin-top:12px;
+}
+.btn-main:active{opacity:.88;}
+.btn-ghost{
+  width:100%;height:44px;border-radius:14px;font-size:14px;font-weight:600;
+  background:#f4f4f6;color:#555;margin-top:10px;
+}
+.row2{display:flex;gap:10px;}
+.row2 .btn-main,.row2 .btn-ghost{flex:1;margin-top:12px;}
+.clear-cart{
+  font-size:12px;color:#999;padding:4px 8px;border-radius:8px;background:#f4f4f6;
+}
+
+/* AI 造物 */
+.hint{font-size:12px;color:#999;line-height:1.6;margin-bottom:10px;}
+.aiinput{
+  width:100%;border:1.5px solid #eee;border-radius:12px;padding:12px 14px;
+  font-size:14px;outline:none;font-family:inherit;
+}
+.aiinput:focus{border-color:var(--brand);}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.chip{padding:6px 12px;border-radius:16px;background:#f4f4f6;font-size:12px;color:#666;}
+.chip:active{background:#ffe8e6;color:var(--brand);}
+
+/* 群 / 角色列表 */
+.glist,.charlist{display:flex;flex-direction:column;gap:8px;}
+.gitem,.chitem{
+  display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:14px;background:#f8f8fa;
+}
+.gitem:active,.chitem:active{background:#ffeceb;}
+.gav,.chav{width:40px;height:40px;border-radius:12px;background:#fff;display:grid;place-items:center;font-size:20px;flex-shrink:0;}
+.gmeta{flex:1;min-width:0;}
+.gname{font-size:14px;font-weight:600;}
+.gdesc{font-size:11px;color:#aaa;margin-top:2px;}
+.arrow{color:#ccc;font-size:14px;}
+
+/* 结算 */
+.paytotal{text-align:center;padding:14px 0 6px;font-size:13px;color:#999;}
+.paytotal b{display:block;font-size:30px;color:var(--brand);font-weight:800;margin-bottom:4px;}
+.paytabs{display:flex;gap:8px;margin:12px 0 14px;background:#f4f4f6;padding:4px;border-radius:12px;}
+.paytab{flex:1;text-align:center;padding:9px 0;border-radius:9px;font-size:13px;color:#777;transition:.2s;}
+.paytab.on{background:#fff;color:var(--brand);font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.06);}
+.paystatus{
+  margin-top:12px;padding:12px;border-radius:12px;background:#f0f9f2;
+  color:#1a9e4b;font-size:13px;text-align:center;display:none;line-height:1.6;
+}
+
+/* 分享文案 */
+.sharecard{
+  background:#f8f8fa;border-radius:14px;padding:14px;font-size:13px;line-height:1.9;
+  color:#444;white-space:pre-wrap;margin-top:4px;word-break:break-all;
+}
+
+/* Toast */
+.toast{
+  position:fixed;left:50%;top:45%;transform:translate(-50%,-50%) scale(.92);
+  background:rgba(0,0,0,.84);color:#fff;padding:12px 20px;border-radius:12px;
+  font-size:13.5px;opacity:0;transition:.25s;z-index:100;pointer-events:none;
+  max-width:80vw;text-align:center;line-height:1.6;
+}
+.toast.on{opacity:1;transform:translate(-50%,-50%) scale(1);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🛍️</div>
+  <div class="shop">
+    <h1>小饿万物</h1>
+    <p>万物皆可送 · 30 分钟达</p>
+  </div>
+  <div class="hbtns">
+    <button id="btnAI" title="AI 造物">✨</button>
+  </div>
+</header>
+
+<div class="searchwrap">
+  <div class="search">
+    <span>🔍</span>
+    <input id="searchInput" placeholder="搜索美食、数码、豪车…" autocomplete="off">
+    <span class="clr" id="clrSearch">✕</span>
+  </div>
+</div>
+
+<nav class="cats" id="cats"></nav>
+
+<main><div class="grid" id="grid"></div></main>
+
+<div class="cartbar">
+  <div class="cartleft" id="cartLeft">
+    <div class="cicon">🛒<span class="badge" id="badge">0</span></div>
+    <div class="ctotal" id="total">¥0</div>
+  </div>
+  <button class="checkout" id="checkoutBtn">¥20 起送</button>
+</div>
+
+<div class="mask" id="mask"></div>
+
+<!-- 购物车 -->
+<div class="sheet" id="sheetCart">
+  <div class="sheet-h">
+    <span>购物车</span>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="clear-cart" id="clearCartBtn">清空</button>
+      <button class="x" data-close>✕</button>
+    </div>
+  </div>
+  <div class="sheet-b" id="cartBody"></div>
+  <div style="padding:0 16px 16px;flex-shrink:0;">
+    <div class="row2">
+      <button class="btn-ghost" id="btnShare">分享到群</button>
+      <button class="btn-main" id="btnCartPay">去结算</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI 造物 -->
+<div class="sheet" id="sheetAI">
+  <div class="sheet-h"><span>✨ AI 造物</span><button class="x" data-close>✕</button></div>
+  <div class="sheet-b">
+    <p class="hint">描述你想要的东西，AI 立刻为你生成 3 件商品。</p>
+    <input class="aiinput" id="aiInput" placeholder="例如：会发光的猫粮、赛博朋克雨伞…" autocomplete="off">
+    <div class="chips" id="aiChips"></div>
+    <button class="btn-main" id="btnAiGo">生成商品</button>
+  </div>
+</div>
+
+<!-- 分享到群 -->
+<div class="sheet" id="sheetShare">
+  <div class="sheet-h"><span>分享到群</span><button class="x" data-close>✕</button></div>
+  <div class="sheet-b" id="shareBody"></div>
+</div>
+
+<!-- 结算 / 代付 -->
+<div class="sheet" id="sheetPay">
+  <div class="sheet-h"><span>结算</span><button class="x" data-close>✕</button></div>
+  <div class="sheet-b">
+    <div class="paytotal">应付金额<b id="payAmount">¥0</b></div>
+    <div class="paytabs">
+      <div class="paytab on" data-mode="toMe">让 TA 帮我付</div>
+      <div class="paytab" data-mode="toChar">我帮 TA 付</div>
+    </div>
+    <div class="charlist" id="charList"></div>
+    <div class="paystatus" id="payStatus"></div>
+    <button class="btn-ghost" id="selfPay">我自己支付</button>
+  </div>
+</div>
+
+<script>
+/* ================= 商品数据（每类 20 件） ================= */
+const CATS = [
+  { k:'food', n:'美食', e:'🍜', items:[
+    ['招牌卤肉饭','肥瘦相间 酱香浓郁',22,'🍚','招牌'],
+    ['香辣鸡腿堡','现炸大鸡腿 外酥里嫩',18,'🍔',''],
+    ['黑椒牛柳饭','大块牛柳 黑椒酱汁',28,'🍛',''],
+    ['照烧鸡排饭','日式照烧 配溏心蛋',26,'🍱',''],
+    ['番茄肉酱意面','慢炖肉酱 酸甜开胃',24,'🍝',''],
+    ['扬州炒饭','粒粒分明 配料十足',18,'🍚',''],
+    ['麻辣香锅','自选拼锅 麻辣鲜香',38,'🌶️','辣'],
+    ['小笼包','6 只装 皮薄汁多',15,'🥟',''],
+    ['香辣炸鸡翅','3 只装 外酥里嫩',15,'🍗',''],
+    ['芝士披萨','8 寸 拉丝芝士',45,'🍕',''],
+    ['日式拉面','豚骨浓汤 叉烧',32,'🍜',''],
+    ['关东煮','拼盘 10 串',25,'🍢',''],
+    ['黄焖鸡米饭','大块鸡腿 浓汁',26,'🍗',''],
+    ['酸菜鱼','现杀黑鱼 酸辣',58,'🐟',''],
+    ['蒜香小龙虾','一斤装 蒜蓉',88,'🦐','时令'],
+    ['柳州螺蛳粉','酸笋腐竹 加辣',22,'🍜',''],
+    ['煎饼果子','现摊 双蛋加肠',12,'🥞',''],
+    ['肉夹馍','腊汁肉 白吉馍',14,'🥙',''],
+    ['兰州拉面','清汤牛肉 手工',26,'🍜',''],
+    ['煲仔饭','腊味双拼 锅巴',32,'🍚',''],
+  ]},
+  { k:'fruit', n:'水果', e:'🍎', items:[
+    ['丹东草莓','奶油香 500g',39,'🍓',''],
+    ['泰国山竹','5A 级 大果',49,'🫒',''],
+    ['智利车厘子','3J 级 500g',69,'🍒','爆款'],
+    ['阳光玫瑰','无籽 甜过初恋',35,'🍇',''],
+    ['猫山王榴莲','树上熟 一整个',188,'🥭',''],
+    ['海南芒果','大台农 5 斤装',29,'🥭',''],
+    ['云南蓝莓','大果 125g×2',26,'🫐',''],
+    ['墨西哥牛油果','3 个装',22,'🥑',''],
+    ['麒麟西瓜','8 斤 现切',25,'🍉',''],
+    ['车厘子礼盒','2kg 精装送礼',199,'🎁','礼盒'],
+    ['赣南脐橙','10 斤 爆汁',45,'🍊',''],
+    ['无籽青提','脆甜',28,'🍏',''],
+    ['水蜜桃','阳山水蜜桃 4 个',32,'🍑',''],
+    ['红心火龙果','2 个装',18,'🐉',''],
+    ['徐香猕猴桃','12 个装',26,'🥝',''],
+    ['泰国小菠萝','3 个装',15,'🍍',''],
+    ['哈密瓜','西州蜜 一整个',22,'🍈',''],
+    ['百香果','大果 6 个',19,'🟣',''],
+    ['红富士苹果','8 个装 脆甜',28,'🍎',''],
+    ['高山香蕉','5 斤装',12,'🍌',''],
+  ]},
+  { k:'cake', n:'蛋糕', e:'🍰', items:[
+    ['提拉米苏','手工现做 微苦回甘',16,'🍰',''],
+    ['芒果布丁','大颗芒果果肉',12,'🥭',''],
+    ['抹茶千层','宇治抹茶 20 层',32,'🍵',''],
+    ['草莓奶油蛋糕','6 寸 动物奶油',88,'🎂','生日'],
+    ['黑森林','6 寸 樱桃酒香',98,'🍫',''],
+    ['巴斯克芝士','流心芝士 4 寸',45,'🧀',''],
+    ['脏脏包','可可爆浆',12,'🍫',''],
+    ['马卡龙礼盒','6 枚装 法式',68,'🧁','礼盒'],
+    ['冰淇淋蛋糕','香草+巧克力',128,'🍦',''],
+    ['葡式蛋挞','4 只装 现烤',18,'🥧',''],
+    ['拿破仑','酥皮奶油',28,'🍰',''],
+    ['红丝绒蛋糕','6 寸 奶油芝士',78,'🎂',''],
+    ['慕斯杯','草莓味',22,'🍮',''],
+    ['轻乳酪蛋糕','4 寸',45,'🧀',''],
+    ['奶油泡芙','6 个装',15,'🥐',''],
+    ['黄油可颂','2 个装',12,'🥐',''],
+    ['布朗尼','黑巧浓香',18,'🍫',''],
+    ['舒芙蕾','现烤 3 只',38,'🥞',''],
+    ['甜甜圈','2 个装',8,'🍩',''],
+    ['毛巾卷','抹茶味',26,'🍥',''],
+  ]},
+  { k:'drink', n:'饮品', e:'🧋', items:[
+    ['珍珠奶茶','黑糖珍珠 三分糖',12,'🧋','人气'],
+    ['冰美式','浅烘豆 清爽提神',15,'☕',''],
+    ['生椰拿铁','厚椰乳 顺滑',18,'🥤',''],
+    ['柠檬气泡水','现切青柠',13,'🍋',''],
+    ['鲜榨橙汁','4 个橙子现榨',16,'🍊',''],
+    ['杨枝甘露','芒果+西米',19,'🥭',''],
+    ['抹茶拿铁','宇治抹茶',18,'🍵',''],
+    ['气泡美式','青柠+冷萃',20,'🥤',''],
+    ['热可可','70% 黑巧',16,'🍫',''],
+    ['蜂蜜柚子茶','现熬果酱',14,'🍯',''],
+    ['芋泥波波','鲜芋泥 大满足',16,'🧋',''],
+    ['鲜榨西瓜汁','现切西瓜',15,'🍉',''],
+    ['芒果冰沙','大块果肉',20,'🥭',''],
+    ['焦糖玛奇朵','焦糖香浓',22,'☕',''],
+    ['茉莉花茶','清新淡雅',12,'🍵',''],
+    ['冰镇酸梅汤','解腻神器',10,'🥤',''],
+    ['葡萄冰萃','青提+冷萃',18,'🍇',''],
+    ['桂花乌龙','桂花香',16,'🍵',''],
+    ['椰奶冻','Q 弹椰奶',14,'🥥',''],
+    ['红糖姜茶','暖胃驱寒',13,'🫚',''],
+  ]},
+  { k:'digital', n:'数码', e:'📱', items:[
+    ['智能手机 Pro','1TB 钛金属',8999,'📱','新品'],
+    ['轻薄笔记本','14 寸 32G+1T',7999,'💻',''],
+    ['降噪耳机','头戴式 45h 续航',1299,'🎧',''],
+    ['智能手表','血氧心率 GPS',2599,'⌚',''],
+    ['平板电脑','11 寸 256G',4299,'📲',''],
+    ['微单相机','全画幅 4K60',12800,'📷',''],
+    ['机械键盘','客制化 三模',699,'⌨️',''],
+    ['游戏主机','次世代 光驱版',3899,'🎮',''],
+    ['无人机','4K 三轴云台',5499,'🚁',''],
+    ['快充充电宝','20000mAh',199,'🔋',''],
+    ['智能音箱','AI 语音助手',399,'🔊',''],
+    ['激光投影仪','4K 家用',4599,'📽️',''],
+    ['电子书阅读器','7 寸 墨水屏',1299,'📖',''],
+    ['运动相机','防抖 4K',2499,'📹',''],
+    ['无线鼠标','静音 双模',299,'🖱️',''],
+    ['27 寸显示器','2K 高刷',1999,'🖥️',''],
+    ['蓝牙音箱','IPX7 防水',599,'🔊',''],
+    ['VR 头显','4K 双眼',2999,'🥽',''],
+    ['智能门锁','3D 人脸',1899,'🔐',''],
+    ['扫地机器人','激光导航',2599,'🤖',''],
+  ]},
+  { k:'luxury', n:'奢品', e:'👜', items:[
+    ['经典手提包','小牛皮 金扣',28800,'👜',''],
+    ['自动机械腕表','42mm 蓝盘',68000,'⌚',''],
+    ['真丝方巾','90×90cm',3200,'🧣',''],
+    ['板材太阳镜','偏光 防紫外线',2800,'🕶️',''],
+    ['香水 100ml','木质东方调',1680,'🧴',''],
+    ['羊绒大衣','双面呢 驼色',19800,'🧥',''],
+    ['小牛皮腰带','3.5cm 金扣',3600,'👔',''],
+    ['钻石耳钉','18K 金 30 分',12800,'💎',''],
+    ['珍珠项链','海水珠 9mm',8800,'📿',''],
+    ['鳄鱼皮钱包','手工缝制',6800,'👛',''],
+    ['丝绒晚宴包','限量色',15800,'👝',''],
+    ['白金手链','18K 金',22800,'💍',''],
+    ['真皮手套','小羊皮',2800,'🧤',''],
+    ['高定墨镜','钛合金框',4200,'🕶️',''],
+    ['香水礼盒','三件套',2680,'🎁',''],
+    ['蓝宝石戒指','1 克拉',88000,'💎',''],
+    ['手工皮鞋','固特异',6800,'👞',''],
+    ['羊绒围巾','苏格兰',3800,'🧣',''],
+    ['限量打火机','纯银',3200,'🔥',''],
+    ['经典钢笔','树脂杆',2800,'🖊️',''],
+  ]},
+  { k:'couture', n:'高定', e:'👗', items:[
+    ['手工刺绣礼服','巴黎工坊 定制',188000,'👗','定制'],
+    ['高定婚纱','手工蕾丝 3 米拖尾',368000,'👰',''],
+    ['定制西装','全麻衬 手工',58000,'🤵',''],
+    ['手工钉珠披肩','200 小时工艺',42000,'🧣',''],
+    ['高定礼帽','羽毛手工',8800,'👒',''],
+    ['定制婚戒','铂金 一对',66000,'💍',''],
+    ['真丝旗袍','苏绣手作',28000,'🥻',''],
+    ['高定手包','鳄鱼皮 限量',128000,'👝','限量'],
+    ['定制礼服裙','手工褶裥',98000,'👗',''],
+    ['手工蕾丝手套','法国蕾丝',12800,'🧤',''],
+    ['高定头纱','5 米长',16800,'👰',''],
+    ['定制领结','真丝',6800,'🎀',''],
+    ['手工刺绣披风','金线刺绣',88000,'🧥',''],
+    ['高定珠宝套装','项链+耳环',288000,'💎',''],
+    ['定制腕表','陀飞轮',128000,'⌚',''],
+    ['高定礼服鞋','水钻',38000,'👠',''],
+    ['手工礼服帽','宽檐',16800,'👒',''],
+    ['定制香水','专属调香',12800,'🧴',''],
+    ['高定晚装包','手工钉珠',68000,'👛',''],
+    ['定制胸针','18K 金',22800,'📌',''],
+  ]},
+  { k:'car', n:'豪车', e:'🚗', items:[
+    ['豪华轿车 S 级','3.0T 行政版',1080000,'🚗',''],
+    ['超跑 双门','V8 双涡轮',2980000,'🏎️',''],
+    ['纯电豪华 SUV','双电机 空气悬挂',498000,'🚙',''],
+    ['硬派越野','三把锁 全地形',788000,'🚙',''],
+    ['敞篷跑车','软顶 后驱',688000,'🚘',''],
+    ['豪华 MPV','四座 行政舱',568000,'🚐',''],
+    ['试驾体验券','旗舰店 1 对 1',10,'🎫','体验'],
+    ['豪车租赁 1 天','含司机 8 小时',8800,'🗝️',''],
+    ['豪华轿跑','2.0T 高功',888000,'🚗',''],
+    ['行政加长版','5.9 米车身',1580000,'🚙',''],
+    ['高性能 SUV','4.0T V8',1280000,'🚙',''],
+    ['复古老爷车','1967 款',3880000,'🚗',''],
+    ['限量超跑','全球 99 台',8880000,'🏎️','限量'],
+    ['豪华皮卡','V6 四驱',688000,'🛻',''],
+    ['混动轿跑','2.0T+电机',588000,'🚗',''],
+    ['豪华旅行车','大空间',698000,'🚙',''],
+    ['纯电轿跑','800V 平台',788000,'🚗',''],
+    ['豪华越野','空气悬架',988000,'🚙',''],
+    ['豪车保养套餐','3 次基础保养',8800,'🔧',''],
+    ['豪车接送服务','机场单程',1280,'🚕',''],
+  ]},
+  { k:'ai', n:'AI造物', e:'✨', items:[] }
+];
+
+/* ================= 状态 ================= */
+const itemMap = {};
+CATS.forEach(c => {
+  c.list = c.items.map((it, i) => {
+    const id = c.k + '_' + i;
+    const o = { id, name:it[0], desc:it[1], price:it[2], emoji:it[3], tag:it[4]||'', cat:c.k };
+    itemMap[id] = o;
+    return o;
+  });
+});
+const cart = {};
+let curCat = 'food';
+let payMode = 'toMe';
+let busy = false;
+const MIN_ORDER = 20;
+
+/* ================= DOM ================= */
+const catsEl    = document.getElementById('cats');
+const gridEl    = document.getElementById('grid');
+const searchEl  = document.getElementById('searchInput');
+const clrEl     = document.getElementById('clrSearch');
+const badgeEl   = document.getElementById('badge');
+const totalEl   = document.getElementById('total');
+const coBtn     = document.getElementById('checkoutBtn');
+const cartLeft  = document.getElementById('cartLeft');
+const cartBody  = document.getElementById('cartBody');
+const maskEl    = document.getElementById('mask');
+const payAmount = document.getElementById('payAmount');
+const payStatus = document.getElementById('payStatus');
+const charList  = document.getElementById('charList');
+const shareBody = document.getElementById('shareBody');
+const clearCartBtn = document.getElementById('clearCartBtn');
+
+/* ================= 工具 ================= */
+function money(v){
+  if (v >= 10000){
+    const w = Math.round(v / 1000) / 10;
+    return '¥' + w + '万';
+  }
+  return '¥' + (Number.isInteger(v) ? v : v.toFixed(2));
+}
+function calc(){
+  let count = 0, total = 0;
+  for (const id in cart){
+    count += cart[id];
+    total += itemMap[id].price * cart[id];
+  }
+  return { count, total };
+}
+let toastTimer;
+function toast(msg, ms){
+  let el = document.querySelector('.toast');
+  if (!el){ el = document.createElement('div'); el.className = 'toast'; document.body.appendChild(el); }
+  el.textContent = msg;
+  clearTimeout(toastTimer);
+  requestAnimationFrame(() => el.classList.add('on'));
+  toastTimer = setTimeout(() => el.classList.remove('on'), ms || 1800);
+}
+
+/* ================= 分类渲染 ================= */
+function renderCats(){
+  catsEl.innerHTML = CATS.map(c =>
+    `<div class="cat${c.k === curCat ? ' on' : ''}" data-k="${c.k}">${c.e} ${c.n}</div>`
+  ).join('');
+}
+catsEl.addEventListener('click', e => {
+  const el = e.target.closest('.cat');
+  if (!el) return;
+  curCat = el.dataset.k;
+  searchEl.value = '';
+  clrEl.style.display = 'none';
+  renderCats();
+  renderGrid();
+});
+
+/* ================= 商品渲染 ================= */
+function renderGrid(){
+  const q = searchEl.value.trim();
+  let list, emptyTip = '';
+
+  if (q){
+    list = Object.values(itemMap).filter(o =>
+      o.name.includes(q) || o.desc.includes(q) || (o.tag && o.tag.includes(q))
+    );
+    emptyTip = `没有找到「${q}」相关商品`;
+  } else {
+    const c = CATS.find(c => c.k === curCat);
+    list = c.list;
+    emptyTip = c.k === 'ai'
+      ? '这里还空空的<br>点右上角 ✨ 让 AI 为你生成商品'
+      : '暂无商品';
+  }
+
+  if (!list.length){
+    gridEl.innerHTML = `<div class="empty">${emptyTip}</div>`;
+    return;
+  }
+
+  gridEl.innerHTML = list.map(o => {
+    const q2 = cart[o.id] || 0;
+    return `<div class="card${q2 ? ' has' : ''}" data-id="${o.id}">
+      <span class="cbadge">${q2 || ''}</span>
+      <div class="ico">${o.emoji}</div>
+      <div class="nm">${o.name}</div>
+      <div class="pr">${money(o.price)}</div>
+      <button class="plus">+</button>
+    </div>`;
+  }).join('');
+}
+
+gridEl.addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  addToCart(card.dataset.id);
+});
+
+function addToCart(id){
+  cart[id] = (cart[id] || 0) + 1;
+  syncCards();
+  syncBar();
+}
+
+function syncCards(){
+  document.querySelectorAll('.card').forEach(el => {
+    const q = cart[el.dataset.id] || 0;
+    el.classList.toggle('has', q > 0);
+    el.querySelector('.cbadge').textContent = q || '';
+  });
+}
+
+/* ================= 底部栏 ================= */
+function syncBar(){
+  const { count, total } = calc();
+  badgeEl.textContent = count;
+  badgeEl.style.display = count ? 'grid' : 'none';
+  totalEl.textContent = money(total);
+
+  if (count && total >= MIN_ORDER){
+    coBtn.classList.add('on');
+    coBtn.textContent = '结算';
+  } else {
+    coBtn.classList.remove('on');
+    coBtn.textContent = count ? `差 ${money(MIN_ORDER - total)} 起送` : `¥${MIN_ORDER} 起送`;
+  }
+  renderCart();
+}
+
+/* ================= 购物车面板 ================= */
+function renderCart(){
+  const ids = Object.keys(cart);
+  if (!ids.length){
+    cartBody.innerHTML = '<div class="empty">购物车还是空的<br>去挑点喜欢的东西吧</div>';
+    return;
+  }
+  cartBody.innerHTML = ids.map(id => {
+    const o = itemMap[id];
+    return `<div class="citem">
+      <div class="cico">${o.emoji}</div>
+      <div class="cinfo">
+        <div class="cnm">${o.name}</div>
+        <div class="cpr">${money(o.price)}</div>
+      </div>
+      <div class="stepper" data-id="${id}">
+        <button class="minus">−</button>
+        <span class="q">${cart[id]}</span>
+        <button class="plus">+</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+cartBody.addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  const st = btn.closest('.stepper');
+  if (!st) return;
+  const id = st.dataset.id;
+  if (btn.classList.contains('plus')) cart[id]++;
+  else {
+    cart[id]--;
+    if (cart[id] <= 0) delete cart[id];
+  }
+  syncCards();
+  syncBar();
+});
+
+/* 一键清空购物车 */
+clearCartBtn.addEventListener('click', () => {
+  const { count } = calc();
+  if (!count){ toast('购物车已经是空的'); return; }
+  clearAll();
+  toast('购物车已清空');
+});
+
+function clearAll(){
+  Object.keys(cart).forEach(k => delete cart[k]);
+  syncCards();
+  syncBar();
+}
+
+/* ================= 弹层控制 ================= */
+function openSheet(id){
+  closeSheets();
+  document.getElementById(id).classList.add('on');
+  maskEl.classList.add('on');
+}
+function closeSheets(){
+  document.querySelectorAll('.sheet').forEach(s => s.classList.remove('on'));
+  maskEl.classList.remove('on');
+}
+maskEl.addEventListener('click', closeSheets);
+document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeSheets));
+
+cartLeft.addEventListener('click', () => {
+  if (!Object.keys(cart).length){ toast('购物车是空的'); return; }
+  renderCart();
+  openSheet('sheetCart');
+});
+
+/* ================= 搜索 ================= */
+searchEl.addEventListener('input', () => {
+  clrEl.style.display = searchEl.value ? 'block' : 'none';
+  renderGrid();
+});
+clrEl.addEventListener('click', () => {
+  searchEl.value = '';
+  clrEl.style.display = 'none';
+  renderGrid();
+});
+
+/* ================= AI 造物 ================= */
+const AI_EMOJI = ['✨','🎁','🔮','🪄','🧪','💠','🌈','🛸','🎀','🧿'];
+const AI_SUFFIX = ['限定版','收藏款','联名款','概念款','典藏版','幻彩版'];
+const AI_DESC = ['AI 独家定制，仅此一件','根据你的描述实时生成','灵感来自你的关键词','AI 为你量身打造','全网唯一，AI 造物'];
+const AI_PRICE = [9, 29, 99, 299, 999, 2999, 9999, 39999];
+const AI_CHIPS = ['星空礼盒','赛博朋克','会发光的猫粮','复古胶片机','云朵抱枕','量子咖啡','机械蝴蝶','月球土壤'];
+
+document.getElementById('aiChips').innerHTML =
+  AI_CHIPS.map(t => `<span class="chip">${t}</span>`).join('');
+
+document.getElementById('aiChips').addEventListener('click', e => {
+  if (e.target.classList.contains('chip')){
+    document.getElementById('aiInput').value = e.target.textContent;
+  }
+});
+
+document.getElementById('btnAI').addEventListener('click', () => openSheet('sheetAI'));
+
+document.getElementById('btnAiGo').addEventListener('click', () => {
+  let kw = document.getElementById('aiInput').value.trim();
+  if (!kw) kw = AI_CHIPS[Math.floor(Math.random() * AI_CHIPS.length)];
+
+  const aiCat = CATS.find(c => c.k === 'ai');
+  for (let i = 0; i < 3; i++){
+    const id = 'ai_' + Date.now() + '_' + i;
+    const o = {
+      id,
+      name: kw + '·' + AI_SUFFIX[Math.floor(Math.random() * AI_SUFFIX.length)],
+      desc: AI_DESC[Math.floor(Math.random() * AI_DESC.length)],
+      price: AI_PRICE[Math.floor(Math.random() * AI_PRICE.length)],
+      emoji: AI_EMOJI[Math.floor(Math.random() * AI_EMOJI.length)],
+      tag: 'AI',
+      cat: 'ai'
+    };
+    itemMap[id] = o;
+    aiCat.list.unshift(o);
+  }
+
+  curCat = 'ai';
+  searchEl.value = '';
+  clrEl.style.display = 'none';
+  renderCats();
+  renderGrid();
+  closeSheets();
+  toast('✨ AI 已为你生成 3 件商品');
+});
+
+/* ================= 分享到群 ================= */
+const GROUPS = [
+  { n:'吃货小分队', d:'12 人 · 天天聊吃的', e:'🍜' },
+  { n:'公司摸鱼群', d:'48 人 · 工作日活跃', e:'💼' },
+  { n:'家人群', d:'6 人 · 爸妈都在', e:'🏠' },
+  { n:'我的小窝', d:'仅自己 · 收藏夹', e:'🛏️' }
+];
+
+document.getElementById('btnShare').addEventListener('click', () => {
+  const { count } = calc();
+  if (!count){ toast('购物车是空的'); return; }
+  renderGroups();
+  openSheet('sheetShare');
+});
+
+function shareText(){
+  const { total } = calc();
+  const lines = Object.keys(cart).map(id => {
+    const o = itemMap[id];
+    return `· ${o.name} ×${cart[id]} ${money(o.price * cart[id])}`;
+  });
+  return `【小饿万物】我挑了 ${Object.keys(cart).length} 件好物，帮我看看？\n\n${lines.join('\n')}\n\n合计：${money(total)}\n👉 打开「小饿万物」一起下单`;
+}
+
+function renderGroups(){
+  shareBody.innerHTML = `<div class="glist">${GROUPS.map((g, i) =>
+    `<div class="gitem" data-i="${i}">
+      <div class="gav">${g.e}</div>
+      <div class="gmeta"><div class="gname">${g.n}</div><div class="gdesc">${g.d}</div></div>
+      <div class="arrow">›</div>
+    </div>`).join('')}</div>`;
+}
+
+shareBody.addEventListener('click', e => {
+  const item = e.target.closest('.gitem');
+  if (!item) return;
+  const g = GROUPS[+item.dataset.i];
+  shareBody.innerHTML = `
+    <p class="hint">发送到「${g.n}」的内容预览：</p>
+    <div class="sharecard">${shareText().replace(/\n/g, '<br>')}</div>
+    <button class="btn-main" id="doShare">发送到群</button>
+    <button class="btn-ghost" id="copyShare">复制文案</button>
+  `;
+  document.getElementById('doShare').addEventListener('click', () => {
+    closeSheets();
+    toast(`已发送到「${g.n}」`);
+  });
+  document.getElementById('copyShare').addEventListener('click', () => {
+    const t = shareText();
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(() => toast('文案已复制'), () => fallbackCopy(t));
+    } else fallbackCopy(t);
+  });
+});
+
+function fallbackCopy(t){
+  const ta = document.createElement('textarea');
+  ta.value = t;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); toast('文案已复制'); }
+  catch(e){ toast('复制失败，请长按手动复制'); }
+  document.body.removeChild(ta);
+}
+
+/* ================= 结算 / 代付 ================= */
+const CHARS = [
+  { n:'小饿管家', e:'🤖', d:'AI 助理 · 24 小时在线' },
+  { n:'陆沉', e:'🕴️', d:'霸道总裁 · 不差钱' },
+  { n:'小美', e:'👧', d:'闺蜜 · 秒回消息' },
+  { n:'妈妈', e:'👩', d:'家人 · 会唠叨两句' }
+];
+
+function renderChars(){
+  charList.innerHTML = CHARS.map((c, i) =>
+    `<div class="chitem" data-i="${i}">
+      <div class="chav">${c.e}</div>
+      <div class="gmeta"><div class="gname">${c.n}</div><div class="gdesc">${c.d}</div></div>
+      <div class="arrow">›</div>
+    </div>`).join('');
+}
+
+document.querySelectorAll('.paytab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.paytab').forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+    payMode = tab.dataset.mode;
+    payStatus.style.display = 'none';
+  });
+});
+
+charList.addEventListener('click', e => {
+  const item = e.target.closest('.chitem');
+  if (!item || busy) return;
+  const c = CHARS[+item.dataset.i];
+  const { total } = calc();
+
+  if (payMode === 'toMe'){
+    busy = true;
+    payStatus.style.display = 'block';
+    payStatus.style.background = '#fff7e8';
+    payStatus.style.color = '#c47b00';
+    payStatus.textContent = `已向「${c.n}」发起代付请求，等待对方确认…`;
+
+    setTimeout(() => {
+      payStatus.style.background = '#f0f9f2';
+      payStatus.style.color = '#1a9e4b';
+      payStatus.textContent = `✅「${c.n}」已为你代付 ${money(total)}，订单已提交！`;
+      busy = false;
+      finishOrder(1800);
+    }, 1600);
+  } else {
+    busy = true;
+    payStatus.style.display = 'block';
+    payStatus.style.background = '#f0f9f2';
+    payStatus.style.color = '#1a9e4b';
+    payStatus.textContent = `✅ 你已为「${c.n}」代付 ${money(total)}，订单已提交！`;
+    busy = false;
+    finishOrder(1800);
+  }
+});
+
+document.getElementById('selfPay').addEventListener('click', () => {
+  if (busy) return;
+  const { total } = calc();
+  toast(`支付成功 ${money(total)}`);
+  finishOrder(700);
+});
+
+/* 结算完成：清空购物车 + 刷新界面 */
+function finishOrder(delay){
+  setTimeout(() => {
+    payStatus.style.display = 'none';
+    closeSheets();
+    clearAll();          // 关键：结算后自动清空购物车
+    toast('订单已提交，购物车已清空');
+  }, delay);
+}
+
+function openPay(){
+  const { count, total } = calc();
+  if (!count){ toast('购物车是空的'); return; }
+  if (total < MIN_ORDER){ toast(`还差 ${money(MIN_ORDER - total)} 才能起送`); return; }
+  payAmount.textContent = money(total);
+  payStatus.style.display = 'none';
+  busy = false;
+  renderChars();
+  openSheet('sheetPay');
+}
+
+coBtn.addEventListener('click', () => {
+  const { count } = calc();
+  if (!count){ toast('购物车是空的，先去挑点东西吧'); return; }
+  openPay();
+});
+document.getElementById('btnCartPay').addEventListener('click', openPay);
+
+/* ================= 启动 ================= */
+renderCats();
+renderGrid();
+syncBar();
+</script>
+</body>
+</html>
+```
+
+功能与操作说明
+
+商品与分类：顶部九大分类可横滑，每个分类下都有20件商品，以三列小图标展示。点“+”加购，卡片左上角实时显示数量。
+
+购物车清空：购物车面板右上角有“清空”按钮，一键清空全部商品。结算并完成支付后，购物车会自动清空并弹出提示。
+
+结算与代付：凑满20元后点“结算”，可分享到群、选择角色代付或自己支付。代付会模拟等待对方确认的过程。
+
+AI造物：点右上角“✨”，输入描述后生成3件专属商品，存入“AI造物”分类。
+
