@@ -353,10 +353,14 @@
 .chat-bubble-role-user:has(.chat-transfer-card),
 .chat-bubble-role-user:has(.chat-html-inline),
 .chat-bubble-role-user:has(.chat-photo-card--image),
+.chat-bubble-role-user:has(.chat-dice),
+.chat-bubble-role-user:has([class*="dice"]),
 .chat-bubble-role-assistant:has(.chat-sticker),
 .chat-bubble-role-assistant:has(.chat-red-packet-card),
 .chat-bubble-role-assistant:has(.chat-transfer-card),
-.chat-bubble-role-assistant:has(.chat-html-inline) {
+.chat-bubble-role-assistant:has(.chat-html-inline),
+.chat-bubble-role-assistant:has(.chat-dice),
+.chat-bubble-role-assistant:has([class*="dice"]) {
   background: transparent !important;
   padding: 0 !important;
   border-radius: 0 !important;
@@ -892,299 +896,139 @@ div.ctx-menu > div:last-of-type > .ctx-menu-btn:nth-child(4)::before,
   border-radius: 3px;
 }
 
-
-
-
 /* ══════════════════════════
-   8. 动态页
+   8. 动态页（朋友圈）
    ══════════════════════════ */
-
 .chat-app .moments-feed-page > .page-body {
-  background: #FFFFFF !important;
-  display: flex !important;
-  flex-direction: column !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
+  background: var(--c-page-body-bg);
 }
 
-.moments-feed-page .page-header {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  background: transparent !important;
-  border-bottom: none !important;
-  z-index: 20 !important;
-}
-
-.moments-feed-page .page-header > .page-header-content > button:first-child,
-.moments-feed-page .page-header button:not([title="发布朋友圈"]):first-of-type {
-  color: #FFFFFF !important;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6)) !important;
-  z-index: 50 !important;
+.moments-feed-page:not(.is-scrolled) .page-header {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
 }
 
 .feed-cover-shell {
-  position: relative !important;
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: #FFFFFF !important;
-  display: flex !important;
-  flex-direction: column !important;
+  margin-bottom: 16px;
 }
 
 .feed-cover-bg {
-  position: relative !important;
-  width: 100% !important;
-  height: 230px !important;
-  background: transparent !important;
+  background: var(--c-input);
 }
 
 .feed-cover-image {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-}
-
-.feed-cover-bg::after {
-  content: "" !important;
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 90px !important;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 40%, rgba(255, 255, 255, 0.85) 75%, #FFFFFF 100%) !important;
-  pointer-events: none !important;
+  object-fit: cover;
 }
 
 .feed-profile {
-  position: relative !important;
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 12px !important;
-  padding: 0 16px 8px 16px !important;
-  margin-top: -38px !important;
-  z-index: 10 !important;
-  background: transparent !important;
+  /* padding-top 控制头像与封面顶部距离，通常需要保留标题栏安全区 */
 }
 
 .feed-profile-avatar {
-  width: 64px !important;
-  height: 64px !important;
-  border-radius: 50% !important;
-  border: 2.5px solid #FFFFFF !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-  background: #FFFFFF !important;
-  flex-shrink: 0 !important;
-}
-
-.feed-profile-info {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  gap: 3px !important;
-  flex: 1 !important;
-  background: transparent !important;
+  border-color: var(--c-page-body-bg);
+  background: var(--c-input);
 }
 
 .feed-profile-name {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  font-size: 17px !important;
-  font-weight: 700 !important;
-  color: #111827 !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+  color: var(--c-text-title);
 }
 
-.feed-profile-name::after {
-  content: "💎 LV1 续费" !important;
-  font-size: 10px !important;
-  font-weight: 700 !important;
-  color: #B45309 !important;
-  background: linear-gradient(135deg, #FEF9C3 0%, #FDE047 50%, #F59E0B 100%) !important;
-  border: 0.8px solid #F59E0B !important;
-  border-radius: 10px !important;
-  padding: 1px 6px !important;
-  line-height: 1.3 !important;
-  box-shadow: 0 1px 2px rgba(245, 158, 11, 0.2) !important;
-  text-shadow: none !important;
+.feed-profile-stats,
+.feed-profile-signature-text {
+  color: var(--c-text);
 }
 
-.feed-profile-stats {
-  font-size: 0 !important;
-  margin: 0 !important;
-}
-.feed-profile-stats * {
-  display: none !important;
-}
-.feed-profile-stats::before {
-  content: "访客总量 99+" !important;
-  font-size: 12.5px !important;
-  font-weight: 500 !important;
-  color: #4B5563 !important;
-  display: block !important;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+.feed-profile-stat-value {
+  color: var(--c-text-title);
 }
 
-.feed-profile-signature {
-  display: none !important;
-}
-
-.feed-profile::after {
-  /* 将 4 个空格缩减为 3 个，间距更紧凑自然 */
-  content: "说说　 　日志　 　相册　 　留言　 　更多" !important;
-  position: absolute !important;
-  top: 100% !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 44px !important;
-  background: #FFFFFF !important;
-  border-bottom: 1px solid #F3F4F6 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important; /* 整体居中 */
-  font-size: 13.5px !important;
-  font-weight: 500 !important;
-  color: #374151 !important;
-  box-sizing: border-box !important;
-  pointer-events: none !important;
-}
-
-.feed-cover-shell::after {
-  content: "分享新鲜事..." !important;
-  display: flex !important;
-  align-items: center !important;
-  box-sizing: border-box !important;
-  margin: 52px 14px 12px 14px !important;
-  height: 38px !important;
-  padding: 0 16px !important;
-  background: #F4F6F8 !important;
-  border-radius: 19px !important;
-  font-size: 13.5px !important;
-  color: #9CA3AF !important;
-  border: none !important;
-}
-
-.moments-feed-page .page-header .page-header-right {
-  position: static !important;
-}
-
-.moments-feed-page .page-header .page-header-right button[title="发布朋友圈"],
-.moments-feed-page .page-header-right button {
-  position: absolute !important;
-  top: 330px !important;              /* 从 288px 加大到 338px，精准压在输入框上触发发动态 */
-  left: 14px !important;              /* 左边距对齐 */
-  right: 14px !important;             /* 右边距对齐 */
-  width: calc(100% - 28px) !important;/* 铺满整条输入框宽 */
-  height: 40px !important;            /* 与 38px 输入框完全贴合 */
-  opacity: 0 !important;              /* 100% 透明，看不见黑框与图标 */
-  z-index: 50 !important;             /* 保证在最上层接收点击 */
-  cursor: pointer !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-.moments-feed-page .page-header-right button svg {
-  display: none !important;
+.feed-notif-banner {
+  background: color-mix(in srgb, var(--c-icon-active) 12%, var(--c-card));
+  color: var(--c-icon-active);
 }
 
 .feed-post {
-  background: #FFFFFF !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-  padding: 16px 16px 14px 16px !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-bottom: 1px solid #F3F4F6 !important;
-  box-sizing: border-box !important;
-  width: 100% !important;
+  background: transparent;
+  /* background: var(--c-card); */
+  border-color: var(--c-card-border);
 }
 
-.feed-post-header {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-  margin-bottom: 8px !important;
-}
-
-.feed-post-author-name {
-  color: #111827 !important;
-  font-weight: 600 !important;
-  font-size: 15px !important;
-}
-
+.feed-post-author-name,
 .feed-post-content {
-  color: #111827 !important;
-  font-size: 14.5px !important;
-  line-height: 1.5 !important;
-  margin-bottom: 12px !important;
-  word-break: break-all !important;
+  color: var(--c-text-title);
 }
 
-.feed-post-footer {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  width: 100% !important;
+.feed-post-location {
+  color: var(--c-icon);
 }
 
-/* 触发点赞状态时的按钮与爱心 */
-.feed-post-like-btn:has(svg[fill="currentColor"]) svg,
-.feed-post-like-btn[class*="text-rose"] svg,
-.feed-post-like-btn[class*="text-red"] svg,
-.feed-post-like-btn[data-liked="true"] svg,
-.feed-post-like-btn.active svg {
-  color: #ffb3b3 !important;
-  fill: #ffb3b3 !important;
-  stroke: #ffb3b3 !important;
+.feed-post-like-btn,
+.feed-post-comment-btn,
+.feed-post-delete-btn {
+  color: var(--c-icon-active);
 }
 
-.feed-post div:has(> svg.lucide-heart) svg.lucide-heart,
-.feed-post-likes svg.lucide-heart {
-  color: #ffb3b3 !important;
-  stroke: #ffb3b3 !important;
+.feed-like-summary {
+  color: var(--c-text-title);
 }
 
-.compose-modal .compose-modal-title {
-  font-size: 0 !important; /* 隐藏原文字 */
-}
-.compose-modal .compose-modal-title::after {
-  content: "写说说" !important;
-  font-size: 16px !important; /* 恢复原标题字号 */
-  font-weight: 600 !important;
-  color: #111827 !important;
+.feed-like-summary-icon {
+  color: var(--c-icon);
 }
 
-.compose-modal .compose-textarea::placeholder {
-  color: transparent !important; 
-}
-.compose-modal .compose-top-area {
-  position: relative !important;
+.feed-comments {
+  gap: 4px;
 }
 
-.compose-modal .compose-textarea:placeholder-shown + *::before,
-.compose-modal .compose-textarea:placeholder-shown::before {
- 
+.feed-comment-avatar-root {
+  width: 32px;
+  height: 32px;
 }
-.compose-modal .compose-top-area:has(.compose-textarea:placeholder-shown)::after {
-  content: "分享新鲜事..." !important;
-  position: absolute !important;
-  top: 12px !important;
-  left: 12px !important;
-  font-size: 14.5px !important;
-  color: #9CA3AF !important;
-  pointer-events: none !important; /* 防止挡住打字光标 */
+
+.feed-comment-avatar-child {
+  width: 22px;
+  height: 22px;
+}
+
+.feed-comment-author,
+.feed-comment-reply-target {
+  color: var(--c-text);
+  opacity: 0.7;
+}
+
+.feed-comment-body,
+.feed-comment-reply-prefix,
+.feed-comment-reply-button {
+  color: var(--c-text-title);
+}
+
+.feed-comment-time {
+  color: var(--c-icon);
+}
+
+.feed-comment-replies {
+  padding-left: 40px;
+}
+
+.feed-comment-input {
+  background: var(--c-input);
+}
+
+.feed-comment-input-field {
+  color: var(--c-text);
+}
+
+.feed-comment-input-send {
+  color: var(--c-icon-active);
+}
+
+.feed-inline-translation-toggle {
+  color: var(--c-icon-active);
+}
+
+.feed-inline-translation {
+  color: var(--c-text-title);
 }
 
 /* ══════════════════════════
@@ -1268,19 +1112,4 @@ div.ctx-menu > div:last-of-type > .ctx-menu-btn:nth-child(4)::before,
 .chat-bubble-role-assistant {
   font-size: 15px !important;    /* 气泡字体大小*/
   line-height: 1.55 !important;  
-}
-
-.chat-bubble-role-user > *:not(.chat-quote-preview),
-.chat-bubble-role-assistant > *:not(.chat-quote-preview) {
-  font-size: inherit !important;
-}
-
-.chat-bubble-role-user {
-  margin-right: 0 !important;
-  margin-left: auto !important; 
-}
-
-.chat-bubble-role-assistant {
-  margin-left: 0 !important;
-  margin-right: auto !important; 
 }
