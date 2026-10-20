@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T12:24:40.649Z",
+  "generatedAt": "2026-10-20T13:02:42.120Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -45,7 +45,7 @@
     },
     {
       "name": "应用反馈（与应用作者沟通渠道）",
-      "count": 8
+      "count": 9
     },
     {
       "name": "快捷指令模版",
@@ -6179,6 +6179,20 @@
       "avatar": "资源/应用反馈（与应用作者沟通渠道）/许愿可以选择线下生成内容的历史版本/.avatar.png",
       "ownerHash": "665326c02f148787908eaa0c808ee8a0cdac7f0d240b3d5e443bff7920683472",
       "updatedAt": "2026-10-11T15:08:26+08:00"
+    },
+    {
+      "folder": "应用反馈（与应用作者沟通渠道）",
+      "name": "许愿线下邀约功能",
+      "dirName": "许愿线下邀约功能",
+      "type": "dir",
+      "path": "资源/应用反馈（与应用作者沟通渠道）/许愿线下邀约功能",
+      "files": [],
+      "images": [],
+      "description": "角色可以主动选择要不要进入线下和拒绝进入线下….",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "2a74aeb71db3a4ba972283b5c44656a8ac729011cc04b4b0917c09fdf6c9b762",
+      "updatedAt": "2026-10-20T22:01:09+09:00"
     },
     {
       "folder": "应用反馈（与应用作者沟通渠道）",
