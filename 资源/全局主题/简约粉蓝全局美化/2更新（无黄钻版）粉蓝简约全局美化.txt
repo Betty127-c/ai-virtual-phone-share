@@ -587,7 +587,10 @@
   gap: 0 !important;
 }
 
-.chat-input-actions button[aria-label="发送"] {
+/* ── 发送与停止按键 ── */
+.chat-input-actions button[aria-label*="发送"],
+.chat-input-actions button[aria-label*="停止"],
+.chat-input-actions button[aria-label*="中止"] {
   position: absolute !important;
   top: 0 !important;
   right: 0 !important;
@@ -597,7 +600,7 @@
   height: 38px !important;
   border-radius: 10px !important;
   border: none !important;
-  background: var(--c-input-icon) !important;  /* 发送键激活时底色 */
+  background: var(--c-input-icon) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -609,28 +612,41 @@
   z-index: 10 !important;
 }
 
-.chat-input-actions button[aria-label="发送"] svg {
+.chat-input-actions button[aria-label*="发送"] svg,
+.chat-input-actions button[aria-label*="停止"] svg,
+.chat-input-actions button[aria-label*="中止"] svg {
   display: none !important;
 }
 
-.chat-input-actions button[aria-label="发送"]::after {
+/* 常态/输入时显示“发送” */
+.chat-input-actions button[aria-label*="发送"]::after {
   content: "发送" !important;
   font-size: 14px !important;
   font-weight: 500 !important;
-  color: #FFFFFF !important;  /* 发送键激活时文本色 */
+  color: #FFFFFF !important;
+  line-height: 1 !important;
+  letter-spacing: 1px !important;
+}
+
+.chat-input-actions button[aria-label*="停止"]::after,
+.chat-input-actions button[aria-label*="中止"]::after {
+  content: "停止" !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #FFFFFF !important;
   line-height: 1 !important;
   letter-spacing: 1px !important;
 }
 
 /* ── 发送按键无输入时 ── */
-.chat-input-actions button[aria-label="发送"]:disabled {
-  background: #8FA4B5 !important;/* 按键无输入底色 */
+.chat-input-actions button[aria-label*="发送"]:disabled {
+  background: #8FA4B5 !important;
   cursor: not-allowed !important;
   opacity: 0.9 !important;
 }
 
-.chat-input-actions button[aria-label="发送"]:disabled::after {
-  color: #FFFFFF !important;/* 发送按键无输入文本色 */
+.chat-input-actions button[aria-label*="发送"]:disabled::after {
+  color: #FFFFFF !important;
   opacity: 0.85 !important;
 }
 
