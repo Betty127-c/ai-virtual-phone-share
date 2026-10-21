@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-26T16:31:31.149Z",
+  "updatedAt": "2026-10-21T05:01:11.543Z",
   "items": [
     {
       "number": 206,
@@ -170,13 +170,6 @@
       "url": "https://github.com/xiaolongbao0709/ai-virtual-phone/pull/129"
     },
     {
-      "number": 118,
-      "title": "阅读器优化（二）：配套样式 styles/chat.css（内含一处非贡献的菜单美化，可直接删除）",
-      "contributor": "温铎",
-      "mergedAt": "2026-08-16T19:43:02Z",
-      "url": "https://github.com/xiaolongbao0709/ai-virtual-phone/pull/118"
-    },
-    {
       "number": 115,
       "title": "聊天窗口自动触发AI回复(聊天设置页开启)",
       "contributor": "但求一睡君莫笑",
@@ -184,11 +177,25 @@
       "url": "https://github.com/xiaolongbao0709/ai-virtual-phone/pull/115"
     },
     {
+      "number": 118,
+      "title": "阅读器优化（二）：配套样式 styles/chat.css（内含一处非贡献的菜单美化，可直接删除）",
+      "contributor": "温铎",
+      "mergedAt": "2026-08-16T19:43:02Z",
+      "url": "https://github.com/xiaolongbao0709/ai-virtual-phone/pull/118"
+    },
+    {
       "number": 112,
       "title": "正则界面复制与 iframe 预览优化 + 小坊聊天复制/编辑 + 正则 historyOnly 标记",
       "contributor": "温铎",
       "mergedAt": "2026-08-16T19:43:02Z",
       "url": "https://github.com/xiaolongbao0709/ai-virtual-phone/pull/112"
+    },
+    {
+      "number": 111,
+      "title": "正则规则新增「仅历史消息」开关（historyOnly）+ 小卷正则工具支持深度控制与仅历史消息",
+      "contributor": "温铎",
+      "mergedAt": "2026-08-16T19:43:02Z",
+      "url": "https://github.com/xiaolongbao0709/ai-virtual-phone/pull/111"
     },
     {
       "number": 114,
@@ -203,13 +210,6 @@
       "contributor": "温铎",
       "mergedAt": "2026-08-16T19:43:02Z",
       "url": "https://github.com/xiaolongbao0709/ai-virtual-phone/pull/117"
-    },
-    {
-      "number": 111,
-      "title": "正则规则新增「仅历史消息」开关（historyOnly）+ 小卷正则工具支持深度控制与仅历史消息",
-      "contributor": "温铎",
-      "mergedAt": "2026-08-16T19:43:02Z",
-      "url": "https://github.com/xiaolongbao0709/ai-virtual-phone/pull/111"
     },
     {
       "number": 106,
