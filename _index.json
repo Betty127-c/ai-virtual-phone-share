@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T17:58:11.621Z",
+  "generatedAt": "2026-10-21T18:02:34.865Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -77,7 +77,7 @@
     },
     {
       "name": "线上美化",
-      "count": 54
+      "count": 55
     },
     {
       "name": "线上聊天状态栏",
@@ -2748,11 +2748,11 @@
       "images": [
         "资源/全局主题/简约粉蓝全局美化/IMG_20261022_013754.jpg"
       ],
-      "description": "2更新输入栏发送键和英文分组，最终图如下\n\n1更新了部分气泡和长按菜单栏问题\n\n自用随意改（此为线上聊天美化，上传错地方了）\n\n末尾可以更改气泡字体大小\n\n动态爱心改颜色代码，如果用的是初始动态直接追加到末尾\n/* 触发点赞状态时的按钮与爱心 */\n.feed-post-like-btn:has(svg[fill=\"currentColor\"]) svg,\n.feed-post-like-btn[class*=\"text-rose\"] svg,\n.feed-post-like-btn[class*=\"text-red\"] svg,\n.feed-post-like-btn[data-liked=\"true\"] svg,\n.feed-post-like-btn.active svg {\n  color: #ffb3b3 !important;\n  fill: #ffb3b3 !important;\n  stroke: #ffb3b3 !important;\n}",
+      "description": "2更新输入栏发送键、英文分组、动态说说一栏固定小屏居中布局，最终图如下\n\n1更新了部分气泡和长按菜单栏问题\n\n自用随意改（此为线上聊天美化，上传错地方了）\n\n末尾可以更改气泡字体大小\n\n动态爱心改颜色代码，如果用的是初始动态直接追加到末尾\n/* 触发点赞状态时的按钮与爱心 */\n.feed-post-like-btn:has(svg[fill=\"currentColor\"]) svg,\n.feed-post-like-btn[class*=\"text-rose\"] svg,\n.feed-post-like-btn[class*=\"text-red\"] svg,\n.feed-post-like-btn[data-liked=\"true\"] svg,\n.feed-post-like-btn.active svg {\n  color: #ffb3b3 !important;\n  fill: #ffb3b3 !important;\n  stroke: #ffb3b3 !important;\n}",
       "author": "Mir",
       "avatar": "",
       "ownerHash": "7e23f17206cd464fcecdd0e4f95aaf3204080d2f5349ab00b54b3d9afc1df15a",
-      "updatedAt": "2026-10-22T02:56:50+09:00"
+      "updatedAt": "2026-10-22T03:00:05+09:00"
     },
     {
       "folder": "全局主题",
@@ -7844,6 +7844,24 @@
       "avatar": "资源/线上美化/简白 by koi/.avatar.png",
       "ownerHash": "168992d163bb3fcaf4ae9bdda07ebcba4591c3533f28260f0bf1dba76ae93ccc",
       "updatedAt": "2026-09-19T16:59:22+08:00"
+    },
+    {
+      "folder": "线上美化",
+      "name": "简约红绿旧色系",
+      "dirName": "简约红绿旧色系",
+      "type": "dir",
+      "path": "资源/线上美化/简约红绿旧色系",
+      "files": [
+        "资源/线上美化/简约红绿旧色系/简约复古红绿旧旧色系线上聊天美化.txt"
+      ],
+      "images": [
+        "资源/线上美化/简约红绿旧色系/IMG_20261022_015243.jpg"
+      ],
+      "description": "自用随意改",
+      "author": "Mir",
+      "avatar": "",
+      "ownerHash": "7e23f17206cd464fcecdd0e4f95aaf3204080d2f5349ab00b54b3d9afc1df15a",
+      "updatedAt": "2026-10-22T02:58:59+09:00"
     },
     {
       "folder": "线上美化",
