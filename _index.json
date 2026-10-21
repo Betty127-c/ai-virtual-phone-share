@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T18:02:34.865Z",
+  "generatedAt": "2026-10-21T18:13:44.700Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -7857,11 +7857,11 @@
       "images": [
         "资源/线上美化/简约红绿旧色系/IMG_20261022_015243.jpg"
       ],
-      "description": "自用随意改",
+      "description": "自用随意改，代码末尾可以更改字体大小",
       "author": "Mir",
       "avatar": "",
       "ownerHash": "7e23f17206cd464fcecdd0e4f95aaf3204080d2f5349ab00b54b3d9afc1df15a",
-      "updatedAt": "2026-10-22T02:58:59+09:00"
+      "updatedAt": "2026-10-22T03:11:37+09:00"
     },
     {
       "folder": "线上美化",
