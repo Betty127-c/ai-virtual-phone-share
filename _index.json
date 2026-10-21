@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T04:19:45.727Z",
+  "generatedAt": "2026-10-21T04:23:29.053Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -916,7 +916,9 @@
       "dirName": "时间戳",
       "type": "dir",
       "path": "资源/Js插件/时间戳",
-      "files": [],
+      "files": [
+        "资源/Js插件/时间戳/消息时间戳.js"
+      ],
       "images": [
         "资源/Js插件/时间戳/1000525949.jpg",
         "资源/Js插件/时间戳/1000525952.jpg"
@@ -925,7 +927,7 @@
       "author": "镜观雪（所有产出🈲bl）bl属性用了倒霉18代",
       "avatar": "资源/Js插件/时间戳/.avatar.png",
       "ownerHash": "1d9cea70e311b630e92234fd8993a1076198434564b88f424df0aba8970847f4",
-      "updatedAt": "2026-10-21T13:18:05+09:00"
+      "updatedAt": "2026-10-21T13:21:38+09:00"
     },
     {
       "folder": "Js插件",
