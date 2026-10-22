@@ -1,8 +1,8 @@
 /**
- * 苹果实况动图与短视频 (Live Photo & Video) v2.3.0
+ * 苹果实况动图与短视频 (Live Photo & Video) v2.3.1
  * 规范：apiVersion 1 (ES Module)
  * 更新：
- * 1. 彻底解决后台相册删除后的“空气泡残留”问题；
+ * 1. 修复相册记录过多时卡片被 Flex 弹性挤扁的问题，改为顺畅滚动查看；
  * 2. 聊天卡片在删除后自动转换为「该实况已被删除」的优雅提示态；
  * 3. 保持 4~10 帧切片供 AI 视觉识别与灯箱查看体验。
  */
@@ -12,7 +12,7 @@ const plugin = {
     id: "live-photo-sender-v2",
     name: "发送实况动图与短视频",
     apiVersion: 1,
-    version: "2.3.0",
+    version: "2.3.1",
     author: "可丽饼＆Gemini",
     description: "向角色发送苹果 Live Photo 实况照片或短视频，支持 4~10 帧动作切片供AI视觉识别；聊天气泡支持点开放大查看实况；相册历史支持多选批量管理。",
     permissions: ["chat.read", "chat.write", "ai", "storage", "ui"],
@@ -97,7 +97,7 @@ const plugin = {
         user-select: none;
         backdrop-filter: blur(4px);
       }
-      /* 相册卡片多选状态 */
+      /* 相册卡片（强制 flex-shrink: 0，杜绝多条记录时被挤瘪） */
       .lp-manage-card {
         position: relative;
         border-radius: 12px;
@@ -105,6 +105,7 @@ const plugin = {
         background: #111317;
         border: 2px solid rgba(255,255,255,0.08);
         transition: all 0.15s ease;
+        flex-shrink: 0;
       }
       .lp-manage-card.selected {
         border-color: #38bdf8;
@@ -130,6 +131,21 @@ const plugin = {
       .lp-manage-card.selected .lp-check-mark {
         background: #0284c7;
         border-color: #38bdf8;
+      }
+      /* 相册专属平滑滚动条 */
+      .lp-scroll-container::-webkit-scrollbar {
+        width: 6px;
+      }
+      .lp-scroll-container::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 3px;
+      }
+      .lp-scroll-container::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+      }
+      .lp-scroll-container::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.35);
       }
     `);
 
@@ -602,7 +618,7 @@ const plugin = {
       });
     }
 
-    // ── 6. 相册弹窗（独立管理面板与同步提示删除） ─────────────
+    // ── 6. 相册弹窗（带防挤压与独立滚动查看） ─────────────
     function openAlbumModal() {
       ctx.ui.openModal((modalEl, { close }) => {
         let isSelecting = false;
@@ -610,7 +626,8 @@ const plugin = {
 
         modalEl.style.cssText = `
           width: min(94vw, 540px);
-          max-height: 88vh;
+          height: 82vh;
+          max-height: 82vh;
           overflow: hidden;
           background: #181b22;
           border-radius: 18px;
@@ -627,7 +644,7 @@ const plugin = {
           modalEl.innerHTML = "";
           const list = ctx.system.storage.get(HISTORY_KEY) || [];
 
-          // 顶部栏
+          // 顶部栏（防止被挤压）
           const topBar = document.createElement("div");
           topBar.style.cssText = `
             padding: 14px 16px;
@@ -635,11 +652,12 @@ const plugin = {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-shrink: 0;
           `;
 
           const titleBox = document.createElement("div");
           titleBox.innerHTML = `
-            <div style="font-size:16px;font-weight:700;letter-spacing:0.3px;">相册</div>
+            <div style="font-size:16px;font-weight:700;letter-spacing:0.3px;">实况相册</div>
             <div style="font-size:11px;color:#9ca3af;margin-top:2px;">共 ${list.length} 条记录（删除后聊天框将提示已删除）</div>
           `;
           topBar.appendChild(titleBox);
@@ -716,9 +734,20 @@ const plugin = {
           topBar.appendChild(rightActions);
           modalEl.appendChild(topBar);
 
-          // 相册列表
+          // 相册列表主体（min-height: 0 保证触发滚动，消除 Flex 挤压）
           const body = document.createElement("div");
-          body.style.cssText = "flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;";
+          body.className = "lp-scroll-container";
+          body.style.cssText = `
+            flex: 1 1 0%;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+          `;
 
           if (list.length === 0) {
             body.innerHTML = `<div style="text-align:center;color:#6b7280;font-size:13px;padding:60px 0;">相册暂无实况记录</div>`;
@@ -731,6 +760,7 @@ const plugin = {
                 display: flex;
                 align-items: center;
                 gap: 12px;
+                flex-shrink: 0;
                 cursor: ${isSelecting ? "pointer" : "default"};
               `;
 
@@ -815,7 +845,7 @@ const plugin = {
       container.innerHTML = `
         <div>
           <div style="font-size:13px;font-weight:600;color:var(--c-text-title, #fff);">实况相册</div>
-          <div style="font-size:11px;opacity:0.6;margin-top:2px;">已存储 ${list.length} 条实况记录，支持多选批量管理</div>
+          <div style="font-size:11px;opacity:0.6;margin-top:2px;">已存储 ${list.length} 条实况记录，支持多选批量管理与滚动浏览</div>
         </div>
         <button id="lpOpenAlbumBtn" class="ui-btn ui-btn-outline" style="padding:5px 14px;font-size:12px;font-weight:600;min-height:32px;">
           打开相册
