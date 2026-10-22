@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T14:17:35.842Z",
+  "generatedAt": "2026-10-22T14:56:06.683Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -25,7 +25,7 @@
     },
     {
       "name": "全局主题",
-      "count": 21
+      "count": 22
     },
     {
       "name": "剧情预设及正则",
@@ -2653,6 +2653,25 @@
       "avatar": "资源/全局主题/天气蒙蒙，你也萌萌/.avatar.png",
       "ownerHash": "55b5ed5e0fd76e790cc1a3022e1c903518df025162aae4a51f310af986e93e50",
       "updatedAt": "2026-09-13T21:03:54+08:00"
+    },
+    {
+      "folder": "全局主题",
+      "name": "小组件",
+      "dirName": "小组件",
+      "type": "dir",
+      "path": "资源/全局主题/小组件",
+      "files": [
+        "资源/全局主题/小组件/float小组件.docx"
+      ],
+      "images": [
+        "资源/全局主题/小组件/Screenshot_2026-10-22-22-14-58-895_app.floatphone.app_10.jpg",
+        "资源/全局主题/小组件/Screenshot_2026-10-22-22-16-57-219_app.floatphone.app_10.jpg"
+      ],
+      "description": "一些动态小组件",
+      "author": "vel",
+      "avatar": "资源/全局主题/小组件/.avatar.png",
+      "ownerHash": "73e837677b5aca6b7ff233abd9ec982c6f93c703ec348bcbf0e380db2c062373",
+      "updatedAt": "2026-10-22T23:54:02+09:00"
     },
     {
       "folder": "全局主题",
