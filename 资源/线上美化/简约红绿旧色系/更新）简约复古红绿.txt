@@ -320,7 +320,7 @@ div:has(> .chat-pinned) {
 .chat-room-wrapper {
    background-color: transparent !important;
 
-/* 背景也可放入图床 background:url("图床链接") no-repeat center center / cover;  直接放颜色代码 background:#FFFFFF !important；*/
+/* 背景也可放入图床 background:url("图床链接") no-repeat center center / cover，直接放颜色代码 background:#FFFFFF !important；直接替换最后两行为一行*/
 
 }
 
