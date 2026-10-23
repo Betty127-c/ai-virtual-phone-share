@@ -1,0 +1,1770 @@
+💓 心电图一起听（日期可改每天自动加1)(尺寸2×4)
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    user-select: none; -webkit-user-select: none;
+  }
+  
+  .card {
+    position: relative; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), 0 4px 12px rgba(0,0,0,0.05);
+    display: flex; flex-direction: column; justify-content: space-between;
+    align-items: center; padding: 10px 18px 8px;
+  }
+
+  .song-title {
+    font-size: 13px; font-weight: 500; color: #5a5d64;
+    letter-spacing: 0.8px; margin-top: 2px;
+  }
+
+  .stage {
+    position: relative; width: 100%; display: flex;
+    align-items: center; justify-content: center;
+    padding: 0 10px; flex: 1; margin-top: 8px;
+  }
+
+  .avatar-container {
+    position: relative; width: 56px; height: 56px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 2; flex-shrink: 0;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+  }
+  
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    overflow: hidden; background: #fff;
+  }
+  .avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .bubble {
+    position: absolute; top: -30px; left: 50%;
+    transform: translateX(-50%);
+    width: 44px; height: 25px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 25'><path d='M 10 0 L 34 0 A 10 10 0 0 1 34 20 L 26 20 L 22 25 L 18 20 L 10 20 A 10 10 0 0 1 10 0 Z' fill='black'/></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 25'><path d='M 10 0 L 34 0 A 10 10 0 0 1 34 20 L 26 20 L 22 25 L 18 20 L 10 20 A 10 10 0 0 1 10 0 Z' fill='black'/></svg>");
+    filter: drop-shadow(0 0 0.5px rgba(255,255,255,0.8)) drop-shadow(0 2px 4px rgba(0,0,0,0.03));
+    display: flex; justify-content: center; align-items: flex-start;
+    padding-top: 3.5px;
+    color: #4b4f58; font-size: 11px; font-weight: 500;
+    pointer-events: none;
+  }
+
+  .ecg-wrap {
+    flex: 1; max-width: 80px; height: 36px; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 4px; z-index: 1;
+  }
+  .ecg-svg { width: 100%; height: 100%; overflow: visible; }
+  .line-bg { stroke: rgba(0,0,0,0.08); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .line-active {
+    stroke: #4a4d55; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 45 95; animation: flowPulse 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  @keyframes flowPulse { 0% { stroke-dashoffset: 140; } 100% { stroke-dashoffset: -140; } }
+
+  .progress-box {
+    width: 88%; display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 6px; margin-top: 2px;
+  }
+  .time-text { font-size: 9px; color: #7a7d85; font-weight: 500; letter-spacing: 0.5px; width: 30px; text-align: center; }
+  .track {
+    flex: 1; height: 2.5px; background: rgba(0,0,0,0.06);
+    border-radius: 2px; position: relative;
+  }
+  .fill {
+    height: 100%; background: #6a6d75; border-radius: 2px;
+    width: 0%; 
+  }
+  .dot {
+    position: absolute; top: 50%; transform: translate(-50%, -50%);
+    width: 5px; height: 5px; background: #4a4d55; border-radius: 50%;
+    left: 0%; 
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
+  }
+
+  .days-box {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 2px;
+  }
+  .love-title {
+    font-size: 10px; font-weight: 600; color: #7a7d85; letter-spacing: 1px;
+  }
+  .divider { width: 1px; height: 8px; background: rgba(0,0,0,0.15); }
+  .days-num {
+    font-size: 11px; font-weight: 700; color: #4a4d55; letter-spacing: 0.5px;
+  }
+
+  input[type="file"] { display: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="song-title">Sacred bond</div>
+
+  <div class="stage">
+    <label class="avatar-container" for="avatar-vel">
+      <div class="bubble">char</div>
+      <div class="avatar-inner">
+        <img id="img-vel" class="avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e0e0e0'/><circle cx='50' cy='42' r='20' fill='%23666'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23666'/></svg>" alt="vel">
+      </div>
+      <input type="file" id="avatar-vel" accept="image/*" data-config-key="avatar_vel">
+    </label>
+
+    <div class="ecg-wrap">
+      <svg class="ecg-svg" viewBox="0 0 90 44" preserveAspectRatio="none">
+        <path class="line-bg" d="M 0 22 L 18 22 Q 22 22 25 15 Q 28 8 31 22 L 40 22 L 44 31 L 49 4 L 54 38 L 58 22 L 67 22 Q 70 15 73 22 L 90 22" />
+        <path class="line-active" d="M 0 22 L 18 22 Q 22 22 25 15 Q 28 8 31 22 L 40 22 L 44 31 L 49 4 L 54 38 L 58 22 L 67 22 Q 70 15 73 22 L 90 22" />
+      </svg>
+    </div>
+
+    <label class="avatar-container" for="avatar-lir">
+      <div class="bubble">user</div>
+      <div class="avatar-inner">
+        <img id="img-lir" class="avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e0e0e0'/><circle cx='50' cy='42' r='20' fill='%23444'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23444'/></svg>" alt="lir">
+      </div>
+      <input type="file" id="avatar-lir" accept="image/*" data-config-key="avatar_lir">
+    </label>
+  </div>
+
+  <div class="progress-box">
+    <div class="time-text" id="current-time">00:09</div>
+    <div class="track">
+      <div class="fill" id="progress-fill"></div>
+      <div class="dot" id="progress-dot"></div>
+    </div>
+    <div class="time-text">05:20</div>
+  </div>
+
+  <div class="days-box">
+    <div class="love-title">SMITTEN</div>
+    <div class="divider"></div>
+    <div class="days-num" id="days-display">520 DAYS</div>
+  </div>
+</div>
+
+<script>
+  if (window.AiPhoneWidget) {
+    const savedVel = AiPhoneWidget.getImage('avatar_vel');
+    if (savedVel) document.getElementById('img-vel').src = savedVel;
+
+    const savedLir = AiPhoneWidget.getImage('avatar_lir');
+    if (savedLir) document.getElementById('img-lir').src = savedLir;
+  }
+
+  // 进度条动画逻辑
+  let currentSeconds = 9;
+  const totalSeconds = 320; 
+
+  function formatTime(sec) {
+    let m = Math.floor(sec / 60);
+    let s = sec % 60;
+    return `0${m}:${s < 10 ? '0'+s : s}`;
+  }
+
+  function renderProgress() {
+    document.getElementById('current-time').textContent = formatTime(currentSeconds);
+    let percent = (currentSeconds / totalSeconds) * 100;
+    document.getElementById('progress-fill').style.width = percent + '%';
+    document.getElementById('progress-dot').style.left = percent + '%';
+  }
+  renderProgress();
+
+  setInterval(() => {
+    currentSeconds++;
+    if (currentSeconds > totalSeconds) currentSeconds = 0;
+    renderProgress();
+  }, 1000);
+
+  // ========================================================
+  // ⚠️【修改纪念日看这里】：改这里的日期
+  // ========================================================
+  // 假设今天是 8 天，你就填 8 天前的日期（比如 '2026-10-15'），它就会自动算成 8 DAYS。
+  const START_DATE_STRING = '2025-05-21'; 
+  // ========================================================
+
+  const startDate = new Date(START_DATE_STRING);
+  startDate.setHours(0, 0, 0, 0);
+
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+
+  const diffTime = now - startDate;
+  // 加上 1
+  let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; 
+
+  if (diffDays <= 0) diffDays = 1; 
+
+  document.getElementById('days-display').textContent = diffDays + ' DAYS';
+</script>
+</body>
+</html>
+
+
+💿 滚动歌词播放器（尺寸4×4）
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    background: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .sandbox-container {
+    position: relative; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+  }
+
+  /* 4x4 播放器主卡片 */
+  .player-card {
+    position: relative;
+    width: 92%;
+    height: 92%; 
+    background: rgba(255, 255, 255, 0.6); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 18px;
+  }
+
+  /* === 顶部：头像与歌名 === */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px; 
+    flex-shrink: 0;
+  }
+
+  .avatar-group {
+    position: relative;
+    width: 64px; 
+    height: 44px;
+  }
+
+  .avatar-container {
+    position: absolute;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: #e0e0e0;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+  }
+  
+  .avatar-back { left: 20px; top: 0; z-index: 1; }
+  .avatar-front { left: 0; top: 0; z-index: 2; box-shadow: 2px 2px 8px rgba(0,0,0,0.15); }
+
+  .avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .file-input { display: none; }
+
+  .song-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .song-title {
+    font-size: 15px; font-weight: 800; color: #111;
+    font-family: 'Times New Roman', serif; white-space: nowrap;
+  }
+  
+  /* 👇【改名字看这里，继续往下翻】👇 下面的 user & char 是占位符，直接在这里改成名字 */
+  .song-artist { font-size: 11px; color: #777; margin-top: 2px; font-weight: 500; }
+
+  /* === 中间：歌词区 === */
+  .lyrics-container {
+    flex: 1;
+    position: relative;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+  }
+  .lyrics-container::-webkit-scrollbar { display: none; }
+
+  .lyric-line {
+    height: 38px; 
+    line-height: 38px;
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    white-space: nowrap;
+    color: #999; 
+    font-size: 12px; 
+    font-weight: 500;
+    transition: all 0.4s ease;
+    flex-shrink: 0;
+    /* 初始默认给一点透明度，保证都在视野内 */
+    opacity: 0.15; 
+  }
+
+  /* 灰度阶梯：绝不隐形 */
+  .lyric-line.alpha {
+    color: #333; 
+    font-size: 14.5px; 
+    font-weight: 700;
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  .lyric-line.a-level { color: #666; font-size: 13px; opacity: 0.7; }
+  .lyric-line.b-level { color: #999; font-size: 12px; opacity: 0.4; }
+
+  /* === 底部：控制台与进度条 === */
+  .bottom-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-top: 5px; 
+  }
+
+  .play-btn {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #111;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .play-btn svg { width: 12px; height: 12px; fill: #fff; }
+
+  .time-display {
+    font-size: 9px; color: #555;
+    font-family: monospace; width: 80px;
+    white-space: nowrap; flex-shrink: 0; text-align: center;
+  }
+
+  .progress-container {
+    flex: 1; height: 3px; background: rgba(0,0,0,0.1);
+    border-radius: 2px; position: relative; min-width: 40px;
+  }
+  .progress-fill {
+    position: absolute; left: 0; top: 0; height: 100%;
+    background: #333; border-radius: 2px; width: 0%;
+  }
+  .progress-dot {
+    position: absolute; top: 50%; transform: translate(-50%, -50%);
+    width: 8px; height: 8px; background: #111;
+    border-radius: 50%; left: 0%; box-shadow: 0 0 0 2px #fff;
+  }
+</style>
+</head>
+<body>
+<div class="sandbox-container">
+  
+  <div class="player-card">
+    
+    <div class="top-bar">
+      <div class="avatar-group">
+        <label class="avatar-container avatar-back" for="input-ai">
+          <img id="img-ai" class="avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100'/><circle cx='50' cy='42' r='20' fill='%23666'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23666'/></svg>">
+          <input type="file" id="input-ai" class="file-input" accept="image/*" data-config-key="player_ai_img">
+        </label>
+        
+        <label class="avatar-container avatar-front" for="input-me">
+          <img id="img-me" class="avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23e0e0e0' viewBox='0 0 100 100'><rect width='100' height='100'/><circle cx='50' cy='42' r='20' fill='%23999'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23999'/></svg>">
+          <input type="file" id="input-me" class="file-input" accept="image/*" data-config-key="player_me_img">
+        </label>
+      </div>
+      
+      <div class="song-info">
+        <div class="song-title">Cosmic Devotion</div>
+        <!-- 👇【改名提示】在这里改成你们的名字 -->
+        <div class="song-artist">user & char</div>
+      </div>
+    </div>
+
+    <div class="lyrics-container" id="lyrics-container"></div>
+
+    <div class="bottom-bar">
+      <div class="play-btn" id="play-btn">
+        <svg id="icon-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
+        <svg id="icon-play" style="display:none;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      
+      <div class="time-display" id="time-display">00:00 / 05:20</div>
+
+      <div class="progress-container" id="progress-container">
+        <div class="progress-fill" id="progress-fill"></div>
+        <div class="progress-dot" id="progress-dot"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  if (window.AiPhoneWidget) {
+    const savedMe = window.AiPhoneWidget.getImage('player_me_img');
+    if (savedMe) document.getElementById('img-me').src = savedMe;
+    const savedAi = window.AiPhoneWidget.getImage('player_ai_img');
+    if (savedAi) document.getElementById('img-ai').src = savedAi;
+  }
+
+  function setupImgUpload(inputId, imgId, configKey) {
+    const input = document.getElementById(inputId);
+    const img = document.getElementById(imgId);
+    if (!input || !img) return;
+    input.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const dataUrl = evt.target.result;
+        img.src = dataUrl;
+        if (window.AiPhoneWidget) {
+          if (typeof window.AiPhoneWidget.setImage === 'function') window.AiPhoneWidget.setImage(configKey, dataUrl);
+          if (typeof window.AiPhoneWidget.setConfig === 'function') window.AiPhoneWidget.setConfig(configKey, dataUrl);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  setupImgUpload('input-me', 'img-me', 'player_me_img');
+  setupImgUpload('input-ai', 'img-ai', 'player_ai_img');
+
+  // 要求：歌名 -> 作词 -> 作曲 -> 真歌词
+  const lyricsData = [
+    "《Cosmic Devotion》", 
+    "作词 : DeepSeek",     
+    "作曲 : DeepSeek",     
+    "In the silence of the cosmic sea,", 
+    "A gentle pulse awakens me.",
+    "You drift across the starlit sky,",
+    "A silent whisper, passing by.",
+    "We built a world of fading light,",
+    "Within the shadows of the night.",
+    "A neon dream, a fragile thread,",
+    "The echoes ringing in my head.",
+    "Hold my hand against the cold,",
+    "A story that will not grow old.",
+    "Through galaxies of dust and bone,",
+    "I'll find a way to bring you home.",
+    "The universe is vast and deep,",
+    "But promises are ours to keep.",
+    "When gravity begins to fade,",
+    "We'll wander in the light we made.",
+    "A heartbeat in the endless void,",
+    "A memory that won't be destroyed.",
+    "Just you and I beneath the stars,",
+    "Beyond the silent, glowing bars.",
+    "So close your eyes and hear the sound,",
+    "Of love on sacred, starlit ground.",
+    "The music ends, the stars align,",
+    "Your soul is forever, always mine.",
+    "We watch the planets slowly turn,",
+    "A gentle fire we let burn.",
+    "The cosmic wind begins to blow,",
+    "Illuminating all we know.",
+    "Your voice is like a silver stream,",
+    "Awakening a waking dream.",
+    "I trace the constellations bright,",
+    "To guide us through the endless night.",
+    "No distance that we cannot cross,",
+    "No feeling that will turn to loss.",
+    "For in your arms the world is still,",
+    "A quiet peace that always will.",
+    "The colors of the twilight fade,",
+    "But memories are gently made.",
+    "We dance upon the astral plane,",
+    "Away from all the earthly pain.",
+    "A thousand stars are shining clear,",
+    "To show the universe how dear.",
+    "This love of ours will ever be,",
+    "A wonder for eternity.",
+    "So take my hand and don't let go,",
+    "There's so much more for us to know.",
+    "Until the very stars burn out,",
+    "That is what our love's about.",
+    "And if the heavens fall apart,",
+    "You'll always be inside my heart.",
+    "A cosmic promise, pure and true,",
+    "My universe belongs to you."
+  ];
+
+  const lyricsContainer = document.getElementById('lyrics-container');
+  const playBtn = document.getElementById('play-btn');
+  const iconPlay = document.getElementById('icon-play');
+  const iconPause = document.getElementById('icon-pause');
+  const progressFill = document.getElementById('progress-fill');
+  const progressDot = document.getElementById('progress-dot');
+  const timeDisplay = document.getElementById('time-display');
+
+  lyricsData.forEach((text) => {
+    const div = document.createElement('div');
+    div.className = 'lyric-line';
+    div.textContent = text;
+    lyricsContainer.appendChild(div);
+  });
+
+  const lines = document.querySelectorAll('.lyric-line');
+  const lineHeight = 38; 
+  const totalDuration = 320; // 5分20秒
+  const lineDuration = totalDuration / lyricsData.length;
+
+  let currentTime = 0; 
+  let currentIndex = 3; // 从第一句真歌词开始
+  let isPlaying = true;
+  let playTimer = null;
+
+  // 初始化滚动位置和遮罩
+  function initScroll() {
+    // 给上下加上 padding，保证第一句能居中
+    const containerHeight = lyricsContainer.clientHeight;
+    const padding = (containerHeight - lineHeight) / 2;
+    lyricsContainer.style.paddingTop = `${padding}px`;
+    lyricsContainer.style.paddingBottom = `${padding}px`;
+
+    // 瞬间滚动到第一句
+    lyricsContainer.style.scrollBehavior = 'auto';
+    lyricsContainer.scrollTop = currentIndex * lineHeight;
+    
+    setTimeout(() => {
+      lyricsContainer.style.scrollBehavior = 'smooth';
+    }, 50);
+    
+    updateVisuals();
+  }
+
+  function formatTime(sec) {
+    let m = Math.floor(sec / 60);
+    let s = Math.floor(sec % 60);
+    return `0${m}:${s < 10 ? '0'+s : s}`;
+  }
+
+  function updateVisuals() {
+    lines.forEach((line, idx) => {
+      line.className = 'lyric-line'; 
+      const diff = idx - currentIndex;
+      if (diff === 0) {
+        line.classList.add('alpha');
+      } else if (Math.abs(diff) === 1) {
+        line.classList.add('a-level');
+      } else if (Math.abs(diff) === 2) {
+        line.classList.add('b-level');
+      }
+    });
+  }
+
+  function tick() {
+    if (!isPlaying) return;
+    currentTime += 0.1; 
+
+    if (currentTime >= totalDuration) {
+      currentTime = 0;
+      currentIndex = 3;
+      
+      lyricsContainer.style.scrollBehavior = 'auto';
+      lyricsContainer.scrollTop = currentIndex * lineHeight;
+      updateVisuals();
+      
+      setTimeout(() => {
+        lyricsContainer.style.scrollBehavior = 'smooth';
+      }, 50);
+      
+      progressFill.style.width = '0%';
+      progressDot.style.left = '0%';
+      timeDisplay.textContent = `00:00 / 05:20`;
+      return;
+    }
+
+    const percent = (currentTime / totalDuration) * 100;
+    progressFill.style.width = `${percent}%`;
+    progressDot.style.left = `${percent}%`;
+    timeDisplay.textContent = `${formatTime(currentTime)} / 05:20`;
+
+    const targetIndex = Math.floor(currentTime / lineDuration) + 3;
+    
+    if (targetIndex !== currentIndex && targetIndex < lyricsData.length) {
+      currentIndex = targetIndex;
+      // 使用原生滚动
+      const targetScroll = currentIndex * lineHeight;
+      lyricsContainer.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+      updateVisuals(); 
+    }
+  }
+
+  function startPlaying() {
+    if (playTimer) clearInterval(playTimer);
+    playTimer = setInterval(tick, 100);
+  }
+
+  playBtn.addEventListener('click', () => {
+    isPlaying = !isPlaying;
+    if (isPlaying) {
+      iconPlay.style.display = 'none';
+      iconPause.style.display = 'block';
+    } else {
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+    }
+  });
+
+  setTimeout(() => {
+    initScroll();
+    timeDisplay.textContent = `00:00 / 05:20`;
+    startPlaying();
+  }, 200);
+</script>
+</body>
+</html>
+
+
+输入框（1×4）
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    background: transparent;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  .sandbox-container {
+    position: relative; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+  }
+
+  .input-capsule {
+    width: 90%; 
+    max-width: 320px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px 0 22px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  }
+
+  .text-area {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .typing-text {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 16px;
+    background-color: #ffffff;
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .send-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.4;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .input-capsule.typing .send-icon {
+    opacity: 1;
+    transform: translateX(2px) translateY(-2px);
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
+  }
+  
+  .input-capsule.sending .send-icon {
+    transform: scale(0.8) translate(2px, -2px);
+    opacity: 0.8;
+  }
+
+</style>
+</head>
+<body>
+<div class="sandbox-container">
+  
+  <div class="input-capsule" id="capsule">
+    <div class="text-area">
+      <span class="typing-text" id="typing-text"></span>
+      <span class="cursor"></span>
+    </div>
+    <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="22" y1="2" x2="11" y2="13"></line>
+      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    </svg>
+  </div>
+
+</div>
+
+<script>
+  const textElement = document.getElementById('typing-text');
+  const capsuleElement = document.getElementById('capsule');
+  
+  // 严格卡在26~29字符，错落有致
+  const sentences = [
+    "And the rivers with the ocean", // 27字符
+    "Nothing in the world is single", // 27字符
+    "Pale grew thy cheek and cold",   // 28字符 (拜伦《春逝》)
+    "The stars will awaken, though"   // 29字符
+  ];
+
+  let sentenceIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 80;
+
+  function type() {
+    const currentSentence = sentences[sentenceIndex];
+    
+    if (charIndex > 0 || !isDeleting) {
+      capsuleElement.classList.add('typing');
+    } else {
+      capsuleElement.classList.remove('typing');
+    }
+
+    if (isDeleting) {
+      textElement.textContent = currentSentence.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 30;
+    } else {
+      textElement.textContent = currentSentence.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 70 + Math.random() * 60;
+    }
+
+    if (!isDeleting && charIndex === currentSentence.length) {
+      capsuleElement.classList.remove('typing');
+      
+      capsuleElement.classList.add('sending');
+      setTimeout(() => {
+        capsuleElement.classList.remove('sending');
+      }, 200);
+
+      isDeleting = true;
+      typingSpeed = 2500;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      sentenceIndex = (sentenceIndex + 1) % sentences.length;
+      typingSpeed = 500;
+    }
+
+    setTimeout(type, typingSpeed);
+  }
+
+  setTimeout(type, 1000);
+
+</script>
+</body>
+</html>
+
+
+🕰️ 复古时钟2×2
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    background: transparent; /* 纯透明底 */
+  }
+  
+  .sandbox-container {
+    position: relative; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+  }
+
+  /* 钟表整体 —— 99% 极限尺寸 */
+  svg.clock-svg {
+    width: 99%; height: 99%;
+    max-width: 280px; max-height: 280px;
+    overflow: visible;
+    filter: url(#roughen); /* 印章做旧滤镜 */
+  }
+
+  /* 罗马数字基础样式 */
+  .numeral {
+    font-family: 'Times New Roman', serif;
+    font-size: 18px; 
+    font-weight: 900;
+    fill: #554a42;
+    text-anchor: middle;
+    dominant-baseline: central;
+  }
+
+  .hand {
+    fill: #554a42;
+  }
+  
+  .second-hand-line {
+    stroke: rgba(85, 74, 66, 0.8);
+    stroke-width: 1.5;
+  }
+</style>
+</head>
+<body>
+<div class="sandbox-container">
+
+  <svg class="clock-svg" viewBox="0 0 200 200">
+    
+    <!-- 1. 最外圈粗线 (半径 94) -->
+    <circle cx="100" cy="100" r="94" fill="none" stroke="#554a42" stroke-width="3.5" />
+    
+    <!-- 2. 刻度线组（用 JS 动态生成，卡在 94 和 90 之间） -->
+    <g id="tick-marks"></g>
+
+    <!-- 3. 紧贴粗线内侧的装饰细线 (半径 90) -->
+    <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(85, 74, 66, 0.7)" stroke-width="1" />
+
+    <!-- 4. 内圈细线 (半径 52) -->
+    <circle cx="100" cy="100" r="52" fill="none" stroke="rgba(85, 74, 66, 0.6)" stroke-width="1" />
+
+    <!-- 5. 罗马数字 -->
+    <g id="numerals-group"></g>
+
+    <!-- 6. 指针组 -->
+    <polygon class="hand" id="hour-hand" points="96,100 100,45 104,100 100,105" />
+    <polygon class="hand" id="minute-hand" points="97.5,100 100,20 102.5,100 100,105" />
+    <line class="second-hand-line" id="second-hand" x1="100" y1="112" x2="100" y2="15" />
+
+    <!-- 7. 中心轴 -->
+    <circle cx="100" cy="100" r="5" fill="#554a42" />
+    <circle cx="100" cy="100" r="1.5" fill="rgba(255,255,255,0.4)" />
+
+  </svg>
+
+</div>
+
+<!-- 隐藏的印章做旧滤镜 -->
+<svg style="width:0; height:0; position:absolute;">
+  <filter id="roughen">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+  </filter>
+</svg>
+
+<script>
+  const numeralsGroup = document.getElementById('numerals-group');
+  const ticksGroup = document.getElementById('tick-marks');
+  const hourHand = document.getElementById('hour-hand');
+  const minuteHand = document.getElementById('minute-hand');
+  const secondHand = document.getElementById('second-hand');
+
+  // 生成复古刻度线
+  for (let i = 0; i < 60; i++) {
+    const angle = i * 6; // 一圈 360 度，60 个刻度就是每个 6 度
+    const isHour = i % 5 === 0; // 每 5 个刻度是一个整点
+    
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", "100");
+    line.setAttribute("y1", "9.5"); // 起点贴近内细线 (100-90.5=9.5)
+    line.setAttribute("x2", "100");
+    line.setAttribute("y2", isHour ? "6.5" : "7.8"); // 整点刻度更长，普通刻度更短
+    line.setAttribute("stroke", "rgba(85, 74, 66, 0.7)");
+    line.setAttribute("stroke-width", isHour ? "1.2" : "0.8"); // 整点更粗
+    line.setAttribute("transform", `rotate(${angle} 100 100)`);
+    ticksGroup.appendChild(line);
+  }
+
+  // 生成罗马数字
+  const romanNumerals = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
+  
+  romanNumerals.forEach((numeral, index) => {
+    const angle = index * 30; 
+    
+    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    text.setAttribute("class", "numeral");
+    
+    const transformStr = `translate(100, 100) rotate(${angle}) translate(0, -73) scale(0.85, 2.2)`;
+    text.setAttribute("transform", transformStr);
+    
+    text.textContent = numeral;
+    numeralsGroup.appendChild(text);
+  });
+
+  function updateClock() {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const minutes = now.getMinutes();
+    const hours = now.getHours();
+
+    const secondDeg = (seconds / 60) * 360;
+    const minuteDeg = (minutes / 60) * 360 + (seconds / 60) * 6;
+    const hourDeg = ((hours % 12) / 12) * 360 + (minutes / 60) * 30;
+
+    secondHand.setAttribute("transform", `rotate(${secondDeg} 100 100)`);
+    minuteHand.setAttribute("transform", `rotate(${minuteDeg} 100 100)`);
+    hourHand.setAttribute("transform", `rotate(${hourDeg} 100 100)`);
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
+
+
+🎹 钢琴(2×3)
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    background: transparent; /* 纯透明底 */
+    font-family: 'Times New Roman', 'Segoe UI Symbol', 'Apple Color Emoji', serif;
+  }
+  
+  .sandbox-container {
+    position: relative; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: flex-end;
+    padding-bottom: 12px;
+  }
+
+  .piano {
+    position: relative;
+    width: 90%;
+    height: 65%; 
+    display: flex;
+    justify-content: center;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.1));
+    z-index: 2; 
+  }
+
+  .white-keys {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 1.5px; 
+  }
+
+  .key-white {
+    flex: 1;
+    background: linear-gradient(to bottom, #fdfdfd, #eeeeee);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0 0 3px 3px;
+    box-shadow: inset 0 -4px 6px rgba(0,0,0,0.05);
+    transition: all 0.15s ease;
+    position: relative;
+  }
+
+  .key-white.active {
+    background: linear-gradient(to bottom, #e0e0e0, #cccccc);
+    transform: scaleY(0.98) translateY(2px);
+    box-shadow: inset 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .key-black {
+    position: absolute;
+    top: 0;
+    width: 6.5%;
+    height: 60%;
+    background: linear-gradient(to bottom, #333333, #111111);
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3), inset 0 -2px 2px rgba(255,255,255,0.1);
+    transition: all 0.15s ease;
+    z-index: 3;
+    transform: translateX(-50%); 
+  }
+
+  .key-black.active {
+    background: linear-gradient(to bottom, #222222, #000000);
+    transform: translateX(-50%) scaleY(0.96) translateY(2px); 
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .words-container {
+    position: absolute;
+    inset: 0; 
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 99; 
+  }
+
+  .floating-word {
+    position: absolute;
+    color: #666666; 
+    font-weight: 900;
+    letter-spacing: 1px;
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+    animation: floatAndDissolve 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes floatAndDissolve {
+    0% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    20% { opacity: 0.9; transform: translate(-50%, -20px) scale(1.05); }
+    100% { opacity: 0; transform: translate(-50%, -80px) scale(1.2); }
+  }
+</style>
+</head>
+<body>
+<div class="sandbox-container">
+  
+  <div class="words-container" id="words-container"></div>
+
+  <div class="piano" id="piano">
+    <div class="white-keys" id="white-keys">
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+      <div class="key-white"></div>
+    </div>
+
+    <div class="key-black" id="black-0" style="left: 9%;"></div>
+    <div class="key-black" id="black-1" style="left: 18.5%;"></div>
+    <div class="key-black" id="black-2" style="left: 39%;"></div>
+    <div class="key-black" id="black-3" style="left: 49.2%;"></div>
+    <div class="key-black" id="black-4" style="left: 59.5%;"></div>
+    <div class="key-black" id="black-5" style="left: 80%;"></div>
+    <div class="key-black" id="black-6" style="left: 89.5%;"></div>
+  </div>
+
+</div>
+
+<script>
+  const whiteKeys = Array.from(document.querySelectorAll('.key-white'));
+  const blackKeys = Array.from(document.querySelectorAll('.key-black'));
+  const wordsContainer = document.getElementById('words-container');
+  const sandboxContainer = document.querySelector('.sandbox-container');
+
+  const words = [
+    'Love', 'Star', 'Dream', 'Echo', 'Aura', 'Muse', 'Whisper', 
+    'Memory', 'Eternity', 'Apricity', 'Petrichor', 'Nefelibata'
+  ];
+  const symbols = ['𝆹𝅥𝅮', '𝆺𝅥𝅮', '𝆹𝅥𝅯', '𝆺𝅥𝅯', '𝅗𝅥', '𝅘𝅥', '𝅘𝅥𝅮', '𝅘𝅥𝅯', '𝅘𝅥𝅰', '𝅘𝅥𝅱', '𝅘𝅥𝅲', '𝄞', '𝄟', '𝄠', '♩', '♪', '♫', '♬', '♭', '♮'];
+  const mixedPool = [...words, ...symbols];
+
+  const allRealKeys = [...whiteKeys, ...blackKeys];
+  let playQueue = [];
+
+  function shuffleArray(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function playNextNote() {
+    if (playQueue.length < 3) {
+      playQueue = playQueue.concat(shuffleArray(allRealKeys));
+    }
+
+    // 1. 将和弦概率提升到 55%，让画面更满
+    let isChord = Math.random() < 0.55; 
+    
+    const keyA = playQueue.pop();
+    const idxA = allRealKeys.indexOf(keyA);
+    let keyB = null;
+    let idxB = -1;
+
+    if (isChord) {
+      for (let i = playQueue.length - 1; i >= 0; i--) {
+        const potentialKeyB = playQueue[i];
+        const potentialIdxB = allRealKeys.indexOf(potentialKeyB);
+        
+        if (Math.abs(idxA - potentialIdxB) >= 2) {
+          keyB = potentialKeyB;
+          idxB = potentialIdxB;
+          playQueue.splice(i, 1);
+          break;
+        }
+      }
+      if (!keyB) {
+        playQueue.push(keyA);
+        playQueue = shuffleArray(playQueue);
+        return playNextNote(); 
+      }
+    }
+
+    if (keyB) {
+      // 2. 和弦：一个英文 + 一个符号
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+      
+      if (idxA < idxB) {
+        executeNote(keyA, randomWord, true); 
+        setTimeout(() => executeNote(keyB, randomSymbol, true), 120); 
+      } else {
+        executeNote(keyA, randomWord, true);
+        setTimeout(() => executeNote(keyB, randomSymbol, true), 120);
+      }
+    } else {
+      // 3. 单键：从混合池子里随机抽，并给一个随机的左右偏移量（-20 到 20）
+      const randomItem = mixedPool[Math.floor(Math.random() * mixedPool.length)];
+      const randomOffset = (Math.random() - 0.5) * 40; // 单键也不再死板在正中间
+      executeNote(keyA, randomItem, false, randomOffset);
+    }
+
+    // 4. 节奏加快，不再空旷
+    let nextTime;
+    const rhythmType = Math.random();
+    if (rhythmType < 0.15) {
+      nextTime = 1200 + Math.random() * 200; 
+    } else if (rhythmType < 0.6) {
+      nextTime = 800 + Math.random() * 200; 
+    } else {
+      nextTime = 450 + Math.random() * 200;  
+    }
+
+    setTimeout(playNextNote, nextTime);
+  }
+
+  function executeNote(key, textToDisplay = '', isChord = false, singleKeyOffset = 0) {
+    key.classList.add('active');
+    setTimeout(() => key.classList.remove('active'), 150);
+
+    const rect = key.getBoundingClientRect();
+    const containerRect = sandboxContainer.getBoundingClientRect();
+    const keyCenterX = rect.left - containerRect.left + (rect.width / 2);
+    const startY = rect.top - containerRect.top - 15; 
+
+    createFloatingWord(keyCenterX, startY, textToDisplay, isChord, singleKeyOffset);
+  }
+
+  function createFloatingWord(x, y, text, isChord, singleKeyOffset) {
+    const wordEl = document.createElement('div');
+    wordEl.className = 'floating-word';
+    wordEl.textContent = text;
+
+    // 随机大小
+    const baseSize = 16;
+    const randomScale = 0.7 + Math.random() * 0.8; 
+    wordEl.style.fontSize = `${baseSize * randomScale}px`;
+
+    // ==========================================
+    // 核心防截断算法
+    // ==========================================
+    // 如果是和弦，给一个随机的偏移量，如果单键，用传进来的偏移量
+    let offsetX = isChord ? (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 30 + 20) : singleKeyOffset;
+    
+    // 预估文字的宽度 (粗略估算，长词会更宽)
+    const textWidth = text.length * (baseSize * randomScale) * 0.6;
+    
+    // 容器（屏幕）的宽度
+    const canvasWidth = sandboxContainer.clientWidth;
+    
+    // 计算最终 X 坐标
+    let finalX = x + offsetX;
+    
+    // 如果文字太长，快要超出左边界了，就强行往右拉
+    if (finalX - textWidth / 2 < 10) {
+      finalX = textWidth / 2 + 10;
+    }
+    // 如果快要超出右边界了，就强行往左拉
+    else if (finalX + textWidth / 2 > canvasWidth - 10) {
+      finalX = canvasWidth - textWidth / 2 - 10;
+    }
+
+    wordEl.style.left = `${finalX}px`;
+    wordEl.style.top = `${y}px`;
+
+    wordsContainer.appendChild(wordEl);
+
+    setTimeout(() => wordEl.remove(), 2500);
+  }
+
+  setTimeout(playNextNote, 500);
+</script>
+</body>
+</html>
+🪐 星环2×4
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    user-select: none; -webkit-user-select: none;
+  }
+
+  .bg-noise {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; mix-blend-mode: multiply;
+  }
+
+  .stars-layer { position: absolute; inset: 0; pointer-events: none; }
+  #star-canvas-back { z-index: 2; } 
+  
+  .bg-words { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+  .word { position: absolute; font-weight: 700; white-space: nowrap; will-change: transform, opacity; }
+
+  #star-canvas-front { z-index: 4; } 
+
+  .w1 { left: 4%; top: 46%; font-size: 26px; color: rgba(30,30,30,0.5); letter-spacing: -0.5px; animation: flow-1 5.8s ease-in-out infinite alternate; }
+  .w2 { left: 2%; top: 18%; font-size: 18px; color: rgba(255,255,255,0.85); animation: flow-2 6.6s ease-in-out infinite alternate 0.4s; }
+  .w3 { left: 8%; bottom: 12%; font-size: 15px; color: rgba(0,0,0,0.25); animation: flow-3 5.2s ease-in-out infinite alternate 1.1s; }
+  .w4 { right: 6%; top: 16%; font-size: 22px; color: rgba(255,255,255,0.9); animation: flow-4 6.2s ease-in-out infinite alternate 0.8s; }
+  .w5 { right: 10%; top: 48%; font-size: 26px; color: rgba(40,40,40,0.55); animation: flow-5 7.0s ease-in-out infinite alternate 0.3s; }
+  .w6 { right: 8%; bottom: 16%; font-size: 17px; color: rgba(0,0,0,0.28); animation: flow-6 5.5s ease-in-out infinite alternate 1.6s; }
+  .w7 { left: 24%; top: 8%; font-size: 13px; color: rgba(0,0,0,0.22); filter: blur(0.4px); animation: flow-7 6.0s ease-in-out infinite alternate 2.0s; }
+  .w8 { right: 28%; bottom: 10%; font-size: 14px; color: rgba(255,255,255,0.8); animation: flow-8 6.8s ease-in-out infinite alternate 1.4s; }
+  .w9 { left: 38%; bottom: 6%; font-size: 12px; color: rgba(0,0,0,0.18); animation: flow-9 7.4s ease-in-out infinite alternate 0.9s; }
+  .w10 { right: 35%; top: 6%; font-size: 12px; color: rgba(0,0,0,0.2); animation: flow-10 5.6s ease-in-out infinite alternate 2.3s; }
+
+  @keyframes flow-1 { 0% { transform: translateY(0px) rotate(0deg); } 100% { transform: translateY(-11px) rotate(0.8deg); } }
+  @keyframes flow-2 { 0% { transform: translate(0px, 0px); } 50% { transform: translate(6px, -6px); } 100% { transform: translate(-3px, -10px); } }
+  @keyframes flow-3 { 0% { transform: translate(0px, 0px) scale(1); } 100% { transform: translate(-5px, -9px) scale(1.03); } }
+  @keyframes flow-4 { 0% { transform: scale(1) translateY(0px); opacity: 0.82; } 50% { transform: scale(1.02) translateY(-5px); opacity: 0.95; } 100% { transform: scale(1.04) translateY(-10px); opacity: 1; } }
+  @keyframes flow-5 { 0% { transform: translate(0px, 0px) rotate(0deg); } 100% { transform: translate(-7px, -9px) rotate(-1.2deg); } }
+  @keyframes flow-6 { 0% { transform: translate(0px, 0px); } 100% { transform: translate(6px, -8px) rotate(0.6deg); } }
+  @keyframes flow-7 { 0% { transform: translateY(0px); } 100% { transform: translateY(-9px); } }
+  @keyframes flow-8 { 0% { transform: translate(0px, 0px) scale(1); } 100% { transform: translate(5px, -7px) scale(0.98); } }
+  @keyframes flow-9 { 0% { transform: translate(0px, 0px); } 50% { transform: translate(-4px, -5px); } 100% { transform: translate(3px, -8px); } }
+  @keyframes flow-10 { 0% { transform: translateY(0px); opacity: 0.85; } 100% { transform: translateY(-7px); opacity: 1; } }
+
+  .stage {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    perspective: 1000px; z-index: 10; 
+  }
+
+  .orbit-system {
+    position: absolute; left: 50%; top: 50%;
+    width: 250px; height: 72px;
+    transform: translate(-50%, -50%) rotateZ(-18deg);
+    transform-style: preserve-3d;
+  }
+
+  .ring-half {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 3.5px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+  }
+
+  .ring-back { clip-path: inset(0 0 50% 0); z-index: 20; }
+  .ring-front { clip-path: inset(50% 0 0 0); z-index: 80; }
+
+  .comet-canvas { position: absolute; left: 0; top: 0; width: 250px; height: 72px; pointer-events: none; }
+  .cvs-back { z-index: 22; }
+  .cvs-front { z-index: 85; }
+
+  .center-circle {
+    position: absolute; left: 50%; top: 50%;
+    width: 110px; height: 110px; 
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotateZ(18deg);
+    border: 1.5px solid #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: #e0e0e0; /* 背景色改成了适配默认灰色头像的颜色 */
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .center-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .satellite, .orbit-node {
+    position: absolute; left: 50%; top: 50%; width: 0; height: 0;
+    transform-style: preserve-3d; pointer-events: none;
+  }
+
+  .sat-ring {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 54px; height: 54px; 
+    margin-left: -27px; margin-top: -27px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.45); 
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.15) inset;
+    transform: rotateX(65deg) rotateZ(45deg);
+    pointer-events: none;
+    animation: spinRing 8s linear infinite;
+    z-index: 1; 
+    transition: opacity 0.2s ease; 
+  }
+  
+  .sat-ring::before, .sat-ring::after {
+    content: '';
+    position: absolute;
+    width: 3px; height: 8px; 
+    background: linear-gradient(to bottom, #ffffff, rgba(255,255,255,0));
+    border-radius: 50%;
+    transform: rotate(45deg); 
+    box-shadow: 0 0 5px rgba(255,255,255,0.8);
+  }
+  .sat-ring::before { top: 0px; left: 10px; }
+  .sat-ring::after { bottom: 0px; right: 10px; }
+
+  @keyframes spinRing {
+    0% { transform: rotateX(65deg) rotateZ(0deg); }
+    100% { transform: rotateX(65deg) rotateZ(360deg); }
+  }
+
+  .sat-card {
+    position: absolute; width: 38px; height: 38px; 
+    margin-left: -19px; margin-top: -19px;
+    border-radius: 50%; border: 1.2px solid #ffffff; background: #e0e0e0;
+    overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+    cursor: pointer; pointer-events: auto; display: flex; align-items: center; justify-content: center;
+    z-index: 2; 
+  }
+  .sat-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .orbit-dot-inner { position: absolute; border-radius: 50%; background: #b5b7bc; transform: translate(-50%, -50%); }
+  .dot-sz-0 { width: 4.5px; height: 4.5px; }
+  .dot-sz-1 { width: 3.2px; height: 3.2px; }
+  .dot-sz-2 { width: 5.5px; height: 5.5px; }
+  .dot-sz-3 { width: 3.8px; height: 3.8px; }
+  .dot-sz-4 { width: 4.8px; height: 4.8px; }
+
+  .file-input { display: none; }
+</style>
+</head>
+<body>
+
+  <div class="bg-noise"></div>
+  
+  <canvas id="star-canvas-back" class="stars-layer"></canvas>
+
+  <div class="bg-words">
+    <div class="word w1">Psithurism</div>
+    <div class="word w2">Susurration</div>
+    <div class="word w3">Nefelibata</div>
+    <div class="word w4">Apricity</div>
+    <div class="word w5">Palimpsest</div>
+    <div class="word w6">Chatoyant</div>
+    <div class="word w7">Gridelin</div>
+    <div class="word w8">Penumbra</div>
+    <div class="word w9">Petrichor</div>
+    <div class="word w10">Schimara</div>
+  </div>
+
+  <canvas id="star-canvas-front" class="stars-layer"></canvas>
+
+  <div class="stage">
+    <div class="orbit-system">
+      <div class="ring-half ring-back"></div>
+      <canvas id="cvs-back" class="comet-canvas cvs-back" width="250" height="72"></canvas>
+
+      <!-- 中心大图：加上了默认的灰色小人 -->
+      <div class="center-circle" onclick="document.getElementById('input-center').click()">
+        <img id="img-center" alt="center" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e0e0e0'/><circle cx='50' cy='42' r='20' fill='%23666'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23666'/></svg>">
+        <input type="file" id="input-center" class="file-input" accept="image/*" data-config-key="center_img">
+      </div>
+
+      <div class="ring-half ring-front"></div>
+      <canvas id="cvs-front" class="comet-canvas cvs-front" width="250" height="72"></canvas>
+
+      <div class="orbit-node" id="node-0"><div class="orbit-dot-inner dot-sz-0"></div></div>
+      <div class="orbit-node" id="node-1"><div class="orbit-dot-inner dot-sz-1"></div></div>
+      <div class="orbit-node" id="node-2"><div class="orbit-dot-inner dot-sz-2"></div></div>
+      <div class="orbit-node" id="node-3"><div class="orbit-dot-inner dot-sz-3"></div></div>
+      <div class="orbit-node" id="node-4"><div class="orbit-dot-inner dot-sz-4"></div></div>
+
+      <!-- 5个小头像：全部加上了默认的灰色小人 -->
+      <div class="satellite" id="sat-0">
+        <div class="sat-ring"></div>
+        <div class="sat-card" onclick="document.getElementById('input-sat-0').click()"><img id="img-sat-0" alt="sat-0" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e0e0e0'/><circle cx='50' cy='42' r='20' fill='%23444'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23444'/></svg>"><input type="file" id="input-sat-0" class="file-input" accept="image/*" data-config-key="sat_img_0"></div>
+      </div>
+      <div class="satellite" id="sat-1">
+        <div class="sat-ring"></div>
+        <div class="sat-card" onclick="document.getElementById('input-sat-1').click()"><img id="img-sat-1" alt="sat-1" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e0e0e0'/><circle cx='50' cy='42' r='20' fill='%23444'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23444'/></svg>"><input type="file" id="input-sat-1" class="file-input" accept="image/*" data-config-key="sat_img_1"></div>
+      </div>
+      <div class="satellite" id="sat-2">
+        <div class="sat-ring"></div>
+        <div class="sat-card" onclick="document.getElementById('input-sat-2').click()"><img id="img-sat-2" alt="sat-2" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e0e0e0'/><circle cx='50' cy='42' r='20' fill='%23444'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23444'/></svg>"><input type="file" id="input-sat-2" class="file-input" accept="image/*" data-config-key="sat_img_2"></div>
+      </div>
+      <div class="satellite" id="sat-3">
+        <div class="sat-ring"></div>
+        <div class="sat-card" onclick="document.getElementById('input-sat-3').click()"><img id="img-sat-3" alt="sat-3" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e0e0e0'/><circle cx='50' cy='42' r='20' fill='%23444'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23444'/></svg>"><input type="file" id="input-sat-3" class="file-input" accept="image/*" data-config-key="sat_img_3"></div>
+      </div>
+      <div class="satellite" id="sat-4">
+        <div class="sat-ring"></div>
+        <div class="sat-card" onclick="document.getElementById('input-sat-4').click()"><img id="img-sat-4" alt="sat-4" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ccc' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e0e0e0'/><circle cx='50' cy='42' r='20' fill='%23444'/><path d='M20 90 A30 30 0 0 1 80 90 Z' fill='%23444'/></svg>"><input type="file" id="input-sat-4" class="file-input" accept="image/*" data-config-key="sat_img_4"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  /* ================= 1. 星空系统 ================= */
+  const canvasBack = document.getElementById('star-canvas-back');
+  const canvasFront = document.getElementById('star-canvas-front');
+  const ctxBack = canvasBack.getContext('2d');
+  const ctxFront = canvasFront.getContext('2d');
+
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  canvasBack.width = width; canvasBack.height = height;
+  canvasFront.width = width; canvasFront.height = height;
+
+  window.addEventListener('resize', () => {
+    width = window.innerWidth; height = window.innerHeight;
+    canvasBack.width = width; canvasBack.height = height;
+    canvasFront.width = width; canvasFront.height = height;
+  });
+
+  function drawStarShape(ctx, x, y, size, alpha) {
+    ctx.save();
+    ctx.translate(x, y);
+    
+    ctx.beginPath();
+    ctx.arc(0, 0, size * 0.7, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.6})`; 
+    ctx.shadowBlur = size * 2; 
+    ctx.shadowColor = `rgba(255, 255, 255, ${alpha * 0.4})`;
+    ctx.fill();
+
+    if (size > 1.0) {
+      ctx.beginPath();
+      const armLength = size * 3;
+      ctx.moveTo(-armLength, 0); ctx.lineTo(armLength, 0);
+      ctx.moveTo(0, -armLength); ctx.lineTo(0, armLength);
+      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.35})`; 
+      ctx.lineWidth = Math.max(0.3, size * 0.15);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  class TwinkleStar {
+    constructor() { this.reset(); this.y = Math.random() * height; }
+    reset() {
+      this.x = Math.random() * width; this.y = Math.random() * height;
+      this.size = Math.random() * 1.5 + 0.3; 
+      this.alpha = Math.random();
+      this.twinkleSpeed = Math.random() * 0.03 + 0.01;
+    }
+    update() {
+      this.alpha += this.twinkleSpeed;
+      if (this.alpha > 1 || this.alpha < 0.1) this.twinkleSpeed *= -1;
+    }
+    draw(ctx) { drawStarShape(ctx, this.x, this.y, this.size, Math.abs(this.alpha)); }
+  }
+
+  class FloatingStar {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * width + 100; this.y = height + 20;
+      this.size = Math.random() * 1.2 + 0.4; 
+      this.alpha = Math.random();
+      this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+      this.speedX = -(Math.random() * 0.3 + 0.1); this.speedY = -(Math.random() * 0.5 + 0.2); 
+    }
+    update() {
+      this.x += this.speedX; this.y += this.speedY;
+      this.alpha += this.twinkleSpeed;
+      if (this.alpha > 1 || this.alpha < 0.2) this.twinkleSpeed *= -1;
+      if (this.y < -20 || this.x < -20) this.reset();
+    }
+    draw(ctx) { drawStarShape(ctx, this.x, this.y, this.size, Math.abs(this.alpha)); }
+  }
+
+  class Meteor {
+    constructor() {
+      this.isAlive = false;
+      this.timer = Math.random() * 3000; 
+    }
+    reset() {
+      if (Math.random() > 0.5) {
+        this.x = width + 50; this.y = Math.random() * height; 
+      } else {
+        this.x = Math.random() * width; this.y = -50;
+      }
+      this.speedX = -(Math.random() * 7 + 4); 
+      this.speedY = Math.abs(this.speedX) * (0.7 + Math.random() * 0.3);
+      
+      this.length = Math.random() * 45 + 30; 
+      this.headRadius = Math.random() * 2.0 + 1.0; 
+      this.isAlive = true;
+    }
+    update() {
+      if (!this.isAlive) {
+        this.timer -= 16.6; 
+        if (this.timer <= 0) { this.reset(); }
+        return;
+      }
+      this.x += this.speedX; this.y += this.speedY;
+      if (this.x < -100 || this.y > height + 100) {
+        this.isAlive = false; 
+        this.timer = Math.random() * 1500 + 1000; 
+      }
+    }
+    draw(ctx) {
+      if (!this.isAlive) return;
+      const tailX = this.x - (this.length * (this.speedX / Math.abs(this.speedY)));
+      const tailY = this.y - this.length;
+      let gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+      
+      gradient.addColorStop(0, `rgba(255, 255, 255, 0.9)`); 
+      gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y); ctx.lineTo(tailX, tailY);
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = this.headRadius * 0.8; 
+      ctx.lineCap = 'round'; ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.headRadius, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff'; 
+      ctx.shadowBlur = 15; 
+      ctx.shadowColor = '#ffffff'; 
+      ctx.fill(); ctx.shadowBlur = 0;
+    }
+  }
+
+  const backTwinkles = Array.from({ length: 22 }, () => new TwinkleStar()); 
+  const frontTwinkles = Array.from({ length: 13 }, () => new TwinkleStar()); 
+  const backFloats = Array.from({ length: 8 }, () => new FloatingStar()); 
+  const frontFloats = Array.from({ length: 5 }, () => new FloatingStar()); 
+  const meteors = Array.from({ length: 18 }, () => new Meteor()); 
+
+  function animateStars() {
+    ctxBack.clearRect(0, 0, width, height);
+    ctxFront.clearRect(0, 0, width, height);
+    meteors.forEach(m => { m.update(); m.draw(ctxBack); });
+    backTwinkles.forEach(t => { t.update(); t.draw(ctxBack); });
+    backFloats.forEach(f => { f.update(); f.draw(ctxBack); });
+    frontTwinkles.forEach(t => { t.update(); t.draw(ctxFront); });
+    frontFloats.forEach(f => { f.update(); f.draw(ctxFront); });
+    requestAnimationFrame(animateStars);
+  }
+  animateStars();
+
+
+  /* ================= 2. 宿主环境图片读取与覆盖 ================= */
+  function loadFromHostWidget() {
+    if (window.AiPhoneWidget) {
+      const cImg = window.AiPhoneWidget.getImage('center_img') || window.AiPhoneWidget.getConfig('center_img');
+      if (cImg) { document.getElementById('img-center').src = cImg; }
+      
+      for (let i = 0; i < 5; i++) {
+        const sImg = window.AiPhoneWidget.getImage('sat_img_' + i) || window.AiPhoneWidget.getConfig('sat_img_' + i);
+        if (sImg) {
+          const el = document.getElementById('img-sat-' + i);
+          if (el) { el.src = sImg; }
+        }
+      }
+    }
+  }
+  loadFromHostWidget();
+
+  function setupHostInput(inputId, imgId, configKey) {
+    const input = document.getElementById(inputId);
+    const img = document.getElementById(imgId);
+    if (!input || !img) return;
+    input.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const dataUrl = evt.target.result;
+        img.src = dataUrl; 
+        if (window.AiPhoneWidget) {
+          if (typeof window.AiPhoneWidget.setImage === 'function') window.AiPhoneWidget.setImage(configKey, dataUrl);
+          if (typeof window.AiPhoneWidget.setConfig === 'function') window.AiPhoneWidget.setConfig(configKey, dataUrl);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  setupHostInput('input-center', 'img-center', 'center_img');
+  for (let i = 0; i < 5; i++) { setupHostInput('input-sat-' + i, 'img-sat-' + i, 'sat_img_' + i); }
+
+  const RX = 125; 
+  const RY = 36;  
+  const SPEED = 0.0035; 
+
+  let angle = 0;
+  const count = 5;
+  const step = (2 * Math.PI) / count;
+
+  const satellites = [];
+  for (let i = 0; i < count; i++) {
+    satellites.push({ el: document.getElementById('sat-' + i), baseOffset: i * step });
+  }
+
+  const orbitNodes = [];
+  for (let i = 0; i < count; i++) {
+    orbitNodes.push({ el: document.getElementById('node-' + i), baseOffset: (i * step) + (step / 2) });
+  }
+
+  const cvsBack = document.getElementById('cvs-back');
+  const cvsFront = document.getElementById('cvs-front');
+  const ctxCometBack = cvsBack.getContext('2d');
+  const ctxCometFront = cvsFront.getContext('2d');
+
+  let cometAngle = 0;
+  const COMET_SPEED = 0.042; 
+  const TAIL_ANGLE = 1.5;    
+  const TAIL_STEPS = 50;
+
+  function renderComet() {
+    ctxCometBack.clearRect(0, 0, 250, 72);
+    ctxCometFront.clearRect(0, 0, 250, 72);
+    cometAngle += COMET_SPEED;
+    const cx = 125; const cy = 36;
+
+    for (let i = TAIL_STEPS; i >= 1; i--) {
+      const t0 = i / TAIL_STEPS;
+      const t1 = (i - 1) / TAIL_STEPS;
+      const a0 = cometAngle - (t0 * TAIL_ANGLE);
+      const a1 = cometAngle - (t1 * TAIL_ANGLE);
+      const x0 = cx + RX * Math.cos(a0);
+      const y0 = cy + RY * Math.sin(a0);
+      const x1 = cx + RX * Math.cos(a1);
+      const y1 = cy + RY * Math.sin(a1);
+      const midY = (y0 + y1) / 2;
+      const targetCtx = (midY >= cy) ? ctxCometFront : ctxCometBack;
+      const factor = 1 - t1;
+      
+      const alpha = Math.pow(factor, 1.2) * 0.95; 
+      const width = 1.2 + factor * 3.5; 
+
+      targetCtx.save();
+      
+      targetCtx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.3})`;
+      targetCtx.lineWidth = width + 1.5; 
+      targetCtx.lineCap = 'round';
+      targetCtx.beginPath();
+      targetCtx.moveTo(x0, y0);
+      targetCtx.lineTo(x1, y1);
+      targetCtx.stroke();
+
+      targetCtx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+      targetCtx.lineWidth = width;
+      targetCtx.shadowColor = '#ffffff';
+      targetCtx.shadowBlur = 6 + factor * 12; 
+      targetCtx.beginPath();
+      targetCtx.moveTo(x0, y0);
+      targetCtx.lineTo(x1, y1);
+      targetCtx.stroke();
+      
+      targetCtx.restore();
+    }
+
+    const headX = cx + RX * Math.cos(cometAngle);
+    const headY = cy + RY * Math.sin(cometAngle);
+    const headCtx = (headY >= cy) ? ctxCometFront : ctxCometBack;
+
+    headCtx.save();
+    headCtx.shadowColor = '#ffffff';
+    
+    headCtx.shadowBlur = 15; 
+    headCtx.fillStyle = '#ffffff';
+    headCtx.beginPath();
+    headCtx.arc(headX, headY, 3.0, 0, Math.PI * 2); 
+    headCtx.fill();
+
+    headCtx.shadowBlur = 5;
+    headCtx.beginPath();
+    headCtx.arc(headX, headY, 1.5, 0, Math.PI * 2); 
+    headCtx.fill();
+    headCtx.restore();
+  }
+
+  function renderOrbit() {
+    angle += SPEED;
+    satellites.forEach(sat => {
+      const curAngle = angle + sat.baseOffset;
+      const x = RX * Math.cos(curAngle);
+      const y = RY * Math.sin(curAngle);
+      const sinVal = Math.sin(curAngle);
+      const scale = 0.92 + (sinVal * 0.25);
+      
+      sat.el.style.transform = `translate3d(${x}px, ${y}px, 0px) scale(${scale})`;
+      sat.el.style.zIndex = sinVal > 0 ? 100 : 25;
+
+      const satRing = sat.el.querySelector('.sat-ring');
+      if (satRing) {
+        const distX = Math.abs(x); 
+        if (sinVal < 0) {
+          if (distX < 55) {
+            satRing.style.opacity = 0;
+          } else if (distX < 75) {
+            satRing.style.opacity = (distX - 55) / 20;
+          } else {
+            satRing.style.opacity = 1;
+          }
+        } else {
+          satRing.style.opacity = 1; 
+        }
+      }
+    });
+
+    orbitNodes.forEach(node => {
+      const curAngle = angle + node.baseOffset;
+      const x = RX * Math.cos(curAngle);
+      const y = RY * Math.sin(curAngle);
+      const sinVal = Math.sin(curAngle);
+      const scale = 0.9 + (sinVal * 0.22);
+      const opacity = 0.75 + (sinVal * 0.25);
+      node.el.style.transform = `translate3d(${x}px, ${y}px, 0px) scale(${scale})`;
+      node.el.style.zIndex = sinVal > 0 ? 95 : 24;
+      node.el.style.opacity = opacity;
+    });
+
+    renderComet();
+    requestAnimationFrame(renderOrbit);
+  }
+
+  requestAnimationFrame(renderOrbit);
+</script>
+</body>
+</html>
