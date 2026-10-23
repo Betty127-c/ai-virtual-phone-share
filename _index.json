@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T10:30:38.090Z",
+  "generatedAt": "2026-10-23T11:15:36.491Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -37,7 +37,7 @@
     },
     {
       "name": "应用",
-      "count": 149
+      "count": 150
     },
     {
       "name": "应用bug改善",
@@ -5556,6 +5556,22 @@
       "avatar": "资源/应用/爱奇艺[蘑菇]/.avatar.png",
       "ownerHash": "9840628ff5f4d01a8a3aad435eade27791b624164c9cb2815513a424987ac5f7",
       "updatedAt": "2026-08-19T17:32:42+08:00"
+    },
+    {
+      "folder": "应用",
+      "name": "番外",
+      "dirName": "番外",
+      "type": "dir",
+      "path": "资源/应用/番外",
+      "files": [
+        "资源/应用/番外/app.fanwai.story-1.0.1.zip"
+      ],
+      "images": [],
+      "description": "是一个支持html渲染的，番外app",
+      "author": "",
+      "avatar": "",
+      "ownerHash": "2760fe2001296e6591af85492bdb2725c7a7770227ca38ceb9900888917580da",
+      "updatedAt": "2026-10-23T20:13:33+09:00"
     },
     {
       "folder": "应用",
