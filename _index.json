@@ -1,7 +1,7 @@
 {
   "schema": "ai_phone_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T11:20:11.102Z",
+  "generatedAt": "2026-10-23T11:22:14.450Z",
   "folders": [
     {
       "name": "A 重要须知（自部署版请查看）",
@@ -5566,12 +5566,14 @@
       "files": [
         "资源/应用/番外/app.fanwai.story-1.0.1.zip"
       ],
-      "images": [],
-      "description": "是一个支持html渲染的，番外app，可以私发给char，界面比较简单",
+      "images": [
+        "资源/应用/番外/1000090489.jpg"
+      ],
+      "description": "是一个支持html渲染的，番外app",
       "author": "",
       "avatar": "",
       "ownerHash": "2760fe2001296e6591af85492bdb2725c7a7770227ca38ceb9900888917580da",
-      "updatedAt": "2026-10-23T20:18:24+09:00"
+      "updatedAt": "2026-10-23T20:19:56+09:00"
     },
     {
       "folder": "应用",
